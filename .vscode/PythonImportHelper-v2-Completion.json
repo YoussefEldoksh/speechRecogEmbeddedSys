@@ -1,0 +1,110 @@
+[
+    {
+        "label": "speech_recognition",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "speech_recognition",
+        "description": "speech_recognition",
+        "detail": "speech_recognition",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "matplotlib.pyplot",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "matplotlib.pyplot",
+        "description": "matplotlib.pyplot",
+        "detail": "matplotlib.pyplot",
+        "documentation": {}
+    },
+    {
+        "label": "seaborn",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "seaborn",
+        "description": "seaborn",
+        "detail": "seaborn",
+        "documentation": {}
+    },
+    {
+        "label": "librosa",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "librosa",
+        "description": "librosa",
+        "detail": "librosa",
+        "documentation": {}
+    },
+    {
+        "label": "librosa.display",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "librosa.display",
+        "description": "librosa.display",
+        "detail": "librosa.display",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "sounddevice",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sounddevice",
+        "description": "sounddevice",
+        "detail": "sounddevice",
+        "documentation": {}
+    },
+    {
+        "label": "soundfile",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "soundfile",
+        "description": "soundfile",
+        "detail": "soundfile",
+        "documentation": {}
+    },
+    {
+        "label": "audio_data",
+        "kind": 5,
+        "importPath": "script",
+        "description": "script",
+        "peekOfCode": "audio_data = os.listdir('Audio Files')\nprint(pd.DataFrame(audio_data, columns=['Audio Files']))\nmfcc_list = []\nfor file in audio_data:\n    print(f\"File: {file}, Size: {os.path.getsize(f'Audio Files/{file}')/1024:.2f} KB\")\n    y, sampling_rate = librosa.load(f'Audio Files/{file}', sr=None)\n    y_trimmed , _ = librosa.effects.trim(y, top_db=20)\n    n_mfcc = 13\n    mfcc = librosa.feature.mfcc(y=y_trimmed, sr=sampling_rate, n_mfcc=n_mfcc)    \n    # Normalize: mean of each coefficient across time (gives a fixed-size vector)",
+        "detail": "script",
+        "documentation": {}
+    },
+    {
+        "label": "mfcc_list",
+        "kind": 5,
+        "importPath": "script",
+        "description": "script",
+        "peekOfCode": "mfcc_list = []\nfor file in audio_data:\n    print(f\"File: {file}, Size: {os.path.getsize(f'Audio Files/{file}')/1024:.2f} KB\")\n    y, sampling_rate = librosa.load(f'Audio Files/{file}', sr=None)\n    y_trimmed , _ = librosa.effects.trim(y, top_db=20)\n    n_mfcc = 13\n    mfcc = librosa.feature.mfcc(y=y_trimmed, sr=sampling_rate, n_mfcc=n_mfcc)    \n    # Normalize: mean of each coefficient across time (gives a fixed-size vector)\n    mfcc_mean = np.mean(mfcc, axis=1)  # shape: (13,)\n    # Quantize to int8 (range -128 to 127) to fit in AVR ROM",
+        "detail": "script",
+        "documentation": {}
+    }
+]
