@@ -10,7 +10,7 @@
 
 #include <avr/pgmspace.h>
 #define N_MFCC 13
-#define N_CLASSES 2
+#define N_CLASSES 8
 
 #ifdef	__cplusplus
 extern "C" {
@@ -34,7 +34,7 @@ const int8_t* const PROGMEM mfcc_table[] = {
     mfcc_right,
     mfcc_left,
     mfcc_start,
-    mfcc_stop
+    mfcc_stop   
            
 };
 const char* labels[] = {"on", "off", "up", "down", "right",  "left", "start" , "stop"};
