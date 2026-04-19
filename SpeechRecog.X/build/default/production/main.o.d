@@ -15,7 +15,7 @@ build/default/production/main.o.d build/default/production/main.o: main.c \
  C:/Program\ Files/Embedded\ systems\ tools/avr8-gnu-toolchain-win32_x86_64/avr/include/avr/version.h \
  C:/Program\ Files/Embedded\ systems\ tools/avr8-gnu-toolchain-win32_x86_64/avr/include/avr/fuse.h \
  C:/Program\ Files/Embedded\ systems\ tools/avr8-gnu-toolchain-win32_x86_64/avr/include/avr/lock.h \
- speech_data.h \
+ speech_data.h lcd.h \
  C:/Program\ Files/Embedded\ systems\ tools/avr8-gnu-toolchain-win32_x86_64/avr/include/avr/interrupt.h \
  C:/Program\ Files/Embedded\ systems\ tools/avr8-gnu-toolchain-win32_x86_64/avr/include/util/delay.h \
  C:/Program\ Files/Embedded\ systems\ tools/avr8-gnu-toolchain-win32_x86_64/avr/include/util/delay_basic.h
@@ -36,6 +36,7 @@ C:/Program\ Files/Embedded\ systems\ tools/avr8-gnu-toolchain-win32_x86_64/avr/i
 C:/Program\ Files/Embedded\ systems\ tools/avr8-gnu-toolchain-win32_x86_64/avr/include/avr/fuse.h:
 C:/Program\ Files/Embedded\ systems\ tools/avr8-gnu-toolchain-win32_x86_64/avr/include/avr/lock.h:
 speech_data.h:
+lcd.h:
 C:/Program\ Files/Embedded\ systems\ tools/avr8-gnu-toolchain-win32_x86_64/avr/include/avr/interrupt.h:
 C:/Program\ Files/Embedded\ systems\ tools/avr8-gnu-toolchain-win32_x86_64/avr/include/util/delay.h:
 C:/Program\ Files/Embedded\ systems\ tools/avr8-gnu-toolchain-win32_x86_64/avr/include/util/delay_basic.h:

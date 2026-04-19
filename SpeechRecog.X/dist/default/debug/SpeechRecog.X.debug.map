@@ -2,6 +2,8 @@ Archive member included to satisfy reference by file (symbol)
 
 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
                               C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega32/avr5/crtatmega32.o (exit)
+C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_tablejump2.o)
+                              build/default/debug/main.o (__tablejump2__)
 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_copy_data.o)
                               build/default/debug/main.o (__do_copy_data)
 
@@ -12,9 +14,15 @@ Discarded input sections
  .text          0x00000000        0x0 build/default/debug/main.o
  .data          0x00000000        0x0 build/default/debug/main.o
  .bss           0x00000000        0x0 build/default/debug/main.o
- .rodata.str1.1
-                0x00000000       0x25 build/default/debug/main.o
- .data.labels   0x00000000       0x10 build/default/debug/main.o
+ .text          0x00000000        0x0 build/default/debug/lcd.o
+ .data          0x00000000        0x0 build/default/debug/lcd.o
+ .bss           0x00000000        0x0 build/default/debug/lcd.o
+ .text.LCD_String_xy
+                0x00000000       0x46 build/default/debug/lcd.o
+ .text.lcd_create_char
+                0x00000000       0x2e build/default/debug/lcd.o
+ .text.LCD_Read_Char
+                0x00000000       0x40 build/default/debug/lcd.o
  .text          0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
  .data          0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
  .bss           0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
@@ -31,6 +39,21 @@ Discarded input sections
                 0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
  .text.libgcc.fixed
                 0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
+ .text          0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_tablejump2.o)
+ .data          0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_tablejump2.o)
+ .bss           0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_tablejump2.o)
+ .text.libgcc.mul
+                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_tablejump2.o)
+ .text.libgcc.div
+                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_tablejump2.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_tablejump2.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_tablejump2.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_tablejump2.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_tablejump2.o)
  .text          0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_copy_data.o)
  .data          0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_copy_data.o)
  .bss           0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_copy_data.o)
@@ -64,6 +87,7 @@ Linker script and memory map
 
 LOAD C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega32/avr5/crtatmega32.o
 LOAD build/default/debug/main.o
+LOAD build/default/debug/lcd.o
                 0x00000001                        __MPLAB_BUILD = 0x1
                 0x00000001                        __MPLAB_DEBUG = 0x1
                 0x00000001                        __DEBUG = 0x1
@@ -177,7 +201,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x1f8
+.text           0x00000000      0x46a
  *(.vectors)
  .vectors       0x00000000       0x54 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega32/avr5/crtatmega32.o
                 0x00000000                __vector_default
@@ -193,62 +217,58 @@ END GROUP
  *libprintf_flt.a:*(.progmem.data)
  *libc.a:*(.progmem.data)
  *(.progmem.*)
- .progmem.data.mfcc_input
-                0x00000054        0xd build/default/debug/main.o
-                0x00000054                mfcc_input
  .progmem.data.mfcc_table
-                0x00000061       0x10 build/default/debug/main.o
-                0x00000061                mfcc_table
+                0x00000054       0x10 build/default/debug/main.o
+                0x00000054                mfcc_table
  .progmem.data.mfcc_stop
-                0x00000071        0xd build/default/debug/main.o
-                0x00000071                mfcc_stop
+                0x00000064        0xd build/default/debug/main.o
+                0x00000064                mfcc_stop
  .progmem.data.mfcc_start
-                0x0000007e        0xd build/default/debug/main.o
-                0x0000007e                mfcc_start
+                0x00000071        0xd build/default/debug/main.o
+                0x00000071                mfcc_start
  .progmem.data.mfcc_right
-                0x0000008b        0xd build/default/debug/main.o
-                0x0000008b                mfcc_right
+                0x0000007e        0xd build/default/debug/main.o
+                0x0000007e                mfcc_right
  .progmem.data.mfcc_left
-                0x00000098        0xd build/default/debug/main.o
-                0x00000098                mfcc_left
+                0x0000008b        0xd build/default/debug/main.o
+                0x0000008b                mfcc_left
  .progmem.data.mfcc_down
-                0x000000a5        0xd build/default/debug/main.o
-                0x000000a5                mfcc_down
+                0x00000098        0xd build/default/debug/main.o
+                0x00000098                mfcc_down
  .progmem.data.mfcc_up
-                0x000000b2        0xd build/default/debug/main.o
-                0x000000b2                mfcc_up
+                0x000000a5        0xd build/default/debug/main.o
+                0x000000a5                mfcc_up
  .progmem.data.mfcc_off
-                0x000000bf        0xd build/default/debug/main.o
-                0x000000bf                mfcc_off
+                0x000000b2        0xd build/default/debug/main.o
+                0x000000b2                mfcc_off
  .progmem.data.mfcc_on
-                0x000000cc        0xd build/default/debug/main.o
-                0x000000cc                mfcc_on
-                0x000000da                        . = ALIGN (0x2)
- *fill*         0x000000d9        0x1 
+                0x000000bf        0xd build/default/debug/main.o
+                0x000000bf                mfcc_on
+                0x000000cc                        . = ALIGN (0x2)
  *(.lowtext)
  *(.lowtext*)
-                0x000000da                        __ctors_start = .
+                0x000000cc                        __ctors_start = .
  *(.ctors)
-                0x000000da                        __ctors_end = .
-                0x000000da                        __dtors_start = .
+                0x000000cc                        __ctors_end = .
+                0x000000cc                        __dtors_start = .
  *(.dtors)
-                0x000000da                        __dtors_end = .
+                0x000000cc                        __dtors_end = .
  SORT_BY_NAME(*)(.ctors)
  SORT_BY_NAME(*)(.dtors)
  *(.init0)
- .init0         0x000000da        0x0 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega32/avr5/crtatmega32.o
-                0x000000da                __init
+ .init0         0x000000cc        0x0 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega32/avr5/crtatmega32.o
+                0x000000cc                __init
  *(.init0)
  *(.init1)
  *(.init1)
  *(.init2)
- .init2         0x000000da        0xc C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega32/avr5/crtatmega32.o
+ .init2         0x000000cc        0xc C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega32/avr5/crtatmega32.o
  *(.init2)
  *(.init3)
  *(.init3)
  *(.init4)
- .init4         0x000000e6       0x16 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_copy_data.o)
-                0x000000e6                __do_copy_data
+ .init4         0x000000d8       0x16 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_copy_data.o)
+                0x000000d8                __do_copy_data
  *(.init4)
  *(.init5)
  *(.init5)
@@ -259,43 +279,63 @@ END GROUP
  *(.init8)
  *(.init8)
  *(.init9)
- .init9         0x000000fc        0x8 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega32/avr5/crtatmega32.o
+ .init9         0x000000ee        0x8 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega32/avr5/crtatmega32.o
  *(.init9)
  *(.text)
- .text          0x00000104        0x4 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega32/avr5/crtatmega32.o
-                0x00000104                __vector_1
-                0x00000104                __vector_12
-                0x00000104                __bad_interrupt
-                0x00000104                __vector_6
-                0x00000104                __vector_3
-                0x00000104                __vector_11
-                0x00000104                __vector_13
-                0x00000104                __vector_17
-                0x00000104                __vector_19
-                0x00000104                __vector_7
-                0x00000104                __vector_5
-                0x00000104                __vector_4
-                0x00000104                __vector_9
-                0x00000104                __vector_2
-                0x00000104                __vector_15
-                0x00000104                __vector_8
-                0x00000104                __vector_14
-                0x00000104                __vector_10
-                0x00000104                __vector_16
-                0x00000104                __vector_18
-                0x00000104                __vector_20
-                0x00000108                        . = ALIGN (0x2)
+ .text          0x000000f6        0x4 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega32/avr5/crtatmega32.o
+                0x000000f6                __vector_1
+                0x000000f6                __vector_12
+                0x000000f6                __bad_interrupt
+                0x000000f6                __vector_6
+                0x000000f6                __vector_3
+                0x000000f6                __vector_11
+                0x000000f6                __vector_13
+                0x000000f6                __vector_17
+                0x000000f6                __vector_19
+                0x000000f6                __vector_7
+                0x000000f6                __vector_5
+                0x000000f6                __vector_4
+                0x000000f6                __vector_9
+                0x000000f6                __vector_2
+                0x000000f6                __vector_15
+                0x000000f6                __vector_8
+                0x000000f6                __vector_14
+                0x000000f6                __vector_10
+                0x000000f6                __vector_16
+                0x000000f6                __vector_18
+                0x000000f6                __vector_20
+                0x000000fa                        . = ALIGN (0x2)
  *(.text.*)
  .text.nearest_neighbor
-                0x00000108       0xae build/default/debug/main.o
-                0x00000108                nearest_neighbor
- .text.main     0x000001b6       0x3e build/default/debug/main.o
-                0x000001b6                main
-                0x000001f4                        . = ALIGN (0x2)
+                0x000000fa       0xa2 build/default/debug/main.o
+                0x000000fa                nearest_neighbor
+ .text.main     0x0000019c      0x188 build/default/debug/main.o
+                0x0000019c                main
+ .text.LCD_Command
+                0x00000324       0x46 build/default/debug/lcd.o
+                0x00000324                LCD_Command
+ .text.LCD_Char
+                0x0000036a       0x46 build/default/debug/lcd.o
+                0x0000036a                LCD_Char
+ .text.LCD_Init
+                0x000003b0       0x3a build/default/debug/lcd.o
+                0x000003b0                LCD_Init
+ .text.LCD_String
+                0x000003ea       0x20 build/default/debug/lcd.o
+                0x000003ea                LCD_String
+ .text.LCD_Clear
+                0x0000040a       0x18 build/default/debug/lcd.o
+                0x0000040a                LCD_Clear
+ .text.LCD_Gotoxy
+                0x00000422       0x28 build/default/debug/lcd.o
+                0x00000422                LCD_Gotoxy
+ .text.libgcc   0x0000044a        0xc C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_tablejump2.o)
+                0x0000044a                __tablejump2__
+                0x00000456                        . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000001f4        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
-                0x000001f4                _exit
-                0x000001f4                exit
+ .fini9         0x00000456        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
+                0x00000456                _exit
+                0x00000456                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -314,42 +354,49 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000001f4        0x4 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000456        0x4 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
  *(.hightext)
  *(.hightext*)
  *(.progmemx.*)
-                0x000001f8                        . = ALIGN (0x2)
+                0x0000045a                        . = ALIGN (0x2)
  *(.jumptables)
  *(.jumptables*)
-                0x000001f8                        _etext = .
+ .jumptables.gcc.main
+                0x0000045a       0x10 build/default/debug/main.o
+                0x0000046a                        _etext = .
 
-.data           0x00800060        0x0 load address 0x000001f8
+.data           0x00800060       0x36 load address 0x0000046a
                 0x00800060                        PROVIDE (__data_start = .)
  *(.data)
  *(.data*)
+ .data.labels   0x00800060       0x10 build/default/debug/main.o
+                0x00800060                labels
  *(.gnu.linkonce.d*)
  *(.rodata)
  *(.rodata*)
+ .rodata.str1.1
+                0x00800070       0x25 build/default/debug/main.o
  *(.gnu.linkonce.r*)
-                0x00800060                        . = ALIGN (0x2)
-                0x00800060                        _edata = .
-                0x00800060                        PROVIDE (__data_end = .)
+                0x00800096                        . = ALIGN (0x2)
+ *fill*         0x00800095        0x1 
+                0x00800096                        _edata = .
+                0x00800096                        PROVIDE (__data_end = .)
 
-.bss            0x00800060        0x0
+.bss            0x00800096        0x0
                 [!provide]                        PROVIDE (__bss_start = .)
  *(.bss)
  *(.bss*)
  *(COMMON)
                 [!provide]                        PROVIDE (__bss_end = .)
-                0x000001f8                        __data_load_start = LOADADDR (.data)
-                0x000001f8                        __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0000046a                        __data_load_start = LOADADDR (.data)
+                0x000004a0                        __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800060        0x0
+.noinit         0x00800096        0x0
                 [!provide]                        PROVIDE (__noinit_start = .)
  *(.noinit .noinit.* .gnu.linkonce.n.*)
                 [!provide]                        PROVIDE (__noinit_end = .)
-                0x00800060                        _end = .
+                0x00800096                        _end = .
                 [!provide]                        PROVIDE (__heap_start = .)
                 0x00000000                        __flmap_init_label = DEFINED (__flmap_noinit_start)?__flmap_noinit_start:0x0
                 0x00000000                        __flmap = DEFINED (__flmap)?__flmap:0x0
@@ -392,6 +439,7 @@ END GROUP
  *(.comment)
  .comment       0x00000000       0x2f build/default/debug/main.o
                                  0x30 (size before relaxing)
+ .comment       0x0000002f       0x30 build/default/debug/lcd.o
 
 .note.gnu.avr.deviceinfo
                 0x00000000       0x3c
@@ -416,42 +464,50 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000       0x28
+.debug_aranges  0x00000000       0x88
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x28 build/default/debug/main.o
+ .debug_aranges
+                0x00000028       0x60 build/default/debug/lcd.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0x985
+.debug_info     0x00000000     0x147f
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_info    0x000004e6      0x49f build/default/debug/main.o
+ .debug_info    0x000004e6      0x7b2 build/default/debug/main.o
+ .debug_info    0x00000c98      0x7e7 build/default/debug/lcd.o
 
-.debug_abbrev   0x00000000      0x699
+.debug_abbrev   0x00000000      0x8aa
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_abbrev  0x000004a3      0x1f6 build/default/debug/main.o
+ .debug_abbrev  0x000004a3      0x237 build/default/debug/main.o
+ .debug_abbrev  0x000006da      0x1d0 build/default/debug/lcd.o
 
-.debug_line     0x00000000      0x518
+.debug_line     0x00000000     0x139b
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_line    0x00000116      0x402 build/default/debug/main.o
+ .debug_line    0x00000116      0x8c9 build/default/debug/main.o
+ .debug_line    0x000009df      0x9bc build/default/debug/lcd.o
 
-.debug_frame    0x00000000       0x70
+.debug_frame    0x00000000      0x138
  *(.debug_frame)
- .debug_frame   0x00000000       0x70 build/default/debug/main.o
+ .debug_frame   0x00000000       0x68 build/default/debug/main.o
+ .debug_frame   0x00000068       0xd0 build/default/debug/lcd.o
 
-.debug_str      0x00000000      0x40e
+.debug_str      0x00000000      0x4aa
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_str     0x00000196      0x278 build/default/debug/main.o
-                                0x2bd (size before relaxing)
+ .debug_str     0x00000196      0x314 build/default/debug/main.o
+                                0x2e9 (size before relaxing)
+ .debug_str     0x000004aa      0x285 build/default/debug/lcd.o
 
-.debug_loc      0x00000000      0x4c8
+.debug_loc      0x00000000      0xfe6
  *(.debug_loc)
- .debug_loc     0x00000000      0x4c8 build/default/debug/main.o
+ .debug_loc     0x00000000      0x71a build/default/debug/main.o
+ .debug_loc     0x0000071a      0x8cc build/default/debug/lcd.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -471,9 +527,10 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000       0xe0
+.debug_ranges   0x00000000      0x200
  *(.debug_ranges)
- .debug_ranges  0x00000000       0xe0 build/default/debug/main.o
+ .debug_ranges  0x00000000      0x1b0 build/default/debug/main.o
+ .debug_ranges  0x000001b0       0x50 build/default/debug/lcd.o
 
 .debug_addr
  *(.debug_addr)
