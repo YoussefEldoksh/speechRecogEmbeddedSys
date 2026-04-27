@@ -1,5 +1,128 @@
 [
     {
+        "label": "FFT",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "FFT",
+        "description": "FFT",
+        "detail": "FFT",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "FFT",
+        "description": "FFT",
+        "isExtraImport": true,
+        "detail": "FFT",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Numeric",
+        "description": "Numeric",
+        "isExtraImport": true,
+        "detail": "Numeric",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Numeric",
+        "description": "Numeric",
+        "isExtraImport": true,
+        "detail": "Numeric",
+        "documentation": {}
+    },
+    {
+        "label": "math",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "math",
+        "description": "math",
+        "detail": "math",
+        "documentation": {}
+    },
+    {
+        "label": "random",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "random",
+        "description": "random",
+        "detail": "random",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "struct",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "struct",
+        "description": "struct",
+        "detail": "struct",
+        "documentation": {}
+    },
+    {
+        "label": "fft",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "fft",
+        "description": "fft",
+        "detail": "fft",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "popen2",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "popen2",
+        "description": "popen2",
+        "detail": "popen2",
+        "documentation": {}
+    },
+    {
+        "label": "getopt",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "getopt",
+        "description": "getopt",
+        "detail": "getopt",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
         "label": "speech_recognition",
         "kind": 6,
         "isExtraImport": true,
@@ -15,15 +138,6 @@
         "importPath": "pandas",
         "description": "pandas",
         "detail": "pandas",
-        "documentation": {}
-    },
-    {
-        "label": "numpy",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "numpy",
-        "description": "numpy",
-        "detail": "numpy",
         "documentation": {}
     },
     {
@@ -63,15 +177,6 @@
         "documentation": {}
     },
     {
-        "label": "os",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "os",
-        "description": "os",
-        "detail": "os",
-        "documentation": {}
-    },
-    {
         "label": "sounddevice",
         "kind": 6,
         "isExtraImport": true,
@@ -90,20 +195,424 @@
         "documentation": {}
     },
     {
-        "label": "audio_data",
+        "label": "AudioSegment",
+        "importPath": "pydub",
+        "description": "pydub",
+        "isExtraImport": true,
+        "detail": "pydub",
+        "documentation": {}
+    },
+    {
+        "label": "randbuf",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.compfft",
+        "description": "SpeechRecog.X.kiss_fft130.test.compfft",
+        "peekOfCode": "def randbuf(n,cpx=1):\n    res = array( [ random.uniform( lims[0],lims[1] ) for i in range(n) ] )\n    if cpx:\n        res = res + j*randbuf(n,0)\n    return res\ndef main():\n    from getopt import getopt\n    import popen2\n    opts,args = getopt( sys.argv[1:],'u:n:Rt:' )\n    opts=dict(opts)",
+        "detail": "SpeechRecog.X.kiss_fft130.test.compfft",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.compfft",
+        "description": "SpeechRecog.X.kiss_fft130.test.compfft",
+        "peekOfCode": "def main():\n    from getopt import getopt\n    import popen2\n    opts,args = getopt( sys.argv[1:],'u:n:Rt:' )\n    opts=dict(opts)\n    exitcode=0\n    util = opts.get('-u','./kf_float')\n    try:\n        dims = [ int(d) for d in opts['-n'].split(',')]\n        cpx = opts.get('-R') is None",
+        "detail": "SpeechRecog.X.kiss_fft130.test.compfft",
+        "documentation": {}
+    },
+    {
+        "label": "dopack",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.compfft",
+        "description": "SpeechRecog.X.kiss_fft130.test.compfft",
+        "peekOfCode": "def dopack(x,fmt,cpx):\n    x = reshape( x, ( size(x),) )\n    if cpx:\n        s = ''.join( [ struct.pack('ff',c.real,c.imag) for c in x ] )\n    else:\n        s = ''.join( [ struct.pack('f',c) for c in x ] )\n    return s \ndef dounpack(x,fmt,cpx):\n    uf = fmt * ( len(x) / 4 )\n    s = struct.unpack(uf,x)",
+        "detail": "SpeechRecog.X.kiss_fft130.test.compfft",
+        "documentation": {}
+    },
+    {
+        "label": "dounpack",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.compfft",
+        "description": "SpeechRecog.X.kiss_fft130.test.compfft",
+        "peekOfCode": "def dounpack(x,fmt,cpx):\n    uf = fmt * ( len(x) / 4 )\n    s = struct.unpack(uf,x)\n    if cpx:\n        return array(s[::2]) + array( s[1::2] )*j\n    else:    \n        return array(s )\nif __name__ == \"__main__\":\n    main()",
+        "detail": "SpeechRecog.X.kiss_fft130.test.compfft",
+        "documentation": {}
+    },
+    {
+        "label": "make_random",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.fastfir",
+        "description": "SpeechRecog.X.kiss_fft130.test.fastfir",
+        "peekOfCode": "def make_random(len):\n    import random\n    res=[]\n    for i in range(int(len)):\n        r=random.uniform(-1,1)\n        i=random.uniform(-1,1)\n        res.append( complex(r,i) )\n    return res\ndef slowfilter(sig,h):\n    translen = len(h)-1",
+        "detail": "SpeechRecog.X.kiss_fft130.test.fastfir",
+        "documentation": {}
+    },
+    {
+        "label": "slowfilter",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.fastfir",
+        "description": "SpeechRecog.X.kiss_fft130.test.fastfir",
+        "peekOfCode": "def slowfilter(sig,h):\n    translen = len(h)-1\n    return convolve(sig,h)[translen:-translen]\ndef nextpow2(x):\n    return 2 ** math.ceil(math.log(x)/math.log(2))\ndef fastfilter(sig,h,nfft=None):\n    if nfft is None:\n        nfft = int( nextpow2( 2*len(h) ) )\n    H = fft( h , nfft )\n    scraplen = len(h)-1",
+        "detail": "SpeechRecog.X.kiss_fft130.test.fastfir",
+        "documentation": {}
+    },
+    {
+        "label": "nextpow2",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.fastfir",
+        "description": "SpeechRecog.X.kiss_fft130.test.fastfir",
+        "peekOfCode": "def nextpow2(x):\n    return 2 ** math.ceil(math.log(x)/math.log(2))\ndef fastfilter(sig,h,nfft=None):\n    if nfft is None:\n        nfft = int( nextpow2( 2*len(h) ) )\n    H = fft( h , nfft )\n    scraplen = len(h)-1\n    keeplen = nfft-scraplen\n    res=[]\n    isdone = 0",
+        "detail": "SpeechRecog.X.kiss_fft130.test.fastfir",
+        "documentation": {}
+    },
+    {
+        "label": "fastfilter",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.fastfir",
+        "description": "SpeechRecog.X.kiss_fft130.test.fastfir",
+        "peekOfCode": "def fastfilter(sig,h,nfft=None):\n    if nfft is None:\n        nfft = int( nextpow2( 2*len(h) ) )\n    H = fft( h , nfft )\n    scraplen = len(h)-1\n    keeplen = nfft-scraplen\n    res=[]\n    isdone = 0\n    lastidx = nfft\n    idx0 = 0",
+        "detail": "SpeechRecog.X.kiss_fft130.test.fastfir",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.fastfir",
+        "description": "SpeechRecog.X.kiss_fft130.test.fastfir",
+        "peekOfCode": "def main():\n    import sys\n    from getopt import getopt\n    opts,args = getopt(sys.argv[1:],'rn:l:')\n    opts=dict(opts)\n    siglen = int(opts.get('-l',1e4 ) )\n    hlen =50 \n    nfft = int(opts.get('-n',128) )\n    usereal = opts.has_key('-r')\n    print 'nfft=%d'%nfft",
+        "detail": "SpeechRecog.X.kiss_fft130.test.fastfir",
+        "documentation": {}
+    },
+    {
+        "label": "utilfastfilter",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.fastfir",
+        "description": "SpeechRecog.X.kiss_fft130.test.fastfir",
+        "peekOfCode": "def utilfastfilter(sig,h,nfft,usereal):\n    import compfft\n    import os\n    open( 'sig.dat','w').write( compfft.dopack(sig,'f',not usereal) )\n    open( 'h.dat','w').write( compfft.dopack(h,'f',not usereal) )\n    if usereal: \n        util = './fastconvr' \n    else:\n        util = './fastconv'\n    cmd = 'time %s -n %d -i sig.dat -h h.dat -o out.dat' % (util, nfft)",
+        "detail": "SpeechRecog.X.kiss_fft130.test.fastfir",
+        "documentation": {}
+    },
+    {
+        "label": "fft",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.fft",
+        "description": "SpeechRecog.X.kiss_fft130.test.fft",
+        "peekOfCode": "def fft(f,inv):\n    n=len(f)\n    if n==1:\n        return f\n    for p in 2,3,5:\n        if n%p==0:\n            break\n    else:\n        raise Exception('%s not factorable ' % n)\n    m = n/p",
+        "detail": "SpeechRecog.X.kiss_fft130.test.fft",
+        "documentation": {}
+    },
+    {
+        "label": "rifft",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.fft",
+        "description": "SpeechRecog.X.kiss_fft130.test.fft",
+        "peekOfCode": "def rifft(F):\n    N = len(F) - 1\n    Z = [0] * (N)\n    for k in range(N):\n        Fek = ( F[k] + F[-k-1].conjugate() )\n        Fok = ( F[k] - F[-k-1].conjugate() ) * e ** (j*pi*k/N)\n        Z[k] = Fek + j*Fok\n    fp = fft(Z , 1)\n    f = []\n    for c in fp:",
+        "detail": "SpeechRecog.X.kiss_fft130.test.fft",
+        "documentation": {}
+    },
+    {
+        "label": "real_fft",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.fft",
+        "description": "SpeechRecog.X.kiss_fft130.test.fft",
+        "peekOfCode": "def real_fft( f,inv ):\n    if inv:\n        return rifft(f)\n    N = len(f) / 2\n    res = f[::2]\n    ims = f[1::2]\n    fp = [ complex(r,i) for r,i in zip(res,ims) ]\n    print 'fft input ', fp\n    Fp = fft( fp ,0 )\n    print 'fft output ', Fp",
+        "detail": "SpeechRecog.X.kiss_fft130.test.fft",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.fft",
+        "description": "SpeechRecog.X.kiss_fft130.test.fft",
+        "peekOfCode": "def main():\n    #fft_func = fft\n    fft_func = real_fft\n    tvec = [0.309655,0.815653,0.768570,0.591841,0.404767,0.637617,0.007803,0.012665]\n    Ftvec = [ complex(r,i) for r,i in zip(\n                [3.548571,-0.378761,-0.061950,0.188537,-0.566981,0.188537,-0.061950,-0.378761],\n                [0.000000,-1.296198,-0.848764,0.225337,0.000000,-0.225337,0.848764,1.296198] ) ]\n    F = fft_func( tvec,0 )\n    nerrs= 0\n    for i in range(len(Ftvec)/2 + 1):",
+        "detail": "SpeechRecog.X.kiss_fft130.test.fft",
+        "documentation": {}
+    },
+    {
+        "label": "make_random",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.fft",
+        "description": "SpeechRecog.X.kiss_fft130.test.fft",
+        "peekOfCode": "def make_random(dims=[1]):\n    import Numeric \n    res = []\n    for i in range(dims[0]):\n        if len(dims)==1:\n            r=random.uniform(-1,1)\n            i=random.uniform(-1,1)\n            res.append( complex(r,i) )\n        else:\n            res.append( make_random( dims[1:] ) )",
+        "detail": "SpeechRecog.X.kiss_fft130.test.fft",
+        "documentation": {}
+    },
+    {
+        "label": "flatten",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.fft",
+        "description": "SpeechRecog.X.kiss_fft130.test.fft",
+        "peekOfCode": "def flatten(x):\n    import Numeric\n    ntotal = Numeric.product(Numeric.shape(x))\n    return Numeric.reshape(x,(ntotal,))\ndef randmat( ndims ):\n    dims=[]\n    for i in range( ndims ):\n        curdim = int( random.uniform(2,4) )\n        dims.append( curdim )\n    return make_random(dims )",
+        "detail": "SpeechRecog.X.kiss_fft130.test.fft",
+        "documentation": {}
+    },
+    {
+        "label": "randmat",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.fft",
+        "description": "SpeechRecog.X.kiss_fft130.test.fft",
+        "peekOfCode": "def randmat( ndims ):\n    dims=[]\n    for i in range( ndims ):\n        curdim = int( random.uniform(2,4) )\n        dims.append( curdim )\n    return make_random(dims )\ndef test_fftnd(ndims=3):\n    import FFT\n    import Numeric\n    x=randmat( ndims )",
+        "detail": "SpeechRecog.X.kiss_fft130.test.fft",
+        "documentation": {}
+    },
+    {
+        "label": "test_fftnd",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.fft",
+        "description": "SpeechRecog.X.kiss_fft130.test.fft",
+        "peekOfCode": "def test_fftnd(ndims=3):\n    import FFT\n    import Numeric\n    x=randmat( ndims )\n    print 'dimensions=%s' % str( Numeric.shape(x) )\n    #print 'x=%s' %str(x)\n    xver = FFT.fftnd(x)\n    x2=myfftnd(x)\n    err = xver - x2\n    errf = flatten(err)",
+        "detail": "SpeechRecog.X.kiss_fft130.test.fft",
+        "documentation": {}
+    },
+    {
+        "label": "myfftnd",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.fft",
+        "description": "SpeechRecog.X.kiss_fft130.test.fft",
+        "peekOfCode": "def myfftnd(x):\n    import Numeric\n    xf = flatten(x)\n    Xf = fftndwork( xf , Numeric.shape(x) )\n    return Numeric.reshape(Xf,Numeric.shape(x) )\ndef fftndwork(x,dims):\n    import Numeric\n    dimprod=Numeric.product( dims )\n    for k in range( len(dims) ):\n        cur_dim=dims[ k ]",
+        "detail": "SpeechRecog.X.kiss_fft130.test.fft",
+        "documentation": {}
+    },
+    {
+        "label": "fftndwork",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.fft",
+        "description": "SpeechRecog.X.kiss_fft130.test.fft",
+        "peekOfCode": "def fftndwork(x,dims):\n    import Numeric\n    dimprod=Numeric.product( dims )\n    for k in range( len(dims) ):\n        cur_dim=dims[ k ]\n        stride=dimprod/cur_dim\n        next_x = [complex(0,0)]*len(x)\n        for i in range(stride):\n            next_x[i*cur_dim:(i+1)*cur_dim] = fft(x[i:(i+cur_dim)*stride:stride],0)\n        x = next_x",
+        "detail": "SpeechRecog.X.kiss_fft130.test.fft",
+        "documentation": {}
+    },
+    {
+        "label": "randvec",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.mk_test",
+        "description": "SpeechRecog.X.kiss_fft130.test.mk_test",
+        "peekOfCode": "def randvec(n,iscomplex):\n    if iscomplex:\n        return [\n                int(random.uniform(-32768,32767) ) + j*int(random.uniform(-32768,32767) )\n                for i in range(n) ]\n    else:                \n        return [ int(random.uniform(-32768,32767) ) for i in range(n) ]\ndef c_format(v,round=0):\n    if round:\n        return ','.join( [ '{%d,%d}' %(int(c.real),int(c.imag) ) for c in v ] ) ",
+        "detail": "SpeechRecog.X.kiss_fft130.test.mk_test",
+        "documentation": {}
+    },
+    {
+        "label": "c_format",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.mk_test",
+        "description": "SpeechRecog.X.kiss_fft130.test.mk_test",
+        "peekOfCode": "def c_format(v,round=0):\n    if round:\n        return ','.join( [ '{%d,%d}' %(int(c.real),int(c.imag) ) for c in v ] ) \n    else:\n        s= ','.join( [ '{%.60f ,%.60f }' %(c.real,c.imag) for c in v ] ) \n        return re.sub(r'\\.?0+ ',' ',s)\ndef test_cpx( n,inverse ,short):\n    v = randvec(n,1)\n    scale = 1\n    if short:",
+        "detail": "SpeechRecog.X.kiss_fft130.test.mk_test",
+        "documentation": {}
+    },
+    {
+        "label": "test_cpx",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.mk_test",
+        "description": "SpeechRecog.X.kiss_fft130.test.mk_test",
+        "peekOfCode": "def test_cpx( n,inverse ,short):\n    v = randvec(n,1)\n    scale = 1\n    if short:\n        minsnr=30\n    else:\n        minsnr=100\n    if inverse:\n        tvecout = FFT.inverse_fft(v)\n        if short:",
+        "detail": "SpeechRecog.X.kiss_fft130.test.mk_test",
+        "documentation": {}
+    },
+    {
+        "label": "compare_func",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.mk_test",
+        "description": "SpeechRecog.X.kiss_fft130.test.mk_test",
+        "peekOfCode": "def compare_func():\n    s=\"\"\"\n#define xstr(s) str(s)\n#define str(s) #s\ndouble snr_compare( kiss_fft_cpx * test_vec_out,kiss_fft_cpx * testbuf, int n)\n{\n    int k;\n    double sigpow,noisepow,err,snr,scale=0;\n    kiss_fft_cpx err;\n    sigpow = noisepow = .000000000000000000000000000001; ",
+        "detail": "SpeechRecog.X.kiss_fft130.test.mk_test",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.mk_test",
+        "description": "SpeechRecog.X.kiss_fft130.test.mk_test",
+        "peekOfCode": "def main():\n    from getopt import getopt\n    opts,args = getopt(sys.argv[1:],'s')\n    opts = dict(opts)\n    short = int( opts.has_key('-s') )\n    fftsizes = args\n    if not fftsizes:\n        fftsizes = [ 1800 ]\n    print '#include \"kiss_fft.h\"'\n    print compare_func()",
+        "detail": "SpeechRecog.X.kiss_fft130.test.mk_test",
+        "documentation": {}
+    },
+    {
+        "label": "dopack",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "description": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "peekOfCode": "def dopack(x,cpx=1):\n    x = numpy.reshape( x, ( numpy.size(x),) )\n    if cpx:\n        s = ''.join( [ struct.pack(fmt*2,c.real,c.imag) for c in x ] )\n    else:\n        s = ''.join( [ struct.pack(fmt,c.real) for c in x ] )\n    return s\ndef dounpack(x,cpx):\n    uf = fmt * ( len(x) / struct.calcsize(fmt) )\n    s = struct.unpack(uf,x)",
+        "detail": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "documentation": {}
+    },
+    {
+        "label": "dounpack",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "description": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "peekOfCode": "def dounpack(x,cpx):\n    uf = fmt * ( len(x) / struct.calcsize(fmt) )\n    s = struct.unpack(uf,x)\n    if cpx:\n        return numpy.array(s[::2]) + numpy.array( s[1::2] )*j\n    else:\n        return numpy.array(s )\ndef make_random(dims=[1]):\n    res = []\n    for i in range(dims[0]):",
+        "detail": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "documentation": {}
+    },
+    {
+        "label": "make_random",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "description": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "peekOfCode": "def make_random(dims=[1]):\n    res = []\n    for i in range(dims[0]):\n        if len(dims)==1:\n            r=random.uniform(-1,1)\n            if doreal:\n                res.append( r )\n            else:\n                i=random.uniform(-1,1)\n                res.append( complex(r,i) )",
+        "detail": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "documentation": {}
+    },
+    {
+        "label": "flatten",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "description": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "peekOfCode": "def flatten(x):\n    ntotal = numpy.size(x)\n    return numpy.reshape(x,(ntotal,))\ndef randmat( ndims ):\n    dims=[]\n    for i in range( ndims ):\n        curdim = int( random.uniform(2,5) )\n        if doreal and i==(ndims-1):\n            curdim = int(curdim/2)*2 # force even last dimension if real\n        dims.append( curdim )",
+        "detail": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "documentation": {}
+    },
+    {
+        "label": "randmat",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "description": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "peekOfCode": "def randmat( ndims ):\n    dims=[]\n    for i in range( ndims ):\n        curdim = int( random.uniform(2,5) )\n        if doreal and i==(ndims-1):\n            curdim = int(curdim/2)*2 # force even last dimension if real\n        dims.append( curdim )\n    return make_random(dims )\ndef test_fft(ndims):\n    x=randmat( ndims )",
+        "detail": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "documentation": {}
+    },
+    {
+        "label": "test_fft",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "description": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "peekOfCode": "def test_fft(ndims):\n    x=randmat( ndims )\n    if doreal:\n        xver = numpy.fft.rfftn(x)\n    else:\n        xver = numpy.fft.fftn(x)\n    open('/tmp/fftexp.dat','w').write(dopack( flatten(xver) , True ) )\n    x2=dofft(x,doreal)\n    err = xver - x2\n    errf = flatten(err)",
+        "detail": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "documentation": {}
+    },
+    {
+        "label": "dofft",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "description": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "peekOfCode": "def dofft(x,isreal):\n    dims=list( numpy.shape(x) )\n    x = flatten(x)\n    scale=1\n    if datatype=='int16_t':\n        x = 32767 * x\n        scale = len(x) / 32767.0\n    elif datatype=='int32_t':\n        x = 2147483647.0 * x\n        scale = len(x) / 2147483647.0",
+        "detail": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "description": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "peekOfCode": "def main():\n    opts,args = getopt.getopt(sys.argv[1:],'r')\n    opts=dict(opts)\n    global doreal\n    doreal = opts.has_key('-r')\n    if doreal:\n        print 'Testing multi-dimensional real FFTs'\n    else:\n        print 'Testing multi-dimensional FFTs'\n    for dim in range(1,4):",
+        "detail": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "documentation": {}
+    },
+    {
+        "label": "datatype",
         "kind": 5,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "description": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "peekOfCode": "datatype = os.environ.get('DATATYPE','float')\nutil = '../tools/fft_' + datatype\nminsnr=90\nif datatype == 'double':\n    fmt='d'\nelif datatype=='int16_t':\n    fmt='h'\n    minsnr=10\nelif datatype=='int32_t':\n    fmt='i'",
+        "detail": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "documentation": {}
+    },
+    {
+        "label": "util",
+        "kind": 5,
+        "importPath": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "description": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "peekOfCode": "util = '../tools/fft_' + datatype\nminsnr=90\nif datatype == 'double':\n    fmt='d'\nelif datatype=='int16_t':\n    fmt='h'\n    minsnr=10\nelif datatype=='int32_t':\n    fmt='i'\nelif datatype=='simd':",
+        "detail": "SpeechRecog.X.kiss_fft130.test.testkiss",
+        "documentation": {}
+    },
+    {
+        "label": "convert_audio",
+        "kind": 2,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "audio_data = os.listdir('Audio Files')\nprint(pd.DataFrame(audio_data, columns=['Audio Files']))\nmfcc_list = []\nfor file in audio_data:\n    print(f\"File: {file}, Size: {os.path.getsize(f'Audio Files/{file}')/1024:.2f} KB\")\n    y, sampling_rate = librosa.load(f'Audio Files/{file}', sr=None)\n    y_trimmed , _ = librosa.effects.trim(y, top_db=20)\n    n_mfcc = 13\n    mfcc = librosa.feature.mfcc(y=y_trimmed, sr=sampling_rate, n_mfcc=n_mfcc)    \n    # Normalize: mean of each coefficient across time (gives a fixed-size vector)",
+        "peekOfCode": "def convert_audio(input_file):\n    audio = AudioSegment.from_file(input_file)\n    audio = audio.set_channels(1)  # Convert to mono\n    audio = audio.set_frame_rate(8000)\n    audio = audio.set_sample_width(1)\n    return audio\nfor folder in audio_data:\n    os.makedirs(f'Converted Audio Files/{folder}', exist_ok=True)\n    for file in os.listdir(f'Audio Files/{folder}'):    \n        audio = convert_audio(f'Audio Files/{folder}/{file}')",
         "detail": "script",
         "documentation": {}
     },
     {
-        "label": "mfcc_list",
+        "label": "audio_data",
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "mfcc_list = []\nfor file in audio_data:\n    print(f\"File: {file}, Size: {os.path.getsize(f'Audio Files/{file}')/1024:.2f} KB\")\n    y, sampling_rate = librosa.load(f'Audio Files/{file}', sr=None)\n    y_trimmed , _ = librosa.effects.trim(y, top_db=20)\n    n_mfcc = 13\n    mfcc = librosa.feature.mfcc(y=y_trimmed, sr=sampling_rate, n_mfcc=n_mfcc)    \n    # Normalize: mean of each coefficient across time (gives a fixed-size vector)\n    mfcc_mean = np.mean(mfcc, axis=1)  # shape: (13,)\n    # Quantize to int8 (range -128 to 127) to fit in AVR ROM",
+        "peekOfCode": "audio_data = os.listdir('Audio Files')\nfor folder in audio_data:\n    print(f\"\"\"Folder: {folder},\n            Files in Folder: {os.listdir(f'Audio Files/{folder}') }\n          \"\"\")\nzcr_list = []\nshort_term_energy_list = []\nspectral_centroid_list = []\nfeatures = []\nnumber_of_files = 0",
+        "detail": "script",
+        "documentation": {}
+    },
+    {
+        "label": "zcr_list",
+        "kind": 5,
+        "importPath": "script",
+        "description": "script",
+        "peekOfCode": "zcr_list = []\nshort_term_energy_list = []\nspectral_centroid_list = []\nfeatures = []\nnumber_of_files = 0\ndef convert_audio(input_file):\n    audio = AudioSegment.from_file(input_file)\n    audio = audio.set_channels(1)  # Convert to mono\n    audio = audio.set_frame_rate(8000)\n    audio = audio.set_sample_width(1)",
+        "detail": "script",
+        "documentation": {}
+    },
+    {
+        "label": "short_term_energy_list",
+        "kind": 5,
+        "importPath": "script",
+        "description": "script",
+        "peekOfCode": "short_term_energy_list = []\nspectral_centroid_list = []\nfeatures = []\nnumber_of_files = 0\ndef convert_audio(input_file):\n    audio = AudioSegment.from_file(input_file)\n    audio = audio.set_channels(1)  # Convert to mono\n    audio = audio.set_frame_rate(8000)\n    audio = audio.set_sample_width(1)\n    return audio",
+        "detail": "script",
+        "documentation": {}
+    },
+    {
+        "label": "spectral_centroid_list",
+        "kind": 5,
+        "importPath": "script",
+        "description": "script",
+        "peekOfCode": "spectral_centroid_list = []\nfeatures = []\nnumber_of_files = 0\ndef convert_audio(input_file):\n    audio = AudioSegment.from_file(input_file)\n    audio = audio.set_channels(1)  # Convert to mono\n    audio = audio.set_frame_rate(8000)\n    audio = audio.set_sample_width(1)\n    return audio\nfor folder in audio_data:",
+        "detail": "script",
+        "documentation": {}
+    },
+    {
+        "label": "features",
+        "kind": 5,
+        "importPath": "script",
+        "description": "script",
+        "peekOfCode": "features = []\nnumber_of_files = 0\ndef convert_audio(input_file):\n    audio = AudioSegment.from_file(input_file)\n    audio = audio.set_channels(1)  # Convert to mono\n    audio = audio.set_frame_rate(8000)\n    audio = audio.set_sample_width(1)\n    return audio\nfor folder in audio_data:\n    os.makedirs(f'Converted Audio Files/{folder}', exist_ok=True)",
+        "detail": "script",
+        "documentation": {}
+    },
+    {
+        "label": "number_of_files",
+        "kind": 5,
+        "importPath": "script",
+        "description": "script",
+        "peekOfCode": "number_of_files = 0\ndef convert_audio(input_file):\n    audio = AudioSegment.from_file(input_file)\n    audio = audio.set_channels(1)  # Convert to mono\n    audio = audio.set_frame_rate(8000)\n    audio = audio.set_sample_width(1)\n    return audio\nfor folder in audio_data:\n    os.makedirs(f'Converted Audio Files/{folder}', exist_ok=True)\n    for file in os.listdir(f'Audio Files/{folder}'):    ",
+        "detail": "script",
+        "documentation": {}
+    },
+    {
+        "label": "frame_length",
+        "kind": 5,
+        "importPath": "script",
+        "description": "script",
+        "peekOfCode": "frame_length = 64\nhop_length = 64\n# { 'yes': {'zcr': [], 'ste': [], 'sc': []}, 'no': {...}, ... }\nword_features = {folder: {'zcr': [], 'ste': [], 'sc': []} for folder in audio_data}\nfor folder in audio_data:\n    for file in os.listdir(f'Converted Audio Files/{folder}'):\n        y, sr = librosa.load(f'Converted Audio Files/{folder}/{file}', sr=8000, mono=True)\n        y_trimmed, _ = librosa.effects.trim(y, top_db=5)\n        zcr = librosa.feature.zero_crossing_rate(y, frame_length=frame_length, hop_length=hop_length)\n        ste = librosa.feature.rms(y=y, frame_length=frame_length, hop_length=hop_length)",
+        "detail": "script",
+        "documentation": {}
+    },
+    {
+        "label": "hop_length",
+        "kind": 5,
+        "importPath": "script",
+        "description": "script",
+        "peekOfCode": "hop_length = 64\n# { 'yes': {'zcr': [], 'ste': [], 'sc': []}, 'no': {...}, ... }\nword_features = {folder: {'zcr': [], 'ste': [], 'sc': []} for folder in audio_data}\nfor folder in audio_data:\n    for file in os.listdir(f'Converted Audio Files/{folder}'):\n        y, sr = librosa.load(f'Converted Audio Files/{folder}/{file}', sr=8000, mono=True)\n        y_trimmed, _ = librosa.effects.trim(y, top_db=5)\n        zcr = librosa.feature.zero_crossing_rate(y, frame_length=frame_length, hop_length=hop_length)\n        ste = librosa.feature.rms(y=y, frame_length=frame_length, hop_length=hop_length)\n        # sc  = librosa.feature.spectral_centroid(y=y_trimmed, sr=sr, n_fft=frame_length, hop_length=hop_length)",
+        "detail": "script",
+        "documentation": {}
+    },
+    {
+        "label": "word_features",
+        "kind": 5,
+        "importPath": "script",
+        "description": "script",
+        "peekOfCode": "word_features = {folder: {'zcr': [], 'ste': [], 'sc': []} for folder in audio_data}\nfor folder in audio_data:\n    for file in os.listdir(f'Converted Audio Files/{folder}'):\n        y, sr = librosa.load(f'Converted Audio Files/{folder}/{file}', sr=8000, mono=True)\n        y_trimmed, _ = librosa.effects.trim(y, top_db=5)\n        zcr = librosa.feature.zero_crossing_rate(y, frame_length=frame_length, hop_length=hop_length)\n        ste = librosa.feature.rms(y=y, frame_length=frame_length, hop_length=hop_length)\n        # sc  = librosa.feature.spectral_centroid(y=y_trimmed, sr=sr, n_fft=frame_length, hop_length=hop_length)\n        # One mean value per file → collect across all files of this word\n        word_features[folder]['zcr'].append(np.mean(zcr))",
+        "detail": "script",
+        "documentation": {}
+    },
+    {
+        "label": "final_features",
+        "kind": 5,
+        "importPath": "script",
+        "description": "script",
+        "peekOfCode": "final_features = []\nfor folder, feats in word_features.items():\n    final_features.append({\n        'word':     folder,\n        'zcr_mean': np.mean(feats['zcr']),\n        'ste_mean': np.mean(feats['ste']),\n        # 'sc_mean':  np.mean(feats['sc']),\n    })\n# Write to file\nwith open(\"features.txt\", \"w\") as f:",
         "detail": "script",
         "documentation": {}
     }

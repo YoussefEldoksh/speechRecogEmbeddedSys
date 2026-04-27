@@ -1,3 +1,5 @@
+
+
 #define F_CPU 11059200UL
 
 #include <avr/io.h>
@@ -22,7 +24,7 @@ void LCD_Command( unsigned char cmnd )
 
 
 void LCD_Char( unsigned char data )
-{
+{   
     LCD_Port = (LCD_Port & 0x0F) | (data & 0xF0); /* sending upper nibble */
     LCD_Port |= (1<<RS);        /* RS=1, data reg. */    
     

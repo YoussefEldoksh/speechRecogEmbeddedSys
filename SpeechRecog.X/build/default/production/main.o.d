@@ -18,7 +18,9 @@ build/default/production/main.o.d build/default/production/main.o: main.c \
  speech_data.h lcd.h \
  C:/Program\ Files/Embedded\ systems\ tools/avr8-gnu-toolchain-win32_x86_64/avr/include/avr/interrupt.h \
  C:/Program\ Files/Embedded\ systems\ tools/avr8-gnu-toolchain-win32_x86_64/avr/include/util/delay.h \
- C:/Program\ Files/Embedded\ systems\ tools/avr8-gnu-toolchain-win32_x86_64/avr/include/util/delay_basic.h
+ C:/Program\ Files/Embedded\ systems\ tools/avr8-gnu-toolchain-win32_x86_64/avr/include/util/delay_basic.h \
+ ADC_interface.h speech_processing.h \
+ C:/Program\ Files/Embedded\ systems\ tools/avr8-gnu-toolchain-win32_x86_64/avr/include/math.h
 C:/Program\ Files/Embedded\ systems\ tools/avr8-gnu-toolchain-win32_x86_64/avr/include/stdio.h:
 C:/Program\ Files/Embedded\ systems\ tools/avr8-gnu-toolchain-win32_x86_64/avr/include/inttypes.h:
 C:/Program\ Files/Embedded\ systems\ tools/avr8-gnu-toolchain-win32_x86_64/lib/gcc/avr/15.1.0/include/stdint.h:
@@ -40,3 +42,6 @@ lcd.h:
 C:/Program\ Files/Embedded\ systems\ tools/avr8-gnu-toolchain-win32_x86_64/avr/include/avr/interrupt.h:
 C:/Program\ Files/Embedded\ systems\ tools/avr8-gnu-toolchain-win32_x86_64/avr/include/util/delay.h:
 C:/Program\ Files/Embedded\ systems\ tools/avr8-gnu-toolchain-win32_x86_64/avr/include/util/delay_basic.h:
+ADC_interface.h:
+speech_processing.h:
+C:/Program\ Files/Embedded\ systems\ tools/avr8-gnu-toolchain-win32_x86_64/avr/include/math.h:

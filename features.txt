@@ -1,0 +1,9 @@
+word | zcr_mean | ste_mean | sc_mean
+ static const float PROGMEM features_Down[] = { 0.1224, 0.0113 };
+ static const float PROGMEM features_Left[] = { 0.2158, 0.0088 };
+ static const float PROGMEM features_Off[] = { 0.1985, 0.0077 };
+ static const float PROGMEM features_On[] = { 0.1400, 0.0088 };
+ static const float PROGMEM features_Right[] = { 0.1748, 0.0094 };
+ static const float PROGMEM features_Start[] = { 0.2085, 0.0073 };
+ static const float PROGMEM features_Stop[] = { 0.1960, 0.0067 };
+ static const float PROGMEM features_Up[] = { 0.1474, 0.0059 };

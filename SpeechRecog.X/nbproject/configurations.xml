@@ -6,6 +6,8 @@
                    projectFiles="true">
       <itemPath>speech_data.h</itemPath>
       <itemPath>lcd.h</itemPath>
+      <itemPath>ADC_interface.h</itemPath>
+      <itemPath>speech_processing.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -21,6 +23,10 @@
                    projectFiles="true">
       <itemPath>main.c</itemPath>
       <itemPath>lcd.c</itemPath>
+      <itemPath>adc.c</itemPath>
+      <itemPath>speech_processing.c</itemPath>
+      <itemPath>kiss_fft130/kiss_fft.c</itemPath>
+      <itemPath>kiss_fft130/tools/kiss_fftr.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
@@ -54,7 +60,7 @@
         <loading>
           <useAlternateLoadableFile>false</useAlternateLoadableFile>
           <parseOnProdLoad>false</parseOnProdLoad>
-          <alternateLoadableFile></alternateLoadableFile>
+          <alternateLoadableFile>fftw/include/fftw3.h</alternateLoadableFile>
         </loading>
         <subordinates>
         </subordinates>
@@ -113,7 +119,7 @@
       </AVR-CPP>
       <AVR-GCC>
         <property key="additional-warnings" value="true"/>
-        <property key="call-prologues" value="false"/>
+        <property key="call-prologues" value="true"/>
         <property key="default-bitfield-type" value="true"/>
         <property key="default-char-type" value="true"/>
         <property key="extra-include-directories" value=""/>
@@ -139,7 +145,7 @@
         <property key="verbose" value="false"/>
       </AVR-GCC>
       <AVR-Global>
-        <property key="common-include-directories" value=""/>
+        <property key="common-include-directories" value="kiss_fft130"/>
         <property key="eep" value="false"/>
         <property key="external-ram-check" value="false"/>
         <property key="hex" value="true"/>
@@ -167,12 +173,18 @@
         <property key="remove-unused-sections" value="true"/>
         <property key="rodata-writable" value="false"/>
         <property key="sram-segment" value=""/>
-        <property key="v-printf" value="false"/>
+        <property key="v-printf" value="true"/>
       </AVR-LD>
       <Simulator>
         <property key="codecoverage.enabled" value="Disable"/>
         <property key="codecoverage.enableoutputtofile" value="false"/>
         <property key="codecoverage.outputfile" value=""/>
+        <property key="debugoptions.debug-startup" value="Use system settings"/>
+        <property key="debugoptions.reset-behaviour" value="Use system settings"/>
+        <property key="event.recorder.debugger.behavior" value="Running"/>
+        <property key="event.recorder.enabled" value="false"/>
+        <property key="event.recorder.scvd.files" value=""/>
+        <property key="lastid" value=""/>
         <property key="oscillator.auxfrequency" value="120"/>
         <property key="oscillator.auxfrequencyunit" value="Mega"/>
         <property key="oscillator.frequency" value="1"/>
@@ -647,6 +659,12 @@
         <property key="codecoverage.enabled" value="Disable"/>
         <property key="codecoverage.enableoutputtofile" value="false"/>
         <property key="codecoverage.outputfile" value=""/>
+        <property key="debugoptions.debug-startup" value="Use system settings"/>
+        <property key="debugoptions.reset-behaviour" value="Use system settings"/>
+        <property key="event.recorder.debugger.behavior" value="Running"/>
+        <property key="event.recorder.enabled" value="false"/>
+        <property key="event.recorder.scvd.files" value=""/>
+        <property key="lastid" value=""/>
         <property key="oscillator.auxfrequency" value="120"/>
         <property key="oscillator.auxfrequencyunit" value="Mega"/>
         <property key="oscillator.frequency" value="1"/>

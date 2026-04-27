@@ -95,7 +95,7 @@ all: .all-post
 # Add your post 'all' code here...
 
 
-# help
+# help-
 help: .help-post
 
 .help-pre:
