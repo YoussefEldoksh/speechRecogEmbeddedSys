@@ -3,6 +3,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <avr/pgmspace.h>
+#include <string.h>
 #include <util/delay.h>
 #include <stdlib.h>
 
@@ -11,22 +12,22 @@
 #include "ADC_interface.h"
 #include "speech_processing.h"
 
-// Buffer for real-time captured features
-int8_t live_mfcc[N_MFCC];
+// Buffer for real-time captured features (Q15: zcr, ste)
+int16_t live_mfcc[N_MFCC];
 
-uint8_t nearest_neighbor(int8_t* input_mfcc) {
-    uint16_t min_dist = 0xFFFF;
+uint8_t nearest_neighbor(int16_t* input_mfcc) {
+    int32_t min_dist = 0x7FFFFFFF;
     uint8_t best_label = 0;
 
     for (uint8_t i = 0; i < N_CLASSES; i++) {
-        // Read pointer to the template row from Flash
-        const int8_t* ref_row = (const int8_t*)pgm_read_word(&mfcc_table[i]);
-        uint16_t dist = 0;
+        int16_t ref_row[N_MFCC];
+        memcpy_P(ref_row, &features_table[i][0], sizeof(ref_row));
 
+        int32_t dist = 0;
         for (uint8_t j = 0; j < N_MFCC; j++) {
-            int8_t ref = pgm_read_byte(&ref_row[j]); // From Flash
-            int8_t inp = input_mfcc[j];              // From RAM
-            dist += abs(inp - ref);
+            int16_t d = input_mfcc[j] - ref_row[j];
+            if (d < 0) d = (int16_t)-d;
+            dist += d;
         }
 
         if (dist < min_dist) {

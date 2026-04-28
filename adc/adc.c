@@ -3,7 +3,7 @@
 void ADC_init(void) {
     /* Select Voltage Reference: AVCC with external capacitor at AREF pin */
     /* REFS1=0, REFS0=1 */
-    ADMUX = (1 << REFS0);
+    ADMUX = (1 << REFS0) | (1 << ADLAR); // left adjust for 8-bit reads (ADCH)
 
     /*Set ADC Prescaler to 128 */
     /* 11,059,200 / 128 = 86.4 kHz (Inside the 50-200kHz range for 10-bit accuracy) */
@@ -25,10 +25,10 @@ uint16_t ADC_u16ReadChannel(uint8_t channel) {
 
     /*Wait for conversion to complete (ADSC becomes 0 when finished) */
     while (ADCSRA & (1 << ADSC));
-    return ADC;
+    return ADCH;
 }
 
 uint8_t ADC_u8ReadChannel(uint8_t channel) {
-    /*a wrapper to return the top 8 bits to save memory */
-    return (uint8_t)(ADC_u16ReadChannel(channel) >> 2);
+    /* Return the top 8 bits (left-adjusted) */
+    return (uint8_t)ADC_u16ReadChannel(channel);
 }

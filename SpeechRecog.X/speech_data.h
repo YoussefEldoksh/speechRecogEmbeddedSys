@@ -25,25 +25,27 @@
 //static const int8_t PROGMEM mfcc_stop[]  = {-128, 80, -8, -20, 2, -15, -8, -4, -5, 8, -16, -3, -22};
 
 
- static const float PROGMEM features_on[] = { 0.1350, 0.0167 };
- static const float PROGMEM features_off[] = { 0.2156, 0.0181 };
- static const float PROGMEM features_up[] = { 0.1534, 0.0141 };
- static const float PROGMEM features_down[] = { 0.1098, 0.0205 };
- static const float PROGMEM features_left[] = { 0.2541, 0.0153 };
- static const float PROGMEM features_right[] = { 0.1625, 0.0186 };
- static const float PROGMEM features_start[] = { 0.2350, 0.0129 };
- static const float PROGMEM features_stop[] = { 0.2326, 0.0125 };
-
-
-// static const int8_t* const PROGMEM mfcc_table[N_CLASSES] = {
-//     mfcc_on, mfcc_off, mfcc_up, mfcc_down,
-//     mfcc_right, mfcc_left, mfcc_start, mfcc_stop
-// };
-
-static const float* const PROGMEM features_table[N_CLASSES] = {
-    features_on, features_off, features_up, features_down,
-    features_right, features_left, features_start, features_stop
+// If a generated features header exists (created by the helper `script.py`),
+// prefer it. The generated header defines GENERATED_FEATURES_H and provides
+// `generated_features_table` with the same layout.
+#ifdef GENERATED_FEATURES_H
+#include "generated_features.h"
+#define features_table generated_features_table
+#else
+// Consolidated feature table in PROGMEM (Q15 fixed-point)
+static const int16_t PROGMEM features_table[N_CLASSES][N_MFCC] = {
+    { 4424,  547 }, // on
+    { 7070,  593 }, // off
+    { 5023,  462 }, // up
+    { 3597,  671 }, // down
+    { 5325,  610 }, // right
+    { 8327,  501 }, // left
+    { 7700,  423 }, // start
+    { 7610,  410 }  // stop
 };
+#endif
+// Labels are defined in a single C file to avoid duplicate definitions
+extern const char* labels[N_CLASSES];
 //
 //// extern declaration ? definition goes in one .c file only
 //extern const char* labels[N_CLASSES];

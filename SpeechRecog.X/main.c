@@ -5,11 +5,11 @@
  * Created on April 18, 2026, 7:40 PM
  */
 #define F_CPU 11059200UL
-#define BAUD_PRESCALE  ((F_CPU / (16UL * USAR_BAUDRATE)) - 1)
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <avr/pgmspace.h>
+#include <string.h>
 #include "speech_data.h"
 #include "lcd.h"
 #include <avr/io.h>
@@ -17,9 +17,8 @@
 #include <util/delay.h>
 #include "ADC_interface.h"
 #include "speech_processing.h"
-#include <math.h>
 
-float live_mfcc[N_MFCC];
+int16_t live_mfcc[N_MFCC];
 volatile uint8_t speaking = 0;
 //volatile uint8_t counter = 0;
 
@@ -32,7 +31,6 @@ volatile float values_perword[5][N_MFCC];
  */
 
 //const int8_t PROGMEM mfcc_input[N_MFCC] = {-128, 127, 13, 26, -10, 4, -22, 21, 5, -39, 6, -2, -25};
-const char* labels[N_CLASSES] = {"on", "off", "up", "down", "right", "left", "start", "stop"};
 
 ISR(INT0_vect) {
     PORTD ^= (1 << PD7);
@@ -52,22 +50,21 @@ ISR(INT0_vect) {
 //}
 //
 
-int nearest_neighbor(const float* input_mfcc) {
-    float min_dist = 100000000;
+int nearest_neighbor(const int16_t* input_mfcc) {
+    int32_t min_dist = 0x7FFFFFFF;
     int best_label = 0;
 
     for (uint8_t i = 0; i < N_CLASSES; i++) {
-        const float* ref_row = (const float*) pgm_read_word(&features_table[i]);
-        float dist_squared = 0; 
+        int16_t ref_row[N_MFCC];
+        // copy the row from PROGMEM
+        memcpy_P(ref_row, &features_table[i][0], sizeof(ref_row));
 
+        int32_t dist = 0;
         for (uint8_t j = 0; j < N_MFCC; j++) {
-            float ref = pgm_read_byte(&ref_row[j]);
-            float inp = pgm_read_byte(&input_mfcc[j]);
-            float diff = inp - ref;
-            dist_squared += pow(diff, 2); // Sum of squares
+            int16_t d = input_mfcc[j] - ref_row[j];
+            if (d < 0) d = (int16_t)-d;
+            dist += d;
         }
-
-        float dist = sqrt(dist_squared);
 
         if (dist < min_dist) {
             min_dist = dist;
@@ -108,23 +105,26 @@ int main(int argc, char** argv) {
     while (1) {
 
 
-        SP_UART_Init() ;
+        // SP_UART_Init(); // Enable only if you need UART debug
         int label = 10;
 
         _delay_ms(50);
 
-        while (!speaking);
+        while (!speaking) {
+            if (SP_Is_Speaking()) {
+                speaking = 1;
+            }
+        }
 
         LCD_Clear();
         LCD_String_xy(0, 0, "Listening...");
 
-        _delay_ms(3000);
+        _delay_ms(100);
 
         SP_Init();
         
         
         SP_Compute_features(live_mfcc);
-        printf("Signal values: %f, %f\n",live_mfcc[0],live_mfcc[1]);
 
         //Classification
         label = nearest_neighbor(live_mfcc);

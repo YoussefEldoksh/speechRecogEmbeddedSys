@@ -16,13 +16,10 @@ from pydub import AudioSegment
 
 sns.set_style('whitegrid')
 
-audio_data = os.listdir('Audio Files')
+audio_folders = sorted(os.listdir('Audio Files'))
 
-for folder in audio_data:
-    print(f"""Folder: {folder},
-            Files in Folder: {os.listdir(f'Audio Files/{folder}') }
-          
-          """)
+for folder in audio_folders:
+    print(f"Folder: {folder}, Files: {os.listdir(f'Audio Files/{folder}')}")
 
 
 zcr_list = []
@@ -39,7 +36,7 @@ def convert_audio(input_file):
     audio = audio.set_sample_width(1)
     return audio
 
-for folder in audio_data:
+for folder in audio_folders:
     os.makedirs(f'Converted Audio Files/{folder}', exist_ok=True)
     for file in os.listdir(f'Audio Files/{folder}'):    
         audio = convert_audio(f'Audio Files/{folder}/{file}')
@@ -52,9 +49,9 @@ frame_length = 64
 hop_length = 64
 
 # { 'yes': {'zcr': [], 'ste': [], 'sc': []}, 'no': {...}, ... }
-word_features = {folder: {'zcr': [], 'ste': [], 'sc': []} for folder in audio_data}
+word_features = {folder.lower(): {'zcr': [], 'ste': [], 'sc': []} for folder in audio_folders}
 
-for folder in audio_data:
+for folder in audio_folders:
     for file in os.listdir(f'Converted Audio Files/{folder}'):
         y, sr = librosa.load(f'Converted Audio Files/{folder}/{file}', sr=8000, mono=True)
         y_trimmed, _ = librosa.effects.trim(y, top_db=5)
@@ -64,18 +61,19 @@ for folder in audio_data:
         # sc  = librosa.feature.spectral_centroid(y=y_trimmed, sr=sr, n_fft=frame_length, hop_length=hop_length)
 
         # One mean value per file → collect across all files of this word
-        word_features[folder]['zcr'].append(np.mean(zcr))
-        word_features[folder]['ste'].append(np.mean(ste ** 2))
+        word_features[folder.lower()]['zcr'].append(np.mean(zcr))
+        word_features[folder.lower()]['ste'].append(np.mean(ste ** 2))
         # word_features[folder]['sc'].append(np.mean(sc))
 
 # Now average across all files per word → single vector per word
 final_features = []
-for folder, feats in word_features.items():
+for folder in audio_folders:
+    key = folder.lower()
+    feats = word_features[key]
     final_features.append({
-        'word':     folder,
-        'zcr_mean': np.mean(feats['zcr']),
-        'ste_mean': np.mean(feats['ste']),
-        # 'sc_mean':  np.mean(feats['sc']),
+        'word':     key,
+        'zcr_mean': float(np.mean(feats['zcr'])),
+        'ste_mean': float(np.mean(feats['ste'])),
     })
 
 # Write to file
@@ -85,6 +83,26 @@ with open("features.txt", "w") as f:
         line = f" static const float PROGMEM features_{row['word']}[] = {{ {row['zcr_mean']:.4f}, {row['ste_mean']:.4f} }};"
         f.write(line + "\n")
         print(line)
+
+# Also generate a C header with a PROGMEM 2D table usable by the AVR project
+gen_path = os.path.join('SpeechRecog.X', 'generated_features.h')
+with open(gen_path, 'w') as gf:
+    gf.write('#ifndef GENERATED_FEATURES_H\n')
+    gf.write('#define GENERATED_FEATURES_H\n\n')
+    gf.write('#include <avr/pgmspace.h>\n\n')
+    gf.write(f'#define N_MFCC 2\n')
+    gf.write(f'#define N_CLASSES {len(final_features)}\n\n')
+    gf.write('static const int16_t PROGMEM generated_features_table[N_CLASSES][N_MFCC] = {\n')
+    for row in final_features:
+        z_q15 = int(round(row['zcr_mean'] * 32767))
+        e_q15 = int(round(row['ste_mean'] * 32767))
+        z_q15 = max(-32768, min(32767, z_q15))
+        e_q15 = max(-32768, min(32767, e_q15))
+        gf.write(f"    {{ {z_q15}, {e_q15} }}, // {row['word']}\n")
+    gf.write('};\n\n')
+    gf.write('#endif\n')
+
+print(f"Generated C header: {gen_path}")
 
 
 #--------------------------------------------------------------
