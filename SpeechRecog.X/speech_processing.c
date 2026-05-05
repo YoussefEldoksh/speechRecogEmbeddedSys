@@ -14,12 +14,12 @@
 #include <math.h>
 
 #define BAUD_PRESCALE  ((F_CPU / (16UL * USAR_BAUDRATE)) - 1)
-#define SPEECH_THRESHOLD 30
-#define WINDOW_SIZE 64
+//#define SPEECH_THRESHOLD 30
+//#define WINDOW_SIZE 64
 // ==================== GLOBALS ====================
 // All buffers sized for FFT_SIZE=64 ? total SRAM: ~400 bytes
-volatile int8_t g_adc_value = 0;
-volatile uint8_t g_sampling_flag = 0;
+//volatile int8_t g_adc_value = 0;
+//volatile uint8_t g_sampling_flag = 0;
 
 //static int16_t fft_re[FFT_SIZE]; // 128 bytes ? reused for input + FFT real
 //static int16_t fft_im[FFT_SIZE]; // 128 bytes ? FFT imaginary
@@ -28,28 +28,32 @@ volatile uint8_t g_sampling_flag = 0;
 //static uint8_t log_mel[N_MELS]; //  13 bytes ? log2 approximation
 //static int8_t mfcc_buf[N_MFCC]; //  13 bytes ? final output
 
-static float feature_out[4];
-static int8_t audio_samples[WINDOW_SIZE];
+//static float feature_out[4];
+//static int8_t audio_samples[WINDOW_SIZE];
 
 // ==================== TIMER + ADC ISR ====================
+//
+//void SP_Init(void) {
+//    // CTC on Timer0, prescaler 256 ? OCR0 = F_CPU/(256*8000) - 1 = 11
+//    // Gives ~8kHz interrupt rate; ADC prescaler 128 gives 86kHz ADC clock
+//    // Actual sample rate set by timer: 8000 Hz
+//    // (re-extract Python features at sr=8000 to match)
+//    TCCR1B |= (1 << WGM12); // CTC mode
+//    TCCR1B |= (1 << CS11); // prescaler 8
+//
+//    OCR1A = (F_CPU / (8UL * 8000UL)) - 1; // 8kHz
+//
+//    TIMSK |= (1 << OCIE1A);
+//}
 
-void SP_Init(void) {
-    // CTC on Timer0, prescaler 64 ? OCR0 = F_CPU/(64*8000) - 1 = 21
-    // Gives ~8kHz interrupt rate; ADC prescaler 128 gives 86kHz ADC clock
-    // Actual sample rate set by timer: 8000 Hz
-    // (re-extract Python features at sr=8000 to match)
-    TCCR0 = (1 << WGM01) | (1 << CS01) | (1 << CS00);
-    OCR0 = 21;
-    TIMSK |= (1 << OCIE0);
-}
 
-ISR(TIMER0_COMP_vect) {
-    // Minimal ISR ? just trigger and read
-    ADCSRA |= (1 << ADSC);
-    while (ADCSRA & (1 << ADIF)); // ~9us at 86kHz ADC clock, safe in ISR
-    g_adc_value = ADC;
-    g_sampling_flag = 1;
-}
+//ISR(TIMER0_COMP_vect) {
+//    // Minimal ISR ? just trigger and read
+//    ADCSRA |= (1 << ADSC);
+//    while (! (ADCSRA & (1 << ADIF))); // ~9us at 86kHz ADC clock, safe in ISR
+//    g_adc_value = ADC;
+//    g_sampling_flag = 1;
+//}
 
 //// ==================== HAMMING WINDOW ====================
 //
@@ -194,29 +198,29 @@ int UART_putChar(char c, FILE * stream) {
 
 static FILE uart_str = FDEV_SETUP_STREAM(UART_putChar, UART_getChar, _FDEV_SETUP_RW);
 
-static float compute_zcr(int8_t* samples, uint16_t size) {
-    float zero_crossings = 0;
-
-    for (uint8_t i = 1; i < size; i++) {
-        if ((samples[i - 1] < 0 && samples[i] >= 0) || (samples[i - 1] >= 0 && samples[i] < 0)) {
-            zero_crossings++;
-        }
-    }
-
-    float zero_crossings_scaled = (zero_crossings / WINDOW_SIZE);
-
-//    printf("DEBUG ZCR: crossings=%d, scaled=%d\n", zero_crossings, zero_crossings_scaled);
-    return zero_crossings_scaled;
-}
-
-float compute_ste(int8_t *frame, uint16_t len) {
-    float sum = 0.0f;
-    for (uint8_t i = 0; i < len; i++) {
-        float s = (float) frame[i] / 256.0f; // normalize to [-1.0, 1.0]
-        sum += pow(s, 2);
-    }
-    return sum / len; // normalized STE (matches rms)
-}
+//static float compute_zcr(int16_t* samples, uint16_t size) {
+//    float zero_crossings = 0;
+//
+//    for (uint8_t i = 1; i < size; i++) {
+//        if ((samples[i - 1] < 0 && samples[i] >= 0) || (samples[i - 1] >= 0 && samples[i] < 0)) {
+//            zero_crossings++;
+//        }
+//    }
+//
+//    float zero_crossings_scaled = (zero_crossings / WINDOW_SIZE);
+//
+////    printf("DEBUG ZCR: crossings=%d, scaled=%d\n", zero_crossings, zero_crossings_scaled);
+//    return zero_crossings_scaled;
+//}
+//
+//float compute_ste(int16_t *frame, uint16_t len) {
+//    float sum = 0.0f;
+//    for (uint8_t i = 0; i < len; i++) {
+//        float s = (float) frame[i] / 256.0f; // normalize to [-1.0, 1.0]
+//        sum += pow(s, 2);
+//    }
+//    return sum / len; // normalized STE (matches rms)
+//}
 
 
 
@@ -224,48 +228,48 @@ float compute_ste(int8_t *frame, uint16_t len) {
 // ==================== MAIN FEATURE EXTRACTION ====================
 
 void SP_UART_Init(void) {
-    UART_init(9600);
+    UART_init(115200);
     stdin = stdout = &uart_str;
     _delay_ms(50);
 }
-
-void SP_Compute_features(float *out) {
-    uint8_t num_windows = 0;
-    float   zcr_acc = 0.0f;
-    float   ste_acc = 0.0f;
-
-    while (num_windows < 8) {
-
-        // 1. Collect raw uint8_t samples
-        for (uint8_t i = 0; i < WINDOW_SIZE; i++) {
-            while (!g_sampling_flag);
-            g_sampling_flag = 0;
-            audio_samples[i] = g_adc_value;
-            if(num_windows == 0){
-                printf("ADC value: %d\n",g_adc_value);
-            }
-        }
-
-        // 2. Compute integer mean
-        uint16_t sum = 0;
-        for (uint8_t i = 0; i < WINDOW_SIZE; i++) sum += audio_samples[i];
-        uint8_t mean_int = (uint8_t)(sum / WINDOW_SIZE);
-
-        // 3. Center into int8_t buffer
-        for (uint8_t i = 0; i < WINDOW_SIZE; i++) {
-            audio_samples[i] = (int8_t)((int16_t)audio_samples[i] - mean_int);
-        }
-
-        zcr_acc += compute_zcr(audio_samples, WINDOW_SIZE);
-        ste_acc += compute_ste(audio_samples, WINDOW_SIZE);
-        num_windows++;
-    }
-
-    out[0] = zcr_acc / num_windows;
-    out[1] = ste_acc / num_windows;
-
-    printf_P(PSTR("ZCR=%f, STE=%f\n"), out[0], out[1]);
-}
+//
+//void SP_Compute_features(float *out) {
+//    uint8_t num_windows = 0;
+//    float   zcr_acc = 0.0f;
+//    float   ste_acc = 0.0f;
+//
+//    while (num_windows < 8) {
+//
+//        // 1. Collect raw uint8_t samples
+//        for (uint8_t i = 0; i < WINDOW_SIZE; i++) {
+//            while (!g_sampling_flag);
+//            g_sampling_flag = 0;
+//            audio_samples[i] = g_adc_value;
+//            if(num_windows == 0){
+//                printf("ADC value: %d\n",g_adc_value);
+//            }
+//        }
+//
+//        // 2. Compute integer mean
+//        uint16_t sum = 0;
+//        for (uint8_t i = 0; i < WINDOW_SIZE; i++) sum += audio_samples[i];
+//        uint16_t mean_int = (sum / WINDOW_SIZE);
+//
+//        // 3. Center into int8_t buffer
+//        for (uint8_t i = 0; i < WINDOW_SIZE; i++) {
+//            audio_samples[i] = ((int16_t)audio_samples[i] - mean_int);
+//        }
+//
+//        zcr_acc += compute_zcr(audio_samples, WINDOW_SIZE);
+//        ste_acc += compute_ste(audio_samples, WINDOW_SIZE);
+//        num_windows++;
+//    }
+//
+//    out[0] = zcr_acc / num_windows;
+//    out[1] = ste_acc / num_windows;
+//
+//    printf_P(PSTR("ZCR=%f, STE=%f\n"), out[0], out[1]);
+//}
 
 // ==================== FULL MFCC PIPELINE ====================
 

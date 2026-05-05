@@ -16,7 +16,6 @@ extern "C" {
 #include <stdio.h>
 #pragma once
 
-#define N_MELS      13
 #define THRESHOLD   30
 
 void SP_Init(void);

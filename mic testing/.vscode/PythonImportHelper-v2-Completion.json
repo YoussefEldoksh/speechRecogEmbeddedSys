@@ -1,0 +1,127 @@
+[
+    {
+        "label": "serial",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "serial",
+        "description": "serial",
+        "detail": "serial",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "write",
+        "importPath": "scipy.io.wavfile",
+        "description": "scipy.io.wavfile",
+        "isExtraImport": true,
+        "detail": "scipy.io.wavfile",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "start",
+        "kind": 5,
+        "importPath": "uart_rec (1)",
+        "description": "uart_rec (1)",
+        "peekOfCode": "start = 0\nend = 0\nser = serial.Serial('COM6', 115200, timeout=1)\nsamples = []\nrecording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) Down",
+        "detail": "uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "end",
+        "kind": 5,
+        "importPath": "uart_rec (1)",
+        "description": "uart_rec (1)",
+        "peekOfCode": "end = 0\nser = serial.Serial('COM6', 115200, timeout=1)\nsamples = []\nrecording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) Down\n      1) Left",
+        "detail": "uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "ser",
+        "kind": 5,
+        "importPath": "uart_rec (1)",
+        "description": "uart_rec (1)",
+        "peekOfCode": "ser = serial.Serial('COM6', 115200, timeout=1)\nsamples = []\nrecording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) Down\n      1) Left\n      2) Off",
+        "detail": "uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "samples",
+        "kind": 5,
+        "importPath": "uart_rec (1)",
+        "description": "uart_rec (1)",
+        "peekOfCode": "samples = []\nrecording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) Down\n      1) Left\n      2) Off\n      3) On",
+        "detail": "uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "recording",
+        "kind": 5,
+        "importPath": "uart_rec (1)",
+        "description": "uart_rec (1)",
+        "peekOfCode": "recording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) Down\n      1) Left\n      2) Off\n      3) On\n      4) Right",
+        "detail": "uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "audio_folders",
+        "kind": 5,
+        "importPath": "uart_rec (1)",
+        "description": "uart_rec (1)",
+        "peekOfCode": "audio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) Down\n      1) Left\n      2) Off\n      3) On\n      4) Right\n      5) Start",
+        "detail": "uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "choice",
+        "kind": 5,
+        "importPath": "uart_rec (1)",
+        "description": "uart_rec (1)",
+        "peekOfCode": "choice = int(input(\"Your Choice: \"))\nif(choice == 8):\n    print(\"Ending Program\")\n    sys.exit(0)  \nword = audio_folders[choice]\nfor folder in audio_folders:\n    if folder == word:\n        for i in range(5):\n            print(f\"file {i} in {folder} Waiting for START...\")\n            while True:",
+        "detail": "uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "word",
+        "kind": 5,
+        "importPath": "uart_rec (1)",
+        "description": "uart_rec (1)",
+        "peekOfCode": "word = audio_folders[choice]\nfor folder in audio_folders:\n    if folder == word:\n        for i in range(5):\n            print(f\"file {i} in {folder} Waiting for START...\")\n            while True:\n                if not recording:\n                    # Read line until START\n                    line = ser.readline()\n                    if b\"START\" in line:",
+        "detail": "uart_rec (1)",
+        "documentation": {}
+    }
+]

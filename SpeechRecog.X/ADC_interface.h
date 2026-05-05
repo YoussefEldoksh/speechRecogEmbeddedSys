@@ -16,7 +16,7 @@ extern "C" {
 
 
 void ADC_init(void);
-uint16_t ADC_u16ReadChannel(uint8_t channel);
+int8_t ADC_read(void);
 uint8_t ADC_u8ReadChannel(uint8_t channel);
 
 

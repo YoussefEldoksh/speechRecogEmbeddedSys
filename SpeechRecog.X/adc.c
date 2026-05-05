@@ -2,22 +2,14 @@
 
 #include "ADC_interface.h"
 
-void ADC_init(void) {
-    /* Select Voltage Reference: AVCC with external capacitor at AREF pin */
-    /* REFS1=0, REFS0=1 */
-    ADMUX = (1 << REFS0) |  (1 << ADLAR);
+void ADC_init() {
+    ADMUX = (1 << REFS0) | (1 << ADLAR); // AVCC, left adjust
 
-    /*Set ADC Prescaler to 128 */
-    /* 11,059,200 / 128 = 86.4 kHz (Inside the 50-200kHz range for 10-bit accuracy) */
-    /* ADPS2=1, ADPS1=1, ADPS0=1 */
-    ADCSRA |= (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0) | (1 << ADEN);
-    
-    /* Dummy conversion to complete ADC initialization */
-    ADCSRA |= (1 << ADSC);
-    while (ADCSRA & (1 << ADSC));
+    // prescaler 64
+    ADCSRA = (1 << ADEN) | (1 << ADPS2) | (1 << ADPS1);
 }
 
-uint16_t ADC_u16ReadChannel(uint8_t channel) {
+int8_t ADC_read() {
     /*Select the Channel (Masking first 5 bits of ADMUX to clear old channel) */
     /* Channel must be between 0-7 */
 //    ADMUX &= 0xE0;

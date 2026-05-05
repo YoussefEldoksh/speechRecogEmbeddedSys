@@ -2,7 +2,7 @@ import speech_recognition as sr
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns   
+import seaborn as sns
 # import glob as glob
 
 import librosa
@@ -14,9 +14,12 @@ import soundfile as sf
 from pydub import AudioSegment
 
 
-sns.set_style('whitegrid')
 
-audio_data = os.listdir('Audio Files')
+
+
+# sns.set_style('whitegrid')
+
+audio_data = sorted(os.listdir('Audio Files'))
 
 for folder in audio_data:
     print(f"""Folder: {folder},
@@ -32,19 +35,19 @@ spectral_centroid_list = []
 features = []
 number_of_files = 0
 
-def convert_audio(input_file):
-    audio = AudioSegment.from_file(input_file)
-    audio = audio.set_channels(1)  # Convert to mono
-    audio = audio.set_frame_rate(8000)
-    audio = audio.set_sample_width(1)
-    return audio
+# def convert_audio(input_file):
+#     audio = AudioSegment.from_file(input_file)
+#     audio = audio.set_channels(1)  # Convert to mono
+#     audio = audio.set_frame_rate(8000)
+#     audio = audio.set_sample_width(1)
+#     return audio
 
-for folder in audio_data:
-    os.makedirs(f'Converted Audio Files/{folder}', exist_ok=True)
-    for file in os.listdir(f'Audio Files/{folder}'):    
-        audio = convert_audio(f'Audio Files/{folder}/{file}')
-        fname = os.path.splitext(file)[0] + '.wav'
-        audio.export(f'Converted Audio Files/{folder}/{fname}', format='wav')
+# for folder in audio_data:
+#     os.makedirs(f'Converted Audio Files/{folder}', exist_ok=True)
+#     for file in os.listdir(f'Audio Files/{folder}'):    
+#         audio = convert_audio(f'Audio Files/{folder}/{file}')
+#         fname = os.path.splitext(file)[0] + '.wav'
+#         audio.export(f'Converted Audio Files/{folder}/{fname}', format='wav')
 
 
 
@@ -52,27 +55,36 @@ frame_length = 64
 hop_length = 64
 
 # { 'yes': {'zcr': [], 'ste': [], 'sc': []}, 'no': {...}, ... }
-word_features = {folder: {'zcr': [], 'ste': [], 'sc': []} for folder in audio_data}
+word_features = {folder.lower(): {'zcr': [], 'ste': []} for folder in audio_data}
 
 for folder in audio_data:
-    for file in os.listdir(f'Converted Audio Files/{folder}'):
-        y, sr = librosa.load(f'Converted Audio Files/{folder}/{file}', sr=8000, mono=True)
-        y_trimmed, _ = librosa.effects.trim(y, top_db=5)
+    for file in os.listdir(f'Audio Files/{folder}'):
+        y, sr = librosa.load(f'Audio Files/{folder}/{file}', sr=8000, mono=True)
+        y_int8 = (y * 128).clip(-128, 127).astype(np.float32)
 
-        zcr = librosa.feature.zero_crossing_rate(y, frame_length=frame_length, hop_length=hop_length)
-        ste = librosa.feature.rms(y=y, frame_length=frame_length, hop_length=hop_length)
+        y_trimmed, _ = librosa.effects.trim(y, top_db=50)
+        # ZCR rate (crossings per sample)
+        zero_crossings = np.sum(np.diff(np.sign(y_int8)) != 0)
+        zcr = zero_crossings / len(y_int8)
+
+        # STE mean square in int8 scale
+        ste = np.sum(y_int8 ** 2) / len(y_int8)
+        
+        print(f"zcr of file {folder} : {np.mean(zcr)}")
+
+
         # sc  = librosa.feature.spectral_centroid(y=y_trimmed, sr=sr, n_fft=frame_length, hop_length=hop_length)
 
         # One mean value per file → collect across all files of this word
-        word_features[folder]['zcr'].append(np.mean(zcr))
-        word_features[folder]['ste'].append(np.mean(ste ** 2))
+        word_features[folder.lower()]['zcr'].append(np.mean(zcr))
+        word_features[folder.lower()]['ste'].append(np.mean(ste)/100000)
         # word_features[folder]['sc'].append(np.mean(sc))
 
 # Now average across all files per word → single vector per word
 final_features = []
 for folder, feats in word_features.items():
     final_features.append({
-        'word':     folder,
+        'word':     folder.lower(),
         'zcr_mean': np.mean(feats['zcr']),
         'ste_mean': np.mean(feats['ste']),
         # 'sc_mean':  np.mean(feats['sc']),

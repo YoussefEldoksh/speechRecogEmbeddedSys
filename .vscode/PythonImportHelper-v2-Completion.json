@@ -1,5 +1,58 @@
 [
     {
+        "label": "serial",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "serial",
+        "description": "serial",
+        "detail": "serial",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "write",
+        "importPath": "scipy.io.wavfile",
+        "description": "scipy.io.wavfile",
+        "isExtraImport": true,
+        "detail": "scipy.io.wavfile",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
         "label": "FFT",
         "kind": 6,
         "isExtraImport": true,
@@ -51,15 +104,6 @@
         "documentation": {}
     },
     {
-        "label": "sys",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "sys",
-        "description": "sys",
-        "detail": "sys",
-        "documentation": {}
-    },
-    {
         "label": "struct",
         "kind": 6,
         "isExtraImport": true,
@@ -87,15 +131,6 @@
         "documentation": {}
     },
     {
-        "label": "os",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "os",
-        "description": "os",
-        "detail": "os",
-        "documentation": {}
-    },
-    {
         "label": "popen2",
         "kind": 6,
         "isExtraImport": true,
@@ -111,15 +146,6 @@
         "importPath": "getopt",
         "description": "getopt",
         "detail": "getopt",
-        "documentation": {}
-    },
-    {
-        "label": "numpy",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "numpy",
-        "description": "numpy",
-        "detail": "numpy",
         "documentation": {}
     },
     {
@@ -200,6 +226,78 @@
         "description": "pydub",
         "isExtraImport": true,
         "detail": "pydub",
+        "documentation": {}
+    },
+    {
+        "label": "start",
+        "kind": 5,
+        "importPath": "mic testing.uart_rec (1)",
+        "description": "mic testing.uart_rec (1)",
+        "peekOfCode": "start = 0\nend = 0\nser = serial.Serial('COM6', 115200, timeout=1)\nsamples = []\nrecording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) Down",
+        "detail": "mic testing.uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "end",
+        "kind": 5,
+        "importPath": "mic testing.uart_rec (1)",
+        "description": "mic testing.uart_rec (1)",
+        "peekOfCode": "end = 0\nser = serial.Serial('COM6', 115200, timeout=1)\nsamples = []\nrecording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) Down\n      1) Left",
+        "detail": "mic testing.uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "ser",
+        "kind": 5,
+        "importPath": "mic testing.uart_rec (1)",
+        "description": "mic testing.uart_rec (1)",
+        "peekOfCode": "ser = serial.Serial('COM6', 115200, timeout=1)\nsamples = []\nrecording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) Down\n      1) Left\n      2) Off",
+        "detail": "mic testing.uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "samples",
+        "kind": 5,
+        "importPath": "mic testing.uart_rec (1)",
+        "description": "mic testing.uart_rec (1)",
+        "peekOfCode": "samples = []\nrecording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) Down\n      1) Left\n      2) Off\n      3) On",
+        "detail": "mic testing.uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "recording",
+        "kind": 5,
+        "importPath": "mic testing.uart_rec (1)",
+        "description": "mic testing.uart_rec (1)",
+        "peekOfCode": "recording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) Down\n      1) Left\n      2) Off\n      3) On\n      4) Right",
+        "detail": "mic testing.uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "audio_folders",
+        "kind": 5,
+        "importPath": "mic testing.uart_rec (1)",
+        "description": "mic testing.uart_rec (1)",
+        "peekOfCode": "audio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) Down\n      1) Left\n      2) Off\n      3) On\n      4) Right\n      5) Start",
+        "detail": "mic testing.uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "choice",
+        "kind": 5,
+        "importPath": "mic testing.uart_rec (1)",
+        "description": "mic testing.uart_rec (1)",
+        "peekOfCode": "choice = int(input(\"Your Choice: \"))\nif(choice == 8):\n    print(\"Ending Program\")\n    sys.exit(0)  \nword = audio_folders[choice]\nfor folder in audio_folders:\n    if folder == word:\n        for i in range(5):\n            print(f\"file {i} in {folder} Waiting for START...\")\n            while True:",
+        "detail": "mic testing.uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "word",
+        "kind": 5,
+        "importPath": "mic testing.uart_rec (1)",
+        "description": "mic testing.uart_rec (1)",
+        "peekOfCode": "word = audio_folders[choice]\nfor folder in audio_folders:\n    if folder == word:\n        for i in range(5):\n            print(f\"file {i} in {folder} Waiting for START...\")\n            while True:\n                if not recording:\n                    # Read line until START\n                    line = ser.readline()\n                    if b\"START\" in line:",
+        "detail": "mic testing.uart_rec (1)",
         "documentation": {}
     },
     {
@@ -518,20 +616,11 @@
         "documentation": {}
     },
     {
-        "label": "convert_audio",
-        "kind": 2,
-        "importPath": "script",
-        "description": "script",
-        "peekOfCode": "def convert_audio(input_file):\n    audio = AudioSegment.from_file(input_file)\n    audio = audio.set_channels(1)  # Convert to mono\n    audio = audio.set_frame_rate(8000)\n    audio = audio.set_sample_width(1)\n    return audio\nfor folder in audio_data:\n    os.makedirs(f'Converted Audio Files/{folder}', exist_ok=True)\n    for file in os.listdir(f'Audio Files/{folder}'):    \n        audio = convert_audio(f'Audio Files/{folder}/{file}')",
-        "detail": "script",
-        "documentation": {}
-    },
-    {
         "label": "audio_data",
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "audio_data = os.listdir('Audio Files')\nfor folder in audio_data:\n    print(f\"\"\"Folder: {folder},\n            Files in Folder: {os.listdir(f'Audio Files/{folder}') }\n          \"\"\")\nzcr_list = []\nshort_term_energy_list = []\nspectral_centroid_list = []\nfeatures = []\nnumber_of_files = 0",
+        "peekOfCode": "audio_data = sorted(os.listdir('Audio Files'))\nfor folder in audio_data:\n    print(f\"\"\"Folder: {folder},\n            Files in Folder: {os.listdir(f'Audio Files/{folder}') }\n          \"\"\")\nzcr_list = []\nshort_term_energy_list = []\nspectral_centroid_list = []\nfeatures = []\nnumber_of_files = 0",
         "detail": "script",
         "documentation": {}
     },
@@ -540,7 +629,7 @@
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "zcr_list = []\nshort_term_energy_list = []\nspectral_centroid_list = []\nfeatures = []\nnumber_of_files = 0\ndef convert_audio(input_file):\n    audio = AudioSegment.from_file(input_file)\n    audio = audio.set_channels(1)  # Convert to mono\n    audio = audio.set_frame_rate(8000)\n    audio = audio.set_sample_width(1)",
+        "peekOfCode": "zcr_list = []\nshort_term_energy_list = []\nspectral_centroid_list = []\nfeatures = []\nnumber_of_files = 0\n# def convert_audio(input_file):\n#     audio = AudioSegment.from_file(input_file)\n#     audio = audio.set_channels(1)  # Convert to mono\n#     audio = audio.set_frame_rate(8000)\n#     audio = audio.set_sample_width(1)",
         "detail": "script",
         "documentation": {}
     },
@@ -549,7 +638,7 @@
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "short_term_energy_list = []\nspectral_centroid_list = []\nfeatures = []\nnumber_of_files = 0\ndef convert_audio(input_file):\n    audio = AudioSegment.from_file(input_file)\n    audio = audio.set_channels(1)  # Convert to mono\n    audio = audio.set_frame_rate(8000)\n    audio = audio.set_sample_width(1)\n    return audio",
+        "peekOfCode": "short_term_energy_list = []\nspectral_centroid_list = []\nfeatures = []\nnumber_of_files = 0\n# def convert_audio(input_file):\n#     audio = AudioSegment.from_file(input_file)\n#     audio = audio.set_channels(1)  # Convert to mono\n#     audio = audio.set_frame_rate(8000)\n#     audio = audio.set_sample_width(1)\n#     return audio",
         "detail": "script",
         "documentation": {}
     },
@@ -558,7 +647,7 @@
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "spectral_centroid_list = []\nfeatures = []\nnumber_of_files = 0\ndef convert_audio(input_file):\n    audio = AudioSegment.from_file(input_file)\n    audio = audio.set_channels(1)  # Convert to mono\n    audio = audio.set_frame_rate(8000)\n    audio = audio.set_sample_width(1)\n    return audio\nfor folder in audio_data:",
+        "peekOfCode": "spectral_centroid_list = []\nfeatures = []\nnumber_of_files = 0\n# def convert_audio(input_file):\n#     audio = AudioSegment.from_file(input_file)\n#     audio = audio.set_channels(1)  # Convert to mono\n#     audio = audio.set_frame_rate(8000)\n#     audio = audio.set_sample_width(1)\n#     return audio\n# for folder in audio_data:",
         "detail": "script",
         "documentation": {}
     },
@@ -567,7 +656,7 @@
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "features = []\nnumber_of_files = 0\ndef convert_audio(input_file):\n    audio = AudioSegment.from_file(input_file)\n    audio = audio.set_channels(1)  # Convert to mono\n    audio = audio.set_frame_rate(8000)\n    audio = audio.set_sample_width(1)\n    return audio\nfor folder in audio_data:\n    os.makedirs(f'Converted Audio Files/{folder}', exist_ok=True)",
+        "peekOfCode": "features = []\nnumber_of_files = 0\n# def convert_audio(input_file):\n#     audio = AudioSegment.from_file(input_file)\n#     audio = audio.set_channels(1)  # Convert to mono\n#     audio = audio.set_frame_rate(8000)\n#     audio = audio.set_sample_width(1)\n#     return audio\n# for folder in audio_data:\n#     os.makedirs(f'Converted Audio Files/{folder}', exist_ok=True)",
         "detail": "script",
         "documentation": {}
     },
@@ -576,7 +665,7 @@
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "number_of_files = 0\ndef convert_audio(input_file):\n    audio = AudioSegment.from_file(input_file)\n    audio = audio.set_channels(1)  # Convert to mono\n    audio = audio.set_frame_rate(8000)\n    audio = audio.set_sample_width(1)\n    return audio\nfor folder in audio_data:\n    os.makedirs(f'Converted Audio Files/{folder}', exist_ok=True)\n    for file in os.listdir(f'Audio Files/{folder}'):    ",
+        "peekOfCode": "number_of_files = 0\n# def convert_audio(input_file):\n#     audio = AudioSegment.from_file(input_file)\n#     audio = audio.set_channels(1)  # Convert to mono\n#     audio = audio.set_frame_rate(8000)\n#     audio = audio.set_sample_width(1)\n#     return audio\n# for folder in audio_data:\n#     os.makedirs(f'Converted Audio Files/{folder}', exist_ok=True)\n#     for file in os.listdir(f'Audio Files/{folder}'):    ",
         "detail": "script",
         "documentation": {}
     },
@@ -585,7 +674,7 @@
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "frame_length = 64\nhop_length = 64\n# { 'yes': {'zcr': [], 'ste': [], 'sc': []}, 'no': {...}, ... }\nword_features = {folder: {'zcr': [], 'ste': [], 'sc': []} for folder in audio_data}\nfor folder in audio_data:\n    for file in os.listdir(f'Converted Audio Files/{folder}'):\n        y, sr = librosa.load(f'Converted Audio Files/{folder}/{file}', sr=8000, mono=True)\n        y_trimmed, _ = librosa.effects.trim(y, top_db=5)\n        zcr = librosa.feature.zero_crossing_rate(y, frame_length=frame_length, hop_length=hop_length)\n        ste = librosa.feature.rms(y=y, frame_length=frame_length, hop_length=hop_length)",
+        "peekOfCode": "frame_length = 64\nhop_length = 64\n# { 'yes': {'zcr': [], 'ste': [], 'sc': []}, 'no': {...}, ... }\nword_features = {folder.lower(): {'zcr': [], 'ste': []} for folder in audio_data}\nfor folder in audio_data:\n    for file in os.listdir(f'Audio Files/{folder}'):\n        y, sr = librosa.load(f'Audio Files/{folder}/{file}', sr=8000, mono=True)\n        y_int8 = (y * 128).clip(-128, 127).astype(np.float32)\n        y_trimmed, _ = librosa.effects.trim(y, top_db=50)\n        # ZCR rate (crossings per sample)",
         "detail": "script",
         "documentation": {}
     },
@@ -594,7 +683,7 @@
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "hop_length = 64\n# { 'yes': {'zcr': [], 'ste': [], 'sc': []}, 'no': {...}, ... }\nword_features = {folder: {'zcr': [], 'ste': [], 'sc': []} for folder in audio_data}\nfor folder in audio_data:\n    for file in os.listdir(f'Converted Audio Files/{folder}'):\n        y, sr = librosa.load(f'Converted Audio Files/{folder}/{file}', sr=8000, mono=True)\n        y_trimmed, _ = librosa.effects.trim(y, top_db=5)\n        zcr = librosa.feature.zero_crossing_rate(y, frame_length=frame_length, hop_length=hop_length)\n        ste = librosa.feature.rms(y=y, frame_length=frame_length, hop_length=hop_length)\n        # sc  = librosa.feature.spectral_centroid(y=y_trimmed, sr=sr, n_fft=frame_length, hop_length=hop_length)",
+        "peekOfCode": "hop_length = 64\n# { 'yes': {'zcr': [], 'ste': [], 'sc': []}, 'no': {...}, ... }\nword_features = {folder.lower(): {'zcr': [], 'ste': []} for folder in audio_data}\nfor folder in audio_data:\n    for file in os.listdir(f'Audio Files/{folder}'):\n        y, sr = librosa.load(f'Audio Files/{folder}/{file}', sr=8000, mono=True)\n        y_int8 = (y * 128).clip(-128, 127).astype(np.float32)\n        y_trimmed, _ = librosa.effects.trim(y, top_db=50)\n        # ZCR rate (crossings per sample)\n        zero_crossings = np.sum(np.diff(np.sign(y_int8)) != 0)",
         "detail": "script",
         "documentation": {}
     },
@@ -603,7 +692,7 @@
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "word_features = {folder: {'zcr': [], 'ste': [], 'sc': []} for folder in audio_data}\nfor folder in audio_data:\n    for file in os.listdir(f'Converted Audio Files/{folder}'):\n        y, sr = librosa.load(f'Converted Audio Files/{folder}/{file}', sr=8000, mono=True)\n        y_trimmed, _ = librosa.effects.trim(y, top_db=5)\n        zcr = librosa.feature.zero_crossing_rate(y, frame_length=frame_length, hop_length=hop_length)\n        ste = librosa.feature.rms(y=y, frame_length=frame_length, hop_length=hop_length)\n        # sc  = librosa.feature.spectral_centroid(y=y_trimmed, sr=sr, n_fft=frame_length, hop_length=hop_length)\n        # One mean value per file → collect across all files of this word\n        word_features[folder]['zcr'].append(np.mean(zcr))",
+        "peekOfCode": "word_features = {folder.lower(): {'zcr': [], 'ste': []} for folder in audio_data}\nfor folder in audio_data:\n    for file in os.listdir(f'Audio Files/{folder}'):\n        y, sr = librosa.load(f'Audio Files/{folder}/{file}', sr=8000, mono=True)\n        y_int8 = (y * 128).clip(-128, 127).astype(np.float32)\n        y_trimmed, _ = librosa.effects.trim(y, top_db=50)\n        # ZCR rate (crossings per sample)\n        zero_crossings = np.sum(np.diff(np.sign(y_int8)) != 0)\n        zcr = zero_crossings / len(y_int8)\n        # STE mean square in int8 scale",
         "detail": "script",
         "documentation": {}
     },
@@ -612,7 +701,7 @@
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "final_features = []\nfor folder, feats in word_features.items():\n    final_features.append({\n        'word':     folder,\n        'zcr_mean': np.mean(feats['zcr']),\n        'ste_mean': np.mean(feats['ste']),\n        # 'sc_mean':  np.mean(feats['sc']),\n    })\n# Write to file\nwith open(\"features.txt\", \"w\") as f:",
+        "peekOfCode": "final_features = []\nfor folder, feats in word_features.items():\n    final_features.append({\n        'word':     folder.lower(),\n        'zcr_mean': np.mean(feats['zcr']),\n        'ste_mean': np.mean(feats['ste']),\n        # 'sc_mean':  np.mean(feats['sc']),\n    })\n# Write to file\nwith open(\"features.txt\", \"w\") as f:",
         "detail": "script",
         "documentation": {}
     }

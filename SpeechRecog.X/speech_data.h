@@ -10,7 +10,7 @@
 #define N_MFCC    2
 //#define N_MELS    4
 #define N_CLASSES  8
-#define FFT_SIZE  512
+#define FFT_SIZE  8000
 #define THRESHOLD 30
 #define SAMPLE_RATE 8000    
 
@@ -24,16 +24,14 @@
 //static const int8_t PROGMEM mfcc_start[] = {-128, 87, -8, -5, -4, -15, -16, 2, -1, 3, -8, -2, -17};
 //static const int8_t PROGMEM mfcc_stop[]  = {-128, 80, -8, -20, 2, -15, -8, -4, -5, 8, -16, -3, -22};
 
-
- static const float PROGMEM features_on[] = { 0.1350, 0.0167 };
- static const float PROGMEM features_off[] = { 0.2156, 0.0181 };
- static const float PROGMEM features_up[] = { 0.1534, 0.0141 };
- static const float PROGMEM features_down[] = { 0.1098, 0.0205 };
- static const float PROGMEM features_left[] = { 0.2541, 0.0153 };
- static const float PROGMEM features_right[] = { 0.1625, 0.0186 };
- static const float PROGMEM features_start[] = { 0.2350, 0.0129 };
- static const float PROGMEM features_stop[] = { 0.2326, 0.0125 };
-
+ static const float PROGMEM features_down[] = { 0.1083, 0.0414 };
+ static const float PROGMEM features_left[] = { 0.0621, 0.0375 };
+ static const float PROGMEM features_off[] = { 0.0371, 0.0404 };
+ static const float PROGMEM features_on[] = { 0.0628, 0.0418 };
+ static const float PROGMEM features_right[] = { 0.0646, 0.0414 };
+ static const float PROGMEM features_start[] = { 0.0458, 0.0387 };
+ static const float PROGMEM features_stop[] = { 0.0319, 0.0357 };
+ static const float PROGMEM features_up[] = { 0.0328, 0.0388 };
 
 // static const int8_t* const PROGMEM mfcc_table[N_CLASSES] = {
 //     mfcc_on, mfcc_off, mfcc_up, mfcc_down,
