@@ -37,7 +37,7 @@ uint16_t features[N_FEATURES];
 short fft_real[FFT_SIZE];
 short fft_imag[FFT_SIZE];
 
-const char *labels[N_CLASSES] = {"on", "off", "up", "down", "right", "left", "start", "stop"};
+const char *labels[N_CLASSES] = {"down", "left", "off", "on", "right", "start", "stop", "up"};
 
 /* ?? Mel band bin boundaries (linear spacing on 0..N_BINS-1, 6 bands) ?? */
 static const uint8_t band_start[N_BANDS] PROGMEM = {0, 2, 4, 8, 16, 24};
@@ -201,7 +201,7 @@ void pre_emphasis(short *x, uint8_t len) {
 /*  compute_features                                                   */
 /*                                                                     */
 /*  Feature vector layout (matches Python pipeline):                   */
-/*    feat_out[0]   = ZCR mean        (counts per frame, scaled ×256) */
+/*    feat_out[0]   = ZCR mean        (counts per frame, scaled ï¿½256) */
 /*    feat_out[1]   = log-STE mean    (ilog2_scaled of frame energy)  */
 /*    feat_out[2..7]= log Mel band energies [band 0 .. band 5]        */
 
@@ -219,7 +219,7 @@ void compute_features(uint16_t total_samples, uint16_t *feat_out) {
     // ?? single reusable frame buffer (int8, 64 bytes on stack) ??
     int8_t frame_buf[FFT_SIZE];
 
-    printf("Total Samples: %u\n", total_samples);
+    // printf("Total Samples: %u\n", total_samples);
 
     while (addr + FFT_SIZE <= total_samples) {
 
@@ -229,7 +229,7 @@ void compute_features(uint16_t total_samples, uint16_t *feat_out) {
             //            printf("Address: %d | data: %d\n", addr + i, frame_buf[i]);
         }
 
-        printf("after reading data \n");
+        // printf("after reading data \n");
 
         /* ?? 2. ZCR on raw int8 samples ?? */
         uint8_t zcr_count = 0;
@@ -261,7 +261,7 @@ void compute_features(uint16_t total_samples, uint16_t *feat_out) {
         pre_emphasis(fft_real, FFT_SIZE);
         fix_fft(fft_real, fft_imag, FFT_LOG2, 0);
         
-        printf("after fix_fft\n ");
+        // printf("after fix_fft\n ");
 
 
 
@@ -285,7 +285,7 @@ void compute_features(uint16_t total_samples, uint16_t *feat_out) {
         addr += HOP_SIZE;
     }
 
-    printf("n_frames: %u\n", n_frames);
+    // printf("n_frames: %u\n", n_frames);
 
     if (n_frames > 0) {
         feat_out[0] = (uint16_t) (accum_zcr / n_frames);
@@ -297,9 +297,9 @@ void compute_features(uint16_t total_samples, uint16_t *feat_out) {
             feat_out[k] = 0;
     }
 
-    printf("feat: %u %u %u %u %u %u %u %u\n",
-            feat_out[0], feat_out[1], feat_out[2], feat_out[3],
-            feat_out[4], feat_out[5], feat_out[6], feat_out[7]);
+    // printf("feat: %u %u %u %u %u %u %u %u\n",
+    //         feat_out[0], feat_out[1], feat_out[2], feat_out[3],
+    //         feat_out[4], feat_out[5], feat_out[6], feat_out[7]);
 }
 
 /* ================================================================== */
@@ -334,8 +334,8 @@ int main(int argc, char **argv) {
 
             int label = nearest_neighbor(features);
 
-            LCD_Clear();
-            LCD_String_xy(0, 0, (char *) labels[label]);
+            // LCD_Clear();
+            // LCD_String_xy(0, 0, (char *) labels[label]);
             printf("%s\n", labels[label]);
             _delay_ms(100);
         }
