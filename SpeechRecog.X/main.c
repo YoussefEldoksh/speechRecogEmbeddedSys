@@ -229,7 +229,6 @@ void compute_features(uint16_t total_samples, uint16_t *feat_out) {
             //            printf("Address: %d | data: %d\n", addr + i, frame_buf[i]);
         }
 
-        printf("after reading data \n");
 
         /* ?? 2. ZCR on raw int8 samples ?? */
         uint8_t zcr_count = 0;
@@ -258,10 +257,11 @@ void compute_features(uint16_t total_samples, uint16_t *feat_out) {
         }
 
 
-        pre_emphasis(fft_real, FFT_SIZE);
-        fix_fft(fft_real, fft_imag, FFT_LOG2, 0);
         
-        printf("after fix_fft\n ");
+        pre_emphasis(fft_real, FFT_SIZE);
+
+        fix_fft(fft_real, fft_imag, FFT_LOG2, 0);
+
 
 
 
