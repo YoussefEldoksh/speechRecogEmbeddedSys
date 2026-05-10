@@ -216,7 +216,7 @@ void compute_features(uint16_t total_samples, uint16_t *feat_out) {
         }
 
         pre_emphasis(fft_real, FFT_SIZE);
-        apply_hamming_window(fft_real);
+        // apply_hamming_window(fft_real);
         fix_fft(fft_real, fft_imag, FFT_LOG2, 0);
 
         uint32_t total_energy = 0;
