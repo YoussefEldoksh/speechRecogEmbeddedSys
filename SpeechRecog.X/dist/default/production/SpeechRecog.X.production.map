@@ -26,6 +26,10 @@ C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../l
                               C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o) (__fp_pscB)
 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
                               C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(mulsf3.o) (__fp_round)
+C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_mulhisi3.o)
+                              build/default/production/main.o (__mulhisi3)
+C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_umulhisi3.o)
+                              C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_mulhisi3.o) (__umulhisi3)
 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_mulsi3.o)
                               build/default/production/main.o (__mulsi3)
 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_udivmodsi4.o)
@@ -38,14 +42,14 @@ C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../l
                               build/default/production/main.o (__do_copy_data)
 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_clear_bss.o)
                               build/default/production/main.o (__do_clear_bss)
+C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_usmulhisi3.o)
+                              C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_mulhisi3.o) (__usmulhisi3_tail)
 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_muluhisi3.o)
-                              build/default/production/main.o (__muluhisi3)
+                              C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_mulsi3.o) (__muluhisi3)
 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_prologue.o)
                               C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libprintf_flt.a(vfprintf_flt.o) (__prologue_saves__)
 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_epilogue.o)
                               C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libprintf_flt.a(vfprintf_flt.o) (__epilogue_restores__)
-C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_umulhisi3.o)
-                              C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_muluhisi3.o) (__umulhisi3)
 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libc.a(ftoa_engine.o)
                               C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libprintf_flt.a(vfprintf_flt.o) (__ftoa_engine)
 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
@@ -128,6 +132,34 @@ Discarded input sections
  .text          0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
  .data          0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
  .bss           0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
+ .text          0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_mulhisi3.o)
+ .data          0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_mulhisi3.o)
+ .bss           0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_mulhisi3.o)
+ .text.libgcc.div
+                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_mulhisi3.o)
+ .text.libgcc   0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_mulhisi3.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_mulhisi3.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_mulhisi3.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_mulhisi3.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_mulhisi3.o)
+ .text          0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_umulhisi3.o)
+ .data          0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_umulhisi3.o)
+ .bss           0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_umulhisi3.o)
+ .text.libgcc.div
+                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_umulhisi3.o)
+ .text.libgcc   0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_umulhisi3.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_umulhisi3.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_umulhisi3.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_umulhisi3.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_umulhisi3.o)
  .text          0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_mulsi3.o)
  .data          0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_mulsi3.o)
  .bss           0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_mulsi3.o)
@@ -218,6 +250,20 @@ Discarded input sections
                 0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_clear_bss.o)
  .text.libgcc.fixed
                 0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_clear_bss.o)
+ .text          0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_usmulhisi3.o)
+ .data          0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_usmulhisi3.o)
+ .bss           0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_usmulhisi3.o)
+ .text.libgcc.div
+                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_usmulhisi3.o)
+ .text.libgcc   0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_usmulhisi3.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_usmulhisi3.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_usmulhisi3.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_usmulhisi3.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_usmulhisi3.o)
  .text          0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_muluhisi3.o)
  .data          0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_muluhisi3.o)
  .bss           0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_muluhisi3.o)
@@ -260,20 +306,6 @@ Discarded input sections
                 0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_epilogue.o)
  .text.libgcc.fixed
                 0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_epilogue.o)
- .text          0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_umulhisi3.o)
- .data          0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_umulhisi3.o)
- .bss           0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_umulhisi3.o)
- .text.libgcc.div
-                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_umulhisi3.o)
- .text.libgcc   0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_umulhisi3.o)
- .text.libgcc.prologue
-                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_umulhisi3.o)
- .text.libgcc.builtins
-                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_umulhisi3.o)
- .text.libgcc.fmul
-                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_umulhisi3.o)
- .text.libgcc.fixed
-                0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_umulhisi3.o)
  .text          0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libc.a(ftoa_engine.o)
  .data          0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libc.a(ftoa_engine.o)
  .bss           0x00000000        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libc.a(ftoa_engine.o)
@@ -429,7 +461,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x23f2
+.text           0x00000000     0x1fa6
  *(.vectors)
  .vectors       0x00000000       0x54 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega32/avr5/crtatmega32.o
                 0x00000000                __vector_default
@@ -446,53 +478,55 @@ END GROUP
  .progmem.data  0x00000054        0x8 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libprintf_flt.a(vfprintf_flt.o)
  *libc.a:*(.progmem.data)
  *(.progmem.*)
- .progmem.data.hamming_window
-                0x0000005c      0x200 build/default/production/main.o
+ .progmem.data.band_end
+                0x0000005c        0x6 build/default/production/main.o
+ .progmem.data.band_start
+                0x00000062        0x6 build/default/production/main.o
  .progmem.data.feat_table
-                0x0000025c       0x10 build/default/production/main.o
+                0x00000068       0x10 build/default/production/main.o
  .progmem.data.feat_up
-                0x0000026c       0x14 build/default/production/main.o
+                0x00000078       0x20 build/default/production/main.o
  .progmem.data.feat_stop
-                0x00000280       0x14 build/default/production/main.o
+                0x00000098       0x20 build/default/production/main.o
  .progmem.data.feat_start
-                0x00000294       0x14 build/default/production/main.o
+                0x000000b8       0x20 build/default/production/main.o
  .progmem.data.feat_right
-                0x000002a8       0x14 build/default/production/main.o
+                0x000000d8       0x20 build/default/production/main.o
  .progmem.data.feat_on
-                0x000002bc       0x14 build/default/production/main.o
+                0x000000f8       0x20 build/default/production/main.o
  .progmem.data.feat_off
-                0x000002d0       0x14 build/default/production/main.o
+                0x00000118       0x20 build/default/production/main.o
  .progmem.data.feat_left
-                0x000002e4       0x14 build/default/production/main.o
+                0x00000138       0x20 build/default/production/main.o
  .progmem.data.feat_down
-                0x000002f8       0x14 build/default/production/main.o
-                0x0000030c                        . = ALIGN (0x2)
+                0x00000158       0x20 build/default/production/main.o
+                0x00000178                        . = ALIGN (0x2)
  *(.lowtext)
  *(.lowtext*)
-                0x0000030c                        __ctors_start = .
+                0x00000178                        __ctors_start = .
  *(.ctors)
-                0x0000030c                        __ctors_end = .
-                0x0000030c                        __dtors_start = .
+                0x00000178                        __ctors_end = .
+                0x00000178                        __dtors_start = .
  *(.dtors)
-                0x0000030c                        __dtors_end = .
+                0x00000178                        __dtors_end = .
  SORT_BY_NAME(*)(.ctors)
  SORT_BY_NAME(*)(.dtors)
  *(.init0)
- .init0         0x0000030c        0x0 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega32/avr5/crtatmega32.o
-                0x0000030c                __init
+ .init0         0x00000178        0x0 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega32/avr5/crtatmega32.o
+                0x00000178                __init
  *(.init0)
  *(.init1)
  *(.init1)
  *(.init2)
- .init2         0x0000030c        0xc C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega32/avr5/crtatmega32.o
+ .init2         0x00000178        0xc C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega32/avr5/crtatmega32.o
  *(.init2)
  *(.init3)
  *(.init3)
  *(.init4)
- .init4         0x00000318       0x16 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_copy_data.o)
-                0x00000318                __do_copy_data
- .init4         0x0000032e       0x10 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_clear_bss.o)
-                0x0000032e                __do_clear_bss
+ .init4         0x00000184       0x16 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_copy_data.o)
+                0x00000184                __do_copy_data
+ .init4         0x0000019a       0x10 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_clear_bss.o)
+                0x0000019a                __do_clear_bss
  *(.init4)
  *(.init5)
  *(.init5)
@@ -503,204 +537,210 @@ END GROUP
  *(.init8)
  *(.init8)
  *(.init9)
- .init9         0x0000033e        0x8 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega32/avr5/crtatmega32.o
+ .init9         0x000001aa        0x8 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega32/avr5/crtatmega32.o
  *(.init9)
  *(.text)
- .text          0x00000346        0x4 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega32/avr5/crtatmega32.o
-                0x00000346                __vector_12
-                0x00000346                __bad_interrupt
-                0x00000346                __vector_6
-                0x00000346                __vector_3
-                0x00000346                __vector_11
-                0x00000346                __vector_13
-                0x00000346                __vector_17
-                0x00000346                __vector_19
-                0x00000346                __vector_5
-                0x00000346                __vector_4
-                0x00000346                __vector_9
-                0x00000346                __vector_2
-                0x00000346                __vector_15
-                0x00000346                __vector_8
-                0x00000346                __vector_14
-                0x00000346                __vector_10
-                0x00000346                __vector_16
-                0x00000346                __vector_18
-                0x00000346                __vector_20
-                0x0000034a                        . = ALIGN (0x2)
+ .text          0x000001b2        0x4 C:/Program Files/Microchip/MPLABX/v6.30/packs/Microchip/ATmega_DFP/3.5.296/gcc/dev/atmega32/avr5/crtatmega32.o
+                0x000001b2                __vector_12
+                0x000001b2                __bad_interrupt
+                0x000001b2                __vector_6
+                0x000001b2                __vector_3
+                0x000001b2                __vector_11
+                0x000001b2                __vector_13
+                0x000001b2                __vector_17
+                0x000001b2                __vector_19
+                0x000001b2                __vector_5
+                0x000001b2                __vector_4
+                0x000001b2                __vector_9
+                0x000001b2                __vector_2
+                0x000001b2                __vector_15
+                0x000001b2                __vector_8
+                0x000001b2                __vector_14
+                0x000001b2                __vector_10
+                0x000001b2                __vector_16
+                0x000001b2                __vector_18
+                0x000001b2                __vector_20
+                0x000001b6                        . = ALIGN (0x2)
  *(.text.*)
  .text.avr-libc
-                0x0000034a      0x708 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libprintf_flt.a(vfprintf_flt.o)
-                0x0000034a                vfprintf
+                0x000001b6      0x708 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libprintf_flt.a(vfprintf_flt.o)
+                0x000001b6                vfprintf
+ .text.ilog2_scaled
+                0x000008be       0x78 build/default/production/main.o
  .text.UART_getChar
-                0x00000a52        0xa build/default/production/main.o
-                0x00000a52                UART_getChar
+                0x00000936        0xa build/default/production/main.o
+                0x00000936                UART_getChar
  .text.UART_putChar
-                0x00000a5c        0xc build/default/production/main.o
-                0x00000a5c                UART_putChar
+                0x00000940        0xc build/default/production/main.o
+                0x00000940                UART_putChar
  .text.UART_init
-                0x00000a68       0x56 build/default/production/main.o
-                0x00000a68                UART_init
+                0x0000094c       0x56 build/default/production/main.o
+                0x0000094c                UART_init
  .text.__vector_1
-                0x00000abe       0x2c build/default/production/main.o
-                0x00000abe                __vector_1
+                0x000009a2       0x2c build/default/production/main.o
+                0x000009a2                __vector_1
  .text.__vector_7
-                0x00000aea       0x5e build/default/production/main.o
-                0x00000aea                __vector_7
+                0x000009ce       0x5e build/default/production/main.o
+                0x000009ce                __vector_7
  .text.Timer1_init
-                0x00000b48       0x1c build/default/production/main.o
-                0x00000b48                Timer1_init
+                0x00000a2c       0x1c build/default/production/main.o
+                0x00000a2c                Timer1_init
  .text.SPI_init
-                0x00000b64       0x10 build/default/production/main.o
-                0x00000b64                SPI_init
+                0x00000a48       0x10 build/default/production/main.o
+                0x00000a48                SPI_init
  .text.SPI_transfer
-                0x00000b74        0xa build/default/production/main.o
-                0x00000b74                SPI_transfer
- .text.CS_LOW   0x00000b7e        0x4 build/default/production/main.o
-                0x00000b7e                CS_LOW
- .text.CS_HIGH  0x00000b82        0x4 build/default/production/main.o
-                0x00000b82                CS_HIGH
+                0x00000a58        0xa build/default/production/main.o
+                0x00000a58                SPI_transfer
+ .text.CS_LOW   0x00000a62        0x4 build/default/production/main.o
+                0x00000a62                CS_LOW
+ .text.CS_HIGH  0x00000a66        0x4 build/default/production/main.o
+                0x00000a66                CS_HIGH
  .text.SRAM_init
-                0x00000b86       0x16 build/default/production/main.o
-                0x00000b86                SRAM_init
+                0x00000a6a       0x16 build/default/production/main.o
+                0x00000a6a                SRAM_init
  .text.SRAM_write_byte
-                0x00000b9c       0x3a build/default/production/main.o
-                0x00000b9c                SRAM_write_byte
+                0x00000a80       0x3a build/default/production/main.o
+                0x00000a80                SRAM_write_byte
  .text.SRAM_read_byte
-                0x00000bd6       0x3c build/default/production/main.o
-                0x00000bd6                SRAM_read_byte
+                0x00000aba       0x3c build/default/production/main.o
+                0x00000aba                SRAM_read_byte
  .text.nearest_neighbor
-                0x00000c12       0xe6 build/default/production/main.o
-                0x00000c12                nearest_neighbor
+                0x00000af6       0xe6 build/default/production/main.o
+                0x00000af6                nearest_neighbor
  .text.init_INT0
-                0x00000cf8       0x1c build/default/production/main.o
-                0x00000cf8                init_INT0
+                0x00000bdc       0x1c build/default/production/main.o
+                0x00000bdc                init_INT0
  .text.pre_emphasis
-                0x00000d14       0x7c build/default/production/main.o
-                0x00000d14                pre_emphasis
- .text.apply_hamming_window
-                0x00000d90       0x3c build/default/production/main.o
-                0x00000d90                apply_hamming_window
+                0x00000bf8       0x7c build/default/production/main.o
+                0x00000bf8                pre_emphasis
  .text.compute_features
-                0x00000dcc      0x750 build/default/production/main.o
-                0x00000dcc                compute_features
+                0x00000c74      0x4ae build/default/production/main.o
+                0x00000c74                compute_features
  .text.project_Init
-                0x0000151c       0x34 build/default/production/main.o
-                0x0000151c                project_Init
- .text.main     0x00001550      0x16e build/default/production/main.o
-                0x00001550                main
+                0x00001122       0x34 build/default/production/main.o
+                0x00001122                project_Init
+ .text.main     0x00001156       0xfe build/default/production/main.o
+                0x00001156                main
  .text.LCD_Command
-                0x000016be       0x46 build/default/production/lcd.o
-                0x000016be                LCD_Command
+                0x00001254       0x46 build/default/production/lcd.o
+                0x00001254                LCD_Command
  .text.LCD_Char
-                0x00001704       0x46 build/default/production/lcd.o
-                0x00001704                LCD_Char
+                0x0000129a       0x46 build/default/production/lcd.o
+                0x0000129a                LCD_Char
  .text.LCD_Init
-                0x0000174a       0x3a build/default/production/lcd.o
-                0x0000174a                LCD_Init
+                0x000012e0       0x3a build/default/production/lcd.o
+                0x000012e0                LCD_Init
  .text.LCD_String
-                0x00001784       0x20 build/default/production/lcd.o
-                0x00001784                LCD_String
+                0x0000131a       0x20 build/default/production/lcd.o
+                0x0000131a                LCD_String
  .text.LCD_String_xy
-                0x000017a4       0x46 build/default/production/lcd.o
-                0x000017a4                LCD_String_xy
+                0x0000133a       0x46 build/default/production/lcd.o
+                0x0000133a                LCD_String_xy
  .text.LCD_Clear
-                0x000017ea       0x18 build/default/production/lcd.o
-                0x000017ea                LCD_Clear
+                0x00001380       0x18 build/default/production/lcd.o
+                0x00001380                LCD_Clear
  .text.ADC_init
-                0x00001802        0xa build/default/production/adc.o
-                0x00001802                ADC_init
+                0x00001398        0xa build/default/production/adc.o
+                0x00001398                ADC_init
  .text.ADC_read
-                0x0000180c        0xc build/default/production/adc.o
-                0x0000180c                ADC_read
- .text.fix_fft  0x00001818      0x3e8 build/default/production/fix_fft.o
-                0x00001818                fix_fft
+                0x000013a2        0xc build/default/production/adc.o
+                0x000013a2                ADC_read
+ .text.fix_fft  0x000013ae      0x3e8 build/default/production/fix_fft.o
+                0x000013ae                fix_fft
  .text.avr-libc.fplib
-                0x00001c00        0xe C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(fixsfsi.o)
-                0x00001c00                __fixsfsi
+                0x00001796        0xe C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(fixsfsi.o)
+                0x00001796                __fixsfsi
  .text.avr-libc.fplib
-                0x00001c0e       0x5e C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
-                0x00001c0e                __fixunssfsi
+                0x000017a4       0x5e C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
+                0x000017a4                __fixunssfsi
  .text.avr-libc.fplib
-                0x00001c6c       0x7a C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
-                0x00001c6c                __floatunsisf
-                0x00001c70                __floatsisf
+                0x00001802       0x7a C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
+                0x00001802                __floatunsisf
+                0x00001806                __floatsisf
  .text.avr-libc.fplib
-                0x00001ce6       0x44 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
-                0x00001ce6                __fp_split3
-                0x00001cf6                __fp_splitA
+                0x0000187c       0x44 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
+                0x0000187c                __fp_split3
+                0x0000188c                __fp_splitA
  .text.avr-libc.fplib
-                0x00001d2a        0xe C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
-                0x00001d2a                __fp_zero
-                0x00001d2c                __fp_szero
+                0x000018c0        0xe C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
+                0x000018c0                __fp_zero
+                0x000018c2                __fp_szero
  .text.avr-libc.fplib
-                0x00001d38        0x8 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
-                0x00001d38                __mulsf3
+                0x000018ce        0x8 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
+                0x000018ce                __mulsf3
  .text.avr-libc.fplib
-                0x00001d40       0xd2 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
-                0x00001d5e                __mulsf3x
-                0x00001d64                __mulsf3_pse
+                0x000018d6       0xd2 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
+                0x000018f4                __mulsf3x
+                0x000018fa                __mulsf3_pse
  .text.avr-libc.fplib
-                0x00001e12        0xc C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
-                0x00001e12                __fp_inf
+                0x000019a8        0xc C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
+                0x000019a8                __fp_inf
  .text.avr-libc.fplib
-                0x00001e1e        0x6 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
-                0x00001e1e                __fp_nan
+                0x000019b4        0x6 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
+                0x000019b4                __fp_nan
  .text.avr-libc.fplib
-                0x00001e24        0xe C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
-                0x00001e24                __fp_pscA
+                0x000019ba        0xe C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
+                0x000019ba                __fp_pscA
  .text.avr-libc.fplib
-                0x00001e32        0xe C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
-                0x00001e32                __fp_pscB
+                0x000019c8        0xe C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
+                0x000019c8                __fp_pscB
  .text.avr-libc.fplib
-                0x00001e40       0x22 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
-                0x00001e40                __fp_round
+                0x000019d6       0x22 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
+                0x000019d6                __fp_round
  .text.libgcc.mul
-                0x00001e62       0x20 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_mulsi3.o)
-                0x00001e62                __mulsi3
+                0x000019f8       0x10 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_mulhisi3.o)
+                0x000019f8                __mulhisi3
+ .text.libgcc.mul
+                0x00001a08       0x1e C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_umulhisi3.o)
+                0x00001a08                __umulhisi3
+ .text.libgcc.mul
+                0x00001a26       0x20 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_mulsi3.o)
+                0x00001a26                __mulsi3
  .text.libgcc.div
-                0x00001e82       0x44 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_udivmodsi4.o)
-                0x00001e82                __udivmodsi4
+                0x00001a46       0x44 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_udivmodsi4.o)
+                0x00001a46                __udivmodsi4
  .text.libgcc.div
-                0x00001ec6       0x10 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_negsi2.o)
-                0x00001ec6                __negsi2
+                0x00001a8a       0x10 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_negsi2.o)
+                0x00001a8a                __negsi2
  .text.libgcc.mul
-                0x00001ed6       0x16 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_muluhisi3.o)
-                0x00001ed6                __muluhisi3
- .text.libgcc.prologue
-                0x00001eec       0x38 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_prologue.o)
-                0x00001eec                __prologue_saves__
- .text.libgcc.prologue
-                0x00001f24       0x36 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_epilogue.o)
-                0x00001f24                __epilogue_restores__
+                0x00001a9a        0xe C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_usmulhisi3.o)
+                0x00001a9a                __usmulhisi3
+                0x00001a9e                __usmulhisi3_tail
  .text.libgcc.mul
-                0x00001f5a       0x1e C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_umulhisi3.o)
-                0x00001f5a                __umulhisi3
+                0x00001aa8       0x16 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_muluhisi3.o)
+                0x00001aa8                __muluhisi3
+ .text.libgcc.prologue
+                0x00001abe       0x38 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_prologue.o)
+                0x00001abe                __prologue_saves__
+ .text.libgcc.prologue
+                0x00001af6       0x36 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_epilogue.o)
+                0x00001af6                __epilogue_restores__
  .text.avr-libc
-                0x00001f78      0x1b0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libc.a(ftoa_engine.o)
-                0x00001f78                __ftoa_engine
+                0x00001b2c      0x1b0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libc.a(ftoa_engine.o)
+                0x00001b2c                __ftoa_engine
  .text.avr-libc
-                0x00002128       0x16 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
-                0x00002128                strnlen_P
+                0x00001cdc       0x16 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+                0x00001cdc                strnlen_P
  .text.avr-libc
-                0x0000213e       0x16 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
-                0x0000213e                strnlen
+                0x00001cf2       0x16 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
+                0x00001cf2                strnlen
  .text.avr-libc
-                0x00002154       0x60 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libc.a(fputc.o)
-                0x00002154                fputc
+                0x00001d08       0x60 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libc.a(fputc.o)
+                0x00001d08                fputc
  .text.avr-libc
-                0x000021b4       0x2c C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libc.a(printf.o)
-                0x000021b4                printf
+                0x00001d68       0x2c C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libc.a(printf.o)
+                0x00001d68                printf
  .text.avr-libc
-                0x000021e0       0x58 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libc.a(puts.o)
-                0x000021e0                puts
+                0x00001d94       0x58 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libc.a(puts.o)
+                0x00001d94                puts
  .text.avr-libc
-                0x00002238       0xbc C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
-                0x00002238                __ultoa_invert
-                0x000022f4                        . = ALIGN (0x2)
+                0x00001dec       0xbc C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+                0x00001dec                __ultoa_invert
+                0x00001ea8                        . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000022f4        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
-                0x000022f4                _exit
-                0x000022f4                exit
+ .fini9         0x00001ea8        0x0 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
+                0x00001ea8                _exit
+                0x00001ea8                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -719,19 +759,19 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000022f4        0x4 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00001ea8        0x4 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
  *(.hightext)
  *(.hightext*)
  *(.progmemx.*)
  .progmemx.data.ftoa_engine
-                0x000022f8       0xfa C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libc.a(ftoa_engine.o)
-                0x000023f2                        . = ALIGN (0x2)
+                0x00001eac       0xfa C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libc.a(ftoa_engine.o)
+                0x00001fa6                        . = ALIGN (0x2)
  *(.jumptables)
  *(.jumptables*)
-                0x000023f2                        _etext = .
+                0x00001fa6                        _etext = .
 
-.data           0x00800060      0x6da load address 0x000023f2
+.data           0x00800060      0x6b6 load address 0x00001fa6
                 0x00800060                        PROVIDE (__data_start = .)
  *(.data)
  *(.data*)
@@ -746,57 +786,57 @@ END GROUP
  *(.rodata)
  *(.rodata*)
  .rodata.compute_features.str1.1
-                0x0080067e       0xbb build/default/production/main.o
-                                 0x40 (size before relaxing)
+                0x0080067e       0x97 build/default/production/main.o
+                                 0x64 (size before relaxing)
  .rodata.main.str1.1
-                0x00800739       0x56 build/default/production/main.o
+                0x00800715        0xe build/default/production/main.o
  .rodata.str1.1
-                0x00800739       0x25 build/default/production/main.o
+                0x00800715       0x25 build/default/production/main.o
  *(.gnu.linkonce.r*)
-                0x00800790                        . = ALIGN (0x2)
- *fill*         0x00800739        0x1 
-                0x0080073a                        _edata = .
-                0x0080073a                        PROVIDE (__data_end = .)
+                0x0080073a                        . = ALIGN (0x2)
+ *fill*         0x00800715        0x1 
+                0x00800716                        _edata = .
+                0x00800716                        PROVIDE (__data_end = .)
 
-.bss            0x0080073a      0x11e
-                0x0080073a                        PROVIDE (__bss_start = .)
+.bss            0x00800716      0x11e
+                0x00800716                        PROVIDE (__bss_start = .)
  *(.bss)
- .bss           0x0080073a        0x6 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libc.a(iob.o)
-                0x0080073a                __iob
+ .bss           0x00800716        0x6 C:/Program Files/Embedded systems tools/avr8-gnu-toolchain-win32_x86_64/bin/../lib/gcc/avr/15.1.0/../../../../avr/lib/avr5\libc.a(iob.o)
+                0x00800716                __iob
  *(.bss*)
- .bss.fft_imag  0x00800740       0x80 build/default/production/main.o
-                0x00800740                fft_imag
- .bss.fft_real  0x008007c0       0x80 build/default/production/main.o
-                0x008007c0                fft_real
- .bss.features  0x00800840       0x10 build/default/production/main.o
-                0x00800840                features
- .bss.address   0x00800850        0x2 build/default/production/main.o
-                0x00800850                address
+ .bss.fft_imag  0x0080071c       0x80 build/default/production/main.o
+                0x0080071c                fft_imag
+ .bss.fft_real  0x0080079c       0x80 build/default/production/main.o
+                0x0080079c                fft_real
+ .bss.features  0x0080081c       0x10 build/default/production/main.o
+                0x0080081c                features
+ .bss.address   0x0080082c        0x2 build/default/production/main.o
+                0x0080082c                address
  .bss.number_of_samples
-                0x00800852        0x2 build/default/production/main.o
-                0x00800852                number_of_samples
+                0x0080082e        0x2 build/default/production/main.o
+                0x0080082e                number_of_samples
  .bss.sample_ready
-                0x00800854        0x1 build/default/production/main.o
-                0x00800854                sample_ready
+                0x00800830        0x1 build/default/production/main.o
+                0x00800830                sample_ready
  .bss.audio_sample
-                0x00800855        0x1 build/default/production/main.o
-                0x00800855                audio_sample
+                0x00800831        0x1 build/default/production/main.o
+                0x00800831                audio_sample
  .bss.prev_recording
-                0x00800856        0x1 build/default/production/main.o
-                0x00800856                prev_recording
+                0x00800832        0x1 build/default/production/main.o
+                0x00800832                prev_recording
  .bss.recording
-                0x00800857        0x1 build/default/production/main.o
-                0x00800857                recording
+                0x00800833        0x1 build/default/production/main.o
+                0x00800833                recording
  *(COMMON)
-                0x00800858                        PROVIDE (__bss_end = .)
-                0x000023f2                        __data_load_start = LOADADDR (.data)
-                0x00002acc                        __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00800834                        PROVIDE (__bss_end = .)
+                0x00001fa6                        __data_load_start = LOADADDR (.data)
+                0x0000265c                        __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800858        0x0
+.noinit         0x00800834        0x0
                 [!provide]                        PROVIDE (__noinit_start = .)
  *(.noinit .noinit.* .gnu.linkonce.n.*)
                 [!provide]                        PROVIDE (__noinit_end = .)
-                0x00800858                        _end = .
+                0x00800834                        _end = .
                 [!provide]                        PROVIDE (__heap_start = .)
                 0x00000000                        __flmap_init_label = DEFINED (__flmap_noinit_start)?__flmap_noinit_start:0x0
                 0x00000000                        __flmap = DEFINED (__flmap)?__flmap:0x0

@@ -581,20 +581,11 @@
         "documentation": {}
     },
     {
-        "label": "save_hamming_window",
-        "kind": 2,
-        "importPath": "script",
-        "description": "script",
-        "peekOfCode": "def save_hamming_window(filename=\"hamming_window.h\"):\n    window = np.hamming(FFT_SIZE)\n    with open(filename, \"w\") as f:\n        f.write(\"#ifndef HAMMING_WINDOW_H\\n#define HAMMING_WINDOW_H\\n\\n\")\n        f.write(\"#include <avr/pgmspace.h>\\n\\n\")\n        f.write(f\"static const float hamming_window[{FFT_SIZE}] PROGMEM = {{\\n\")\n        for i in range(0, FFT_SIZE, 8):\n            line = \", \".join(f\"{val:.6f}f\" for val in window[i:i+8])\n            f.write(f\"    {line}{',' if i + 8 < FFT_SIZE else ''}\\n\")\n        f.write(\"};\\n\\n#endif\\n\")",
-        "detail": "script",
-        "documentation": {}
-    },
-    {
         "label": "extract_features",
         "kind": 2,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "def extract_features(y, sr=SAMPLE_RATE):\n    \"\"\"\n    Mirrors exactly what the C code does:\n      pre-emphasis → hamming → FFT → L1 magnitude → band energies + total energy + centroid\n    Averaged across frames. Returns uint16-scaled vector.\n    \"\"\"\n    # Pre-emphasis (matches C: x[i] -= 0.97 * x[i-1], x[0] = 0)\n    y = y.copy().astype(np.float32)\n    y[1:] -= 0.97 * y[:-1]\n    y[0] = 0.0",
+        "peekOfCode": "def extract_features(y, sr=SAMPLE_RATE):\n    \"\"\"\n    Returns a 1-D feature vector of length N_FEATURES:\n      [zcr_mean, ste_mean, mel_band_0, ..., mel_band_5]\n    All computed per-frame then averaged across time.\n    \"\"\"\n    # --- Pre-emphasis ---\n    y = np.append(y[0], y[1:] - 0.97 * y[:-1])\n    # --- Zero-Crossing Rate (1 value) ---\n    zcr_frames = librosa.feature.zero_crossing_rate(",
         "detail": "script",
         "documentation": {}
     },
@@ -603,52 +594,16 @@
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "SAMPLE_RATE = 8000\nN_FEATURES = 10        # 8 band energies + total energy + centroid\nFFT_SIZE = 128\nHOP_LENGTH = 64\nN_BINS = 64            # FFT_SIZE / 2\n# Band boundaries in bins (bin_width = 8000/128 = 62.5 Hz)\n# Bands: 0-250, 250-500, 500-1k, 1k-1.5k, 1.5k-2k, 2k-2.5k, 2.5k-3k, 3k-4k Hz\nBAND_STARTS = [0,  4,  8, 16, 24, 32, 40, 48]\nBAND_ENDS   = [4,  8, 16, 24, 32, 40, 48, 64]\nAUDIO_DIR = 'Audio Files'",
+        "peekOfCode": "SAMPLE_RATE = 8000\nFFT_SIZE    = 128\nHOP_LENGTH  = 64\nN_MEL_BANDS = 6       # Number of Mel filter bank channels\nN_FEATURES  = N_MEL_BANDS + 2  # +1 ZCR, +1 STE  →  8 total\nAUDIO_DIR = 'Audio Files'\n# =========================================================\ndef extract_features(y, sr=SAMPLE_RATE):\n    \"\"\"\n    Returns a 1-D feature vector of length N_FEATURES:",
         "detail": "script",
         "documentation": {}
     },
     {
-        "label": "N_FEATURES",
+        "label": "N_MEL_BANDS",
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "N_FEATURES = 10        # 8 band energies + total energy + centroid\nFFT_SIZE = 128\nHOP_LENGTH = 64\nN_BINS = 64            # FFT_SIZE / 2\n# Band boundaries in bins (bin_width = 8000/128 = 62.5 Hz)\n# Bands: 0-250, 250-500, 500-1k, 1k-1.5k, 1.5k-2k, 2k-2.5k, 2.5k-3k, 3k-4k Hz\nBAND_STARTS = [0,  4,  8, 16, 24, 32, 40, 48]\nBAND_ENDS   = [4,  8, 16, 24, 32, 40, 48, 64]\nAUDIO_DIR = 'Audio Files'\nCLASSES = [\"down\", \"left\", \"off\", \"on\", \"right\", \"start\", \"stop\", \"up\"]  # must match feat_table order",
-        "detail": "script",
-        "documentation": {}
-    },
-    {
-        "label": "FFT_SIZE",
-        "kind": 5,
-        "importPath": "script",
-        "description": "script",
-        "peekOfCode": "FFT_SIZE = 128\nHOP_LENGTH = 64\nN_BINS = 64            # FFT_SIZE / 2\n# Band boundaries in bins (bin_width = 8000/128 = 62.5 Hz)\n# Bands: 0-250, 250-500, 500-1k, 1k-1.5k, 1.5k-2k, 2k-2.5k, 2.5k-3k, 3k-4k Hz\nBAND_STARTS = [0,  4,  8, 16, 24, 32, 40, 48]\nBAND_ENDS   = [4,  8, 16, 24, 32, 40, 48, 64]\nAUDIO_DIR = 'Audio Files'\nCLASSES = [\"down\", \"left\", \"off\", \"on\", \"right\", \"start\", \"stop\", \"up\"]  # must match feat_table order\n# =========================================================",
-        "detail": "script",
-        "documentation": {}
-    },
-    {
-        "label": "HOP_LENGTH",
-        "kind": 5,
-        "importPath": "script",
-        "description": "script",
-        "peekOfCode": "HOP_LENGTH = 64\nN_BINS = 64            # FFT_SIZE / 2\n# Band boundaries in bins (bin_width = 8000/128 = 62.5 Hz)\n# Bands: 0-250, 250-500, 500-1k, 1k-1.5k, 1.5k-2k, 2k-2.5k, 2.5k-3k, 3k-4k Hz\nBAND_STARTS = [0,  4,  8, 16, 24, 32, 40, 48]\nBAND_ENDS   = [4,  8, 16, 24, 32, 40, 48, 64]\nAUDIO_DIR = 'Audio Files'\nCLASSES = [\"down\", \"left\", \"off\", \"on\", \"right\", \"start\", \"stop\", \"up\"]  # must match feat_table order\n# =========================================================\ndef save_hamming_window(filename=\"hamming_window.h\"):",
-        "detail": "script",
-        "documentation": {}
-    },
-    {
-        "label": "N_BINS",
-        "kind": 5,
-        "importPath": "script",
-        "description": "script",
-        "peekOfCode": "N_BINS = 64            # FFT_SIZE / 2\n# Band boundaries in bins (bin_width = 8000/128 = 62.5 Hz)\n# Bands: 0-250, 250-500, 500-1k, 1k-1.5k, 1.5k-2k, 2k-2.5k, 2.5k-3k, 3k-4k Hz\nBAND_STARTS = [0,  4,  8, 16, 24, 32, 40, 48]\nBAND_ENDS   = [4,  8, 16, 24, 32, 40, 48, 64]\nAUDIO_DIR = 'Audio Files'\nCLASSES = [\"down\", \"left\", \"off\", \"on\", \"right\", \"start\", \"stop\", \"up\"]  # must match feat_table order\n# =========================================================\ndef save_hamming_window(filename=\"hamming_window.h\"):\n    window = np.hamming(FFT_SIZE)",
-        "detail": "script",
-        "documentation": {}
-    },
-    {
-        "label": "BAND_STARTS",
-        "kind": 5,
-        "importPath": "script",
-        "description": "script",
-        "peekOfCode": "BAND_STARTS = [0,  4,  8, 16, 24, 32, 40, 48]\nBAND_ENDS   = [4,  8, 16, 24, 32, 40, 48, 64]\nAUDIO_DIR = 'Audio Files'\nCLASSES = [\"down\", \"left\", \"off\", \"on\", \"right\", \"start\", \"stop\", \"up\"]  # must match feat_table order\n# =========================================================\ndef save_hamming_window(filename=\"hamming_window.h\"):\n    window = np.hamming(FFT_SIZE)\n    with open(filename, \"w\") as f:\n        f.write(\"#ifndef HAMMING_WINDOW_H\\n#define HAMMING_WINDOW_H\\n\\n\")\n        f.write(\"#include <avr/pgmspace.h>\\n\\n\")",
+        "peekOfCode": "N_MEL_BANDS = 6       # Number of Mel filter bank channels\nN_FEATURES  = N_MEL_BANDS + 2  # +1 ZCR, +1 STE  →  8 total\nAUDIO_DIR = 'Audio Files'\n# =========================================================\ndef extract_features(y, sr=SAMPLE_RATE):\n    \"\"\"\n    Returns a 1-D feature vector of length N_FEATURES:\n      [zcr_mean, ste_mean, mel_band_0, ..., mel_band_5]\n    All computed per-frame then averaged across time.\n    \"\"\"",
         "detail": "script",
         "documentation": {}
     },
@@ -657,16 +612,7 @@
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "AUDIO_DIR = 'Audio Files'\nCLASSES = [\"down\", \"left\", \"off\", \"on\", \"right\", \"start\", \"stop\", \"up\"]  # must match feat_table order\n# =========================================================\ndef save_hamming_window(filename=\"hamming_window.h\"):\n    window = np.hamming(FFT_SIZE)\n    with open(filename, \"w\") as f:\n        f.write(\"#ifndef HAMMING_WINDOW_H\\n#define HAMMING_WINDOW_H\\n\\n\")\n        f.write(\"#include <avr/pgmspace.h>\\n\\n\")\n        f.write(f\"static const float hamming_window[{FFT_SIZE}] PROGMEM = {{\\n\")\n        for i in range(0, FFT_SIZE, 8):",
-        "detail": "script",
-        "documentation": {}
-    },
-    {
-        "label": "CLASSES",
-        "kind": 5,
-        "importPath": "script",
-        "description": "script",
-        "peekOfCode": "CLASSES = [\"down\", \"left\", \"off\", \"on\", \"right\", \"start\", \"stop\", \"up\"]  # must match feat_table order\n# =========================================================\ndef save_hamming_window(filename=\"hamming_window.h\"):\n    window = np.hamming(FFT_SIZE)\n    with open(filename, \"w\") as f:\n        f.write(\"#ifndef HAMMING_WINDOW_H\\n#define HAMMING_WINDOW_H\\n\\n\")\n        f.write(\"#include <avr/pgmspace.h>\\n\\n\")\n        f.write(f\"static const float hamming_window[{FFT_SIZE}] PROGMEM = {{\\n\")\n        for i in range(0, FFT_SIZE, 8):\n            line = \", \".join(f\"{val:.6f}f\" for val in window[i:i+8])",
+        "peekOfCode": "AUDIO_DIR = 'Audio Files'\n# =========================================================\ndef extract_features(y, sr=SAMPLE_RATE):\n    \"\"\"\n    Returns a 1-D feature vector of length N_FEATURES:\n      [zcr_mean, ste_mean, mel_band_0, ..., mel_band_5]\n    All computed per-frame then averaged across time.\n    \"\"\"\n    # --- Pre-emphasis ---\n    y = np.append(y[0], y[1:] - 0.97 * y[:-1])",
         "detail": "script",
         "documentation": {}
     },
@@ -675,7 +621,25 @@
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "word_features = {cls: [] for cls in CLASSES}\nfor folder in sorted(os.listdir(AUDIO_DIR)):\n    folder_lower = folder.lower()\n    if folder_lower not in word_features:\n        print(f\"⚠️  Skipping unknown folder: {folder}\")\n        continue\n    folder_path = os.path.join(AUDIO_DIR, folder)\n    print(f\"Processing folder: {folder}\")\n    for file in os.listdir(folder_path):\n        if not file.lower().endswith(('.wav', '.mp3', '.m4a')):",
+        "peekOfCode": "word_features = {folder.lower(): [] for folder in audio_data}\nfor folder in audio_data:\n    folder_path = os.path.join(AUDIO_DIR, folder)\n    if not os.path.isdir(folder_path):\n        continue\n    print(f\"Processing folder: {folder}\")\n    for file in sorted(os.listdir(folder_path)):\n        if not file.lower().endswith(('.wav', '.mp3', '.m4a')):\n            continue\n        file_path = os.path.join(folder_path, file)",
+        "detail": "script",
+        "documentation": {}
+    },
+    {
+        "label": "final_features",
+        "kind": 5,
+        "importPath": "script",
+        "description": "script",
+        "peekOfCode": "final_features = {}\nwith open(\"word_features.h\", \"w\") as f:\n    f.write(\"#ifndef WORD_FEATURES_H\\n\")\n    f.write(\"#define WORD_FEATURES_H\\n\\n\")\n    f.write(\"#include <avr/pgmspace.h>\\n\\n\")\n    f.write(f\"#define N_FEATURES {N_FEATURES}\\n\\n\")\n    for word, vectors in sorted(word_features.items()):\n        if len(vectors) == 0:\n            print(f\"  ⚠️  No valid recordings for '{word}', skipping.\")\n            continue",
+        "detail": "script",
+        "documentation": {}
+    },
+    {
+        "label": "header",
+        "kind": 5,
+        "importPath": "script",
+        "description": "script",
+        "peekOfCode": "header = f\"{'Word':12}  {'ZCR':>8}  {'logSTE':>8}  \" + \\\n         \"  \".join(f\"Mel{i}\" for i in range(N_MEL_BANDS))\nprint(header)\nprint(\"-\" * len(header))\nfor word, vec in sorted(final_features.items()):\n    vals = \"  \".join(f\"{v:8.4f}\" for v in vec)\n    print(f\"{word:12}  {vals}\")",
         "detail": "script",
         "documentation": {}
     }
