@@ -37,7 +37,8 @@ uint16_t features[N_FEATURES];
 short fft_real[FFT_SIZE];
 short fft_imag[FFT_SIZE];
 
-const char *labels[N_CLASSES] = {"on", "off", "up", "down", "right", "left", "start", "stop"};
+// main.c — change to match feat_table[] order exactly:
+const char *labels[N_CLASSES] = {"down", "left", "off", "on", "right", "start", "stop", "up"};
 
 /* ?? Mel band bin boundaries (linear spacing on 0..N_BINS-1, 6 bands) ?? */
 static const uint8_t band_start[N_BANDS] PROGMEM = {0, 2, 4, 8, 16, 24};
