@@ -1,20 +1,38 @@
 [
     {
-        "label": "serial",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "serial",
-        "description": "serial",
-        "detail": "serial",
-        "documentation": {}
-    },
-    {
         "label": "numpy",
         "kind": 6,
         "isExtraImport": true,
         "importPath": "numpy",
         "description": "numpy",
         "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "librosa",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "librosa",
+        "description": "librosa",
+        "detail": "librosa",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "serial",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "serial",
+        "description": "serial",
+        "detail": "serial",
         "documentation": {}
     },
     {
@@ -32,15 +50,6 @@
         "importPath": "time",
         "description": "time",
         "detail": "time",
-        "documentation": {}
-    },
-    {
-        "label": "os",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "os",
-        "description": "os",
-        "detail": "os",
         "documentation": {}
     },
     {
@@ -149,12 +158,39 @@
         "documentation": {}
     },
     {
-        "label": "librosa",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "librosa",
-        "description": "librosa",
-        "detail": "librosa",
+        "label": "extract_13_features",
+        "kind": 2,
+        "importPath": "features.template_generator",
+        "description": "features.template_generator",
+        "peekOfCode": "def extract_13_features(audio_path):\n    # Load audio (8kHz as per your project requirement)\n    y, sr = librosa.load(audio_path, sr=8000)\n    # Pre-processing: Normalization\n    y = y / np.max(np.abs(y))\n    features = []\n    # 1. Energy (Scaled to 0-255)\n    features.append(np.mean(librosa.feature.rms(y=y)) * 255)\n    # 2. Zero Crossing Rate (Scaled)\n    features.append(np.mean(librosa.feature.zero_crossing_rate(y)) * 255)",
+        "detail": "features.template_generator",
+        "documentation": {}
+    },
+    {
+        "label": "WORDS",
+        "kind": 5,
+        "importPath": "features.template_generator",
+        "description": "features.template_generator",
+        "peekOfCode": "WORDS = [\"ON\", \"OFF\", \"START\", \"STOP\", \"LEFT\", \"RIGHT\", \"UP\", \"DOWN\"]\nSAMPLES_PER_WORD = 20\ndef extract_13_features(audio_path):\n    # Load audio (8kHz as per your project requirement)\n    y, sr = librosa.load(audio_path, sr=8000)\n    # Pre-processing: Normalization\n    y = y / np.max(np.abs(y))\n    features = []\n    # 1. Energy (Scaled to 0-255)\n    features.append(np.mean(librosa.feature.rms(y=y)) * 255)",
+        "detail": "features.template_generator",
+        "documentation": {}
+    },
+    {
+        "label": "SAMPLES_PER_WORD",
+        "kind": 5,
+        "importPath": "features.template_generator",
+        "description": "features.template_generator",
+        "peekOfCode": "SAMPLES_PER_WORD = 20\ndef extract_13_features(audio_path):\n    # Load audio (8kHz as per your project requirement)\n    y, sr = librosa.load(audio_path, sr=8000)\n    # Pre-processing: Normalization\n    y = y / np.max(np.abs(y))\n    features = []\n    # 1. Energy (Scaled to 0-255)\n    features.append(np.mean(librosa.feature.rms(y=y)) * 255)\n    # 2. Zero Crossing Rate (Scaled)",
+        "detail": "features.template_generator",
+        "documentation": {}
+    },
+    {
+        "label": "master_templates",
+        "kind": 5,
+        "importPath": "features.template_generator",
+        "description": "features.template_generator",
+        "peekOfCode": "master_templates = []\nfor word in WORDS:\n    word_data = []\n    for i in range(1, SAMPLES_PER_WORD + 1):\n        file_path = f\"dataset/{word}_{i}.wav\" # Adjust to your folder structure\n        if os.path.exists(file_path):\n            feat = extract_13_features(file_path)\n            word_data.append(feat)\n    # Average the 20 samples into 1 template\n    avg_template = np.mean(word_data, axis=0).astype(np.uint8)",
+        "detail": "features.template_generator",
         "documentation": {}
     },
     {
