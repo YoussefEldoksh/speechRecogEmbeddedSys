@@ -149,42 +149,6 @@
         "documentation": {}
     },
     {
-        "label": "speech_recognition",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "speech_recognition",
-        "description": "speech_recognition",
-        "detail": "speech_recognition",
-        "documentation": {}
-    },
-    {
-        "label": "pandas",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "pandas",
-        "description": "pandas",
-        "detail": "pandas",
-        "documentation": {}
-    },
-    {
-        "label": "matplotlib.pyplot",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "matplotlib.pyplot",
-        "description": "matplotlib.pyplot",
-        "detail": "matplotlib.pyplot",
-        "documentation": {}
-    },
-    {
-        "label": "seaborn",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "seaborn",
-        "description": "seaborn",
-        "detail": "seaborn",
-        "documentation": {}
-    },
-    {
         "label": "librosa",
         "kind": 6,
         "isExtraImport": true,
@@ -194,46 +158,11 @@
         "documentation": {}
     },
     {
-        "label": "librosa.display",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "librosa.display",
-        "description": "librosa.display",
-        "detail": "librosa.display",
-        "documentation": {}
-    },
-    {
-        "label": "sounddevice",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "sounddevice",
-        "description": "sounddevice",
-        "detail": "sounddevice",
-        "documentation": {}
-    },
-    {
-        "label": "soundfile",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "soundfile",
-        "description": "soundfile",
-        "detail": "soundfile",
-        "documentation": {}
-    },
-    {
-        "label": "AudioSegment",
-        "importPath": "pydub",
-        "description": "pydub",
-        "isExtraImport": true,
-        "detail": "pydub",
-        "documentation": {}
-    },
-    {
         "label": "start",
         "kind": 5,
         "importPath": "mic testing.uart_rec (1)",
         "description": "mic testing.uart_rec (1)",
-        "peekOfCode": "start = 0\nend = 0\nser = serial.Serial('COM6', 115200, timeout=1)\nsamples = []\nrecording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) Down",
+        "peekOfCode": "start = 0\nend = 0\nser = serial.Serial('COM5', 115200, timeout=1)\nsamples = []\nrecording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) Down",
         "detail": "mic testing.uart_rec (1)",
         "documentation": {}
     },
@@ -242,7 +171,7 @@
         "kind": 5,
         "importPath": "mic testing.uart_rec (1)",
         "description": "mic testing.uart_rec (1)",
-        "peekOfCode": "end = 0\nser = serial.Serial('COM6', 115200, timeout=1)\nsamples = []\nrecording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) Down\n      1) Left",
+        "peekOfCode": "end = 0\nser = serial.Serial('COM5', 115200, timeout=1)\nsamples = []\nrecording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) Down\n      1) Left",
         "detail": "mic testing.uart_rec (1)",
         "documentation": {}
     },
@@ -251,7 +180,7 @@
         "kind": 5,
         "importPath": "mic testing.uart_rec (1)",
         "description": "mic testing.uart_rec (1)",
-        "peekOfCode": "ser = serial.Serial('COM6', 115200, timeout=1)\nsamples = []\nrecording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) Down\n      1) Left\n      2) Off",
+        "peekOfCode": "ser = serial.Serial('COM5', 115200, timeout=1)\nsamples = []\nrecording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) Down\n      1) Left\n      2) Off",
         "detail": "mic testing.uart_rec (1)",
         "documentation": {}
     },
@@ -287,7 +216,7 @@
         "kind": 5,
         "importPath": "mic testing.uart_rec (1)",
         "description": "mic testing.uart_rec (1)",
-        "peekOfCode": "choice = int(input(\"Your Choice: \"))\nif(choice == 8):\n    print(\"Ending Program\")\n    sys.exit(0)  \nword = audio_folders[choice]\nfor folder in audio_folders:\n    if folder == word:\n        for i in range(5):\n            print(f\"file {i} in {folder} Waiting for START...\")\n            while True:",
+        "peekOfCode": "choice = int(input(\"Your Choice: \"))\nif(choice == 8):\n    print(\"Ending Program\")\n    sys.exit(0)  \nword = audio_folders[choice]\nfor folder in audio_folders:\n    if folder == word:\n        for i in range(15,16):\n            print(f\"file {i} in {folder} Waiting for START...\")\n            while True:",
         "detail": "mic testing.uart_rec (1)",
         "documentation": {}
     },
@@ -296,7 +225,7 @@
         "kind": 5,
         "importPath": "mic testing.uart_rec (1)",
         "description": "mic testing.uart_rec (1)",
-        "peekOfCode": "word = audio_folders[choice]\nfor folder in audio_folders:\n    if folder == word:\n        for i in range(5):\n            print(f\"file {i} in {folder} Waiting for START...\")\n            while True:\n                if not recording:\n                    # Read line until START\n                    line = ser.readline()\n                    if b\"START\" in line:",
+        "peekOfCode": "word = audio_folders[choice]\nfor folder in audio_folders:\n    if folder == word:\n        for i in range(15,16):\n            print(f\"file {i} in {folder} Waiting for START...\")\n            while True:\n                if not recording:\n                    # Read line until START\n                    line = ser.readline()\n                    if b\"START\" in line:",
         "detail": "mic testing.uart_rec (1)",
         "documentation": {}
     },
@@ -616,74 +545,92 @@
         "documentation": {}
     },
     {
-        "label": "audio_data",
-        "kind": 5,
+        "label": "save_hamming_window",
+        "kind": 2,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "audio_data = sorted(os.listdir('Audio Files'))\nfor folder in audio_data:\n    print(f\"\"\"Folder: {folder},\n            Files in Folder: {os.listdir(f'Audio Files/{folder}') }\n          \"\"\")\nzcr_list = []\nshort_term_energy_list = []\nspectral_centroid_list = []\nfeatures = []\nnumber_of_files = 0",
+        "peekOfCode": "def save_hamming_window(filename=\"hamming_window.h\"):\n    window = np.hamming(FFT_SIZE)\n    with open(filename, \"w\") as f:\n        f.write(\"#ifndef HAMMING_WINDOW_H\\n#define HAMMING_WINDOW_H\\n\\n\")\n        f.write(\"#include <avr/pgmspace.h>\\n\\n\")\n        f.write(f\"static const float hamming_window[{FFT_SIZE}] PROGMEM = {{\\n\")\n        for i in range(0, FFT_SIZE, 8):\n            line = \", \".join(f\"{val:.6f}f\" for val in window[i:i+8])\n            f.write(f\"    {line}{',' if i + 8 < FFT_SIZE else ''}\\n\")\n        f.write(\"};\\n\\n#endif\\n\")",
         "detail": "script",
         "documentation": {}
     },
     {
-        "label": "zcr_list",
-        "kind": 5,
+        "label": "extract_features",
+        "kind": 2,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "zcr_list = []\nshort_term_energy_list = []\nspectral_centroid_list = []\nfeatures = []\nnumber_of_files = 0\n# def convert_audio(input_file):\n#     audio = AudioSegment.from_file(input_file)\n#     audio = audio.set_channels(1)  # Convert to mono\n#     audio = audio.set_frame_rate(8000)\n#     audio = audio.set_sample_width(1)",
+        "peekOfCode": "def extract_features(y, sr=SAMPLE_RATE):\n    \"\"\"\n    Mirrors exactly what the C code does:\n      pre-emphasis → hamming → FFT → L1 magnitude → band energies + total energy + centroid\n    Averaged across frames. Returns uint16-scaled vector.\n    \"\"\"\n    # Pre-emphasis (matches C: x[i] -= 0.97 * x[i-1], x[0] = 0)\n    y = y.copy().astype(np.float32)\n    y[1:] -= 0.97 * y[:-1]\n    y[0] = 0.0",
         "detail": "script",
         "documentation": {}
     },
     {
-        "label": "short_term_energy_list",
+        "label": "SAMPLE_RATE",
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "short_term_energy_list = []\nspectral_centroid_list = []\nfeatures = []\nnumber_of_files = 0\n# def convert_audio(input_file):\n#     audio = AudioSegment.from_file(input_file)\n#     audio = audio.set_channels(1)  # Convert to mono\n#     audio = audio.set_frame_rate(8000)\n#     audio = audio.set_sample_width(1)\n#     return audio",
+        "peekOfCode": "SAMPLE_RATE = 8000\nN_FEATURES = 10        # 8 band energies + total energy + centroid\nFFT_SIZE = 128\nHOP_LENGTH = 64\nN_BINS = 64            # FFT_SIZE / 2\n# Band boundaries in bins (bin_width = 8000/128 = 62.5 Hz)\n# Bands: 0-250, 250-500, 500-1k, 1k-1.5k, 1.5k-2k, 2k-2.5k, 2.5k-3k, 3k-4k Hz\nBAND_STARTS = [0,  4,  8, 16, 24, 32, 40, 48]\nBAND_ENDS   = [4,  8, 16, 24, 32, 40, 48, 64]\nAUDIO_DIR = 'Audio Files'",
         "detail": "script",
         "documentation": {}
     },
     {
-        "label": "spectral_centroid_list",
+        "label": "N_FEATURES",
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "spectral_centroid_list = []\nfeatures = []\nnumber_of_files = 0\n# def convert_audio(input_file):\n#     audio = AudioSegment.from_file(input_file)\n#     audio = audio.set_channels(1)  # Convert to mono\n#     audio = audio.set_frame_rate(8000)\n#     audio = audio.set_sample_width(1)\n#     return audio\n# for folder in audio_data:",
+        "peekOfCode": "N_FEATURES = 10        # 8 band energies + total energy + centroid\nFFT_SIZE = 128\nHOP_LENGTH = 64\nN_BINS = 64            # FFT_SIZE / 2\n# Band boundaries in bins (bin_width = 8000/128 = 62.5 Hz)\n# Bands: 0-250, 250-500, 500-1k, 1k-1.5k, 1.5k-2k, 2k-2.5k, 2.5k-3k, 3k-4k Hz\nBAND_STARTS = [0,  4,  8, 16, 24, 32, 40, 48]\nBAND_ENDS   = [4,  8, 16, 24, 32, 40, 48, 64]\nAUDIO_DIR = 'Audio Files'\nCLASSES = [\"down\", \"left\", \"off\", \"on\", \"right\", \"start\", \"stop\", \"up\"]  # must match feat_table order",
         "detail": "script",
         "documentation": {}
     },
     {
-        "label": "features",
+        "label": "FFT_SIZE",
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "features = []\nnumber_of_files = 0\n# def convert_audio(input_file):\n#     audio = AudioSegment.from_file(input_file)\n#     audio = audio.set_channels(1)  # Convert to mono\n#     audio = audio.set_frame_rate(8000)\n#     audio = audio.set_sample_width(1)\n#     return audio\n# for folder in audio_data:\n#     os.makedirs(f'Converted Audio Files/{folder}', exist_ok=True)",
+        "peekOfCode": "FFT_SIZE = 128\nHOP_LENGTH = 64\nN_BINS = 64            # FFT_SIZE / 2\n# Band boundaries in bins (bin_width = 8000/128 = 62.5 Hz)\n# Bands: 0-250, 250-500, 500-1k, 1k-1.5k, 1.5k-2k, 2k-2.5k, 2.5k-3k, 3k-4k Hz\nBAND_STARTS = [0,  4,  8, 16, 24, 32, 40, 48]\nBAND_ENDS   = [4,  8, 16, 24, 32, 40, 48, 64]\nAUDIO_DIR = 'Audio Files'\nCLASSES = [\"down\", \"left\", \"off\", \"on\", \"right\", \"start\", \"stop\", \"up\"]  # must match feat_table order\n# =========================================================",
         "detail": "script",
         "documentation": {}
     },
     {
-        "label": "number_of_files",
+        "label": "HOP_LENGTH",
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "number_of_files = 0\n# def convert_audio(input_file):\n#     audio = AudioSegment.from_file(input_file)\n#     audio = audio.set_channels(1)  # Convert to mono\n#     audio = audio.set_frame_rate(8000)\n#     audio = audio.set_sample_width(1)\n#     return audio\n# for folder in audio_data:\n#     os.makedirs(f'Converted Audio Files/{folder}', exist_ok=True)\n#     for file in os.listdir(f'Audio Files/{folder}'):    ",
+        "peekOfCode": "HOP_LENGTH = 64\nN_BINS = 64            # FFT_SIZE / 2\n# Band boundaries in bins (bin_width = 8000/128 = 62.5 Hz)\n# Bands: 0-250, 250-500, 500-1k, 1k-1.5k, 1.5k-2k, 2k-2.5k, 2.5k-3k, 3k-4k Hz\nBAND_STARTS = [0,  4,  8, 16, 24, 32, 40, 48]\nBAND_ENDS   = [4,  8, 16, 24, 32, 40, 48, 64]\nAUDIO_DIR = 'Audio Files'\nCLASSES = [\"down\", \"left\", \"off\", \"on\", \"right\", \"start\", \"stop\", \"up\"]  # must match feat_table order\n# =========================================================\ndef save_hamming_window(filename=\"hamming_window.h\"):",
         "detail": "script",
         "documentation": {}
     },
     {
-        "label": "frame_length",
+        "label": "N_BINS",
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "frame_length = 64\nhop_length = 64\n# { 'yes': {'zcr': [], 'ste': [], 'sc': []}, 'no': {...}, ... }\nword_features = {folder.lower(): {'zcr': [], 'ste': []} for folder in audio_data}\nfor folder in audio_data:\n    for file in os.listdir(f'Audio Files/{folder}'):\n        y, sr = librosa.load(f'Audio Files/{folder}/{file}', sr=8000, mono=True)\n        y_int8 = (y * 128).clip(-128, 127).astype(np.float32)\n        y_trimmed, _ = librosa.effects.trim(y, top_db=50)\n        # ZCR rate (crossings per sample)",
+        "peekOfCode": "N_BINS = 64            # FFT_SIZE / 2\n# Band boundaries in bins (bin_width = 8000/128 = 62.5 Hz)\n# Bands: 0-250, 250-500, 500-1k, 1k-1.5k, 1.5k-2k, 2k-2.5k, 2.5k-3k, 3k-4k Hz\nBAND_STARTS = [0,  4,  8, 16, 24, 32, 40, 48]\nBAND_ENDS   = [4,  8, 16, 24, 32, 40, 48, 64]\nAUDIO_DIR = 'Audio Files'\nCLASSES = [\"down\", \"left\", \"off\", \"on\", \"right\", \"start\", \"stop\", \"up\"]  # must match feat_table order\n# =========================================================\ndef save_hamming_window(filename=\"hamming_window.h\"):\n    window = np.hamming(FFT_SIZE)",
         "detail": "script",
         "documentation": {}
     },
     {
-        "label": "hop_length",
+        "label": "BAND_STARTS",
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "hop_length = 64\n# { 'yes': {'zcr': [], 'ste': [], 'sc': []}, 'no': {...}, ... }\nword_features = {folder.lower(): {'zcr': [], 'ste': []} for folder in audio_data}\nfor folder in audio_data:\n    for file in os.listdir(f'Audio Files/{folder}'):\n        y, sr = librosa.load(f'Audio Files/{folder}/{file}', sr=8000, mono=True)\n        y_int8 = (y * 128).clip(-128, 127).astype(np.float32)\n        y_trimmed, _ = librosa.effects.trim(y, top_db=50)\n        # ZCR rate (crossings per sample)\n        zero_crossings = np.sum(np.diff(np.sign(y_int8)) != 0)",
+        "peekOfCode": "BAND_STARTS = [0,  4,  8, 16, 24, 32, 40, 48]\nBAND_ENDS   = [4,  8, 16, 24, 32, 40, 48, 64]\nAUDIO_DIR = 'Audio Files'\nCLASSES = [\"down\", \"left\", \"off\", \"on\", \"right\", \"start\", \"stop\", \"up\"]  # must match feat_table order\n# =========================================================\ndef save_hamming_window(filename=\"hamming_window.h\"):\n    window = np.hamming(FFT_SIZE)\n    with open(filename, \"w\") as f:\n        f.write(\"#ifndef HAMMING_WINDOW_H\\n#define HAMMING_WINDOW_H\\n\\n\")\n        f.write(\"#include <avr/pgmspace.h>\\n\\n\")",
+        "detail": "script",
+        "documentation": {}
+    },
+    {
+        "label": "AUDIO_DIR",
+        "kind": 5,
+        "importPath": "script",
+        "description": "script",
+        "peekOfCode": "AUDIO_DIR = 'Audio Files'\nCLASSES = [\"down\", \"left\", \"off\", \"on\", \"right\", \"start\", \"stop\", \"up\"]  # must match feat_table order\n# =========================================================\ndef save_hamming_window(filename=\"hamming_window.h\"):\n    window = np.hamming(FFT_SIZE)\n    with open(filename, \"w\") as f:\n        f.write(\"#ifndef HAMMING_WINDOW_H\\n#define HAMMING_WINDOW_H\\n\\n\")\n        f.write(\"#include <avr/pgmspace.h>\\n\\n\")\n        f.write(f\"static const float hamming_window[{FFT_SIZE}] PROGMEM = {{\\n\")\n        for i in range(0, FFT_SIZE, 8):",
+        "detail": "script",
+        "documentation": {}
+    },
+    {
+        "label": "CLASSES",
+        "kind": 5,
+        "importPath": "script",
+        "description": "script",
+        "peekOfCode": "CLASSES = [\"down\", \"left\", \"off\", \"on\", \"right\", \"start\", \"stop\", \"up\"]  # must match feat_table order\n# =========================================================\ndef save_hamming_window(filename=\"hamming_window.h\"):\n    window = np.hamming(FFT_SIZE)\n    with open(filename, \"w\") as f:\n        f.write(\"#ifndef HAMMING_WINDOW_H\\n#define HAMMING_WINDOW_H\\n\\n\")\n        f.write(\"#include <avr/pgmspace.h>\\n\\n\")\n        f.write(f\"static const float hamming_window[{FFT_SIZE}] PROGMEM = {{\\n\")\n        for i in range(0, FFT_SIZE, 8):\n            line = \", \".join(f\"{val:.6f}f\" for val in window[i:i+8])",
         "detail": "script",
         "documentation": {}
     },
@@ -692,16 +639,7 @@
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "word_features = {folder.lower(): {'zcr': [], 'ste': []} for folder in audio_data}\nfor folder in audio_data:\n    for file in os.listdir(f'Audio Files/{folder}'):\n        y, sr = librosa.load(f'Audio Files/{folder}/{file}', sr=8000, mono=True)\n        y_int8 = (y * 128).clip(-128, 127).astype(np.float32)\n        y_trimmed, _ = librosa.effects.trim(y, top_db=50)\n        # ZCR rate (crossings per sample)\n        zero_crossings = np.sum(np.diff(np.sign(y_int8)) != 0)\n        zcr = zero_crossings / len(y_int8)\n        # STE mean square in int8 scale",
-        "detail": "script",
-        "documentation": {}
-    },
-    {
-        "label": "final_features",
-        "kind": 5,
-        "importPath": "script",
-        "description": "script",
-        "peekOfCode": "final_features = []\nfor folder, feats in word_features.items():\n    final_features.append({\n        'word':     folder.lower(),\n        'zcr_mean': np.mean(feats['zcr']),\n        'ste_mean': np.mean(feats['ste']),\n        # 'sc_mean':  np.mean(feats['sc']),\n    })\n# Write to file\nwith open(\"features.txt\", \"w\") as f:",
+        "peekOfCode": "word_features = {cls: [] for cls in CLASSES}\nfor folder in sorted(os.listdir(AUDIO_DIR)):\n    folder_lower = folder.lower()\n    if folder_lower not in word_features:\n        print(f\"⚠️  Skipping unknown folder: {folder}\")\n        continue\n    folder_path = os.path.join(AUDIO_DIR, folder)\n    print(f\"Processing folder: {folder}\")\n    for file in os.listdir(folder_path):\n        if not file.lower().endswith(('.wav', '.mp3', '.m4a')):",
         "detail": "script",
         "documentation": {}
     }

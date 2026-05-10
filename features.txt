@@ -1,9 +1,9 @@
-word | zcr_mean | ste_mean | sc_mean
- static const float PROGMEM features_down[] = { 0.1083, 0.0414 };
- static const float PROGMEM features_left[] = { 0.0621, 0.0375 };
- static const float PROGMEM features_off[] = { 0.0371, 0.0404 };
- static const float PROGMEM features_on[] = { 0.0628, 0.0418 };
- static const float PROGMEM features_right[] = { 0.0646, 0.0414 };
- static const float PROGMEM features_start[] = { 0.0458, 0.0387 };
- static const float PROGMEM features_stop[] = { 0.0319, 0.0357 };
- static const float PROGMEM features_up[] = { 0.0328, 0.0388 };
+// MFCC of Input word commands:
+ static const PROGMEM float mfcc_down[] = {-84.8673, 77.8296, 16.9685, 11.9791, 6.3256, -0.0668, -3.0235, 2.2888, 2.8453, -2.6864, 3.4294, 2.6564, 7.0728};
+ static const PROGMEM float mfcc_left[] = {-51.7676, 54.3254, 21.4622, 9.4488, -2.2207, -3.7230, -0.3088, 0.5567, -1.4837, 4.8408, 4.6060, 1.8805, 0.3832};
+ static const PROGMEM float mfcc_off[] = {-47.6846, 59.7166, 4.7886, 5.3488, 6.0017, 4.5599, -1.7994, 1.2819, 0.5985, 2.8426, 4.3728, 3.0355, 3.1852};
+ static const PROGMEM float mfcc_on[] = {-51.4278, 56.9425, 10.0682, 2.9880, 8.7751, 3.0589, -4.9289, -1.1292, 0.1609, -0.6934, -0.1712, 2.6059, 2.7710};
+ static const PROGMEM float mfcc_right[] = {-44.7470, 37.2686, 16.8645, 13.0047, -16.4593, -2.6388, 0.4947, 0.3068, 1.0096, 3.9781, 0.7621, 2.7437, 5.6006};
+ static const PROGMEM float mfcc_start[] = {-26.3902, 77.7010, 1.4296, 1.5964, -10.5975, -10.0019, -11.0182, 2.1389, -1.0021, 3.2757, 4.7933, -0.5654, 1.3360};
+ static const PROGMEM float mfcc_stop[] = {-39.1539, 69.9767, 9.1166, 7.8359, 1.6965, -0.5667, -5.6126, -2.8817, 5.7402, 11.5100, 7.8772, 4.1288, 1.8405};
+ static const PROGMEM float mfcc_up[] = {-53.3750, 94.2901, 13.4860, 9.3647, -5.8268, -8.7744, -10.8410, 2.6700, 5.4096, 2.9968, 3.6086, 4.9417, 4.2343};

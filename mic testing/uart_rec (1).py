@@ -9,7 +9,7 @@ import sys
 start = 0
 end = 0
 
-ser = serial.Serial('COM6', 115200, timeout=1)
+ser = serial.Serial('COM5', 115200, timeout=1)
 
 samples = []
 recording = False
@@ -46,7 +46,7 @@ word = audio_folders[choice]
 
 for folder in audio_folders:
     if folder == word:
-        for i in range(5):
+        for i in range(15,16):
 
             print(f"file {i} in {folder} Waiting for START...")
 

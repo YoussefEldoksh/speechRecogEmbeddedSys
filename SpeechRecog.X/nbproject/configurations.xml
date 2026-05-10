@@ -8,6 +8,7 @@
       <itemPath>lcd.h</itemPath>
       <itemPath>ADC_interface.h</itemPath>
       <itemPath>speech_processing.h</itemPath>
+      <itemPath>fix_fft.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -24,9 +25,7 @@
       <itemPath>main.c</itemPath>
       <itemPath>lcd.c</itemPath>
       <itemPath>adc.c</itemPath>
-      <itemPath>speech_processing.c</itemPath>
-      <itemPath>kiss_fft130/kiss_fft.c</itemPath>
-      <itemPath>kiss_fft130/tools/kiss_fftr.c</itemPath>
+      <itemPath>fix_fft.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>

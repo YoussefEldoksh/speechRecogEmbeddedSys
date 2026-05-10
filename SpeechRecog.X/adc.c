@@ -9,7 +9,7 @@ void ADC_init() {
     ADCSRA = (1 << ADEN) | (1 << ADPS2) | (1 << ADPS1);
 }
 
-int8_t ADC_read() {
+int16_t ADC_read() {
     /*Select the Channel (Masking first 5 bits of ADMUX to clear old channel) */
     /* Channel must be between 0-7 */
 //    ADMUX &= 0xE0;
