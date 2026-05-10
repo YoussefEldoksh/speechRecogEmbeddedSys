@@ -30,6 +30,7 @@
 
 #define N_WAVE      1024    /* full length of Sinewave[] */
 #define LOG2_N_WAVE 10      /* log2(N_WAVE) */
+#include <avr/pgmspace.h>
 
 /*
   Henceforth "short" implies 16-bit word. If this is not
@@ -41,7 +42,7 @@
   Since we only use 3/4 of N_WAVE, we define only
   this many samples, in order to conserve data space.
 */
-short Sinewave[N_WAVE-N_WAVE/4] = {
+static const short Sinewave[N_WAVE - N_WAVE/4] PROGMEM = {
       0,    201,    402,    603,    804,   1005,   1206,   1406,
    1607,   1808,   2009,   2209,   2410,   2610,   2811,   3011,
    3211,   3411,   3611,   3811,   4011,   4210,   4409,   4608,
@@ -234,8 +235,8 @@ int fix_fft(short fr[], short fi[], short m, short inverse)
 		for (m=0; m<l; ++m) {
 			j = m << k;
 			/* 0 <= j < N_WAVE/2 */
-			wr =  Sinewave[j+N_WAVE/4];
-			wi = -Sinewave[j];
+			wr =  (short)pgm_read_word(&Sinewave[j + N_WAVE/4]);
+      wi = -(short)pgm_read_word(&Sinewave[j]);
 			if (inverse)
 				wi = -wi;
 			if (shift) {

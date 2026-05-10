@@ -3,7 +3,7 @@
 
 #include <avr/pgmspace.h>
 
-static const float hamming_window[128] PROGMEM = {
+static const uint8_t hamming_window[64] PROGMEM = {
     0.080000f, 0.080563f, 0.082250f, 0.085057f, 0.088978f, 0.094002f, 0.100118f, 0.107311f,
     0.115562f, 0.124852f, 0.135157f, 0.146454f, 0.158713f, 0.171906f, 0.185999f, 0.200959f,
     0.216749f, 0.233329f, 0.250660f, 0.268699f, 0.287402f, 0.306723f, 0.326615f, 0.347029f,
