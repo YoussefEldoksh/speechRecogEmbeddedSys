@@ -29,7 +29,7 @@ static const float feat_stop[N_FEATURES] PROGMEM = {0.328468f, -4.478813f, -7.11
 // ZCR, log-STE, Mel[0..5]
 static const float feat_up[N_FEATURES] PROGMEM = {0.292927f, -4.614080f, -7.058267f, -6.947430f, -7.381168f, -7.570995f, -7.761914f, -7.732168f};
 
-// Pointer table ï¿½ index matches LABELS[] below
+// Pointer table — index matches LABELS[] below
 static const float* const feat_table[] PROGMEM = {
     feat_down,
     feat_left,

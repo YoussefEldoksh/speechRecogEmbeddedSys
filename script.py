@@ -4,115 +4,83 @@ import librosa
 
 # ========================= CONFIG =========================
 SAMPLE_RATE = 8000
-N_FEATURES = 10        # 8 band energies + total energy + centroid
-FFT_SIZE = 128
-HOP_LENGTH = 64
-N_BINS = 64            # FFT_SIZE / 2
-
-# Band boundaries in bins (bin_width = 8000/128 = 62.5 Hz)
-# Bands: 0-250, 250-500, 500-1k, 1k-1.5k, 1.5k-2k, 2k-2.5k, 2.5k-3k, 3k-4k Hz
-BAND_STARTS = [0,  4,  8, 16, 24, 32, 40, 48]
-BAND_ENDS   = [4,  8, 16, 24, 32, 40, 48, 64]
+FFT_SIZE    = 128
+HOP_LENGTH  = 64
+N_MEL_BANDS = 6       # Number of Mel filter bank channels
+N_FEATURES  = N_MEL_BANDS + 2  # +1 ZCR, +1 STE  →  8 total
 
 AUDIO_DIR = 'Audio Files'
-CLASSES = ["down", "left", "off", "on", "right", "start", "stop", "up"]  # must match feat_table order
-
 # =========================================================
-
-def save_hamming_window(filename="hamming_window.h"):
-    window = np.hamming(FFT_SIZE)
-    with open(filename, "w") as f:
-        f.write("#ifndef HAMMING_WINDOW_H\n#define HAMMING_WINDOW_H\n\n")
-        f.write("#include <avr/pgmspace.h>\n\n")
-        f.write(f"static const float hamming_window[{FFT_SIZE}] PROGMEM = {{\n")
-        for i in range(0, FFT_SIZE, 8):
-            line = ", ".join(f"{val:.6f}f" for val in window[i:i+8])
-            f.write(f"    {line}{',' if i + 8 < FFT_SIZE else ''}\n")
-        f.write("};\n\n#endif\n")
-    print("✅ Hamming window saved to hamming_window.h")
 
 
 def extract_features(y, sr=SAMPLE_RATE):
     """
-    Mirrors exactly what the C code does:
-      pre-emphasis → hamming → FFT → L1 magnitude → band energies + total energy + centroid
-    Averaged across frames. Returns uint16-scaled vector.
+    Returns a 1-D feature vector of length N_FEATURES:
+      [zcr_mean, ste_mean, mel_band_0, ..., mel_band_5]
+    All computed per-frame then averaged across time.
     """
-    # Pre-emphasis (matches C: x[i] -= 0.97 * x[i-1], x[0] = 0)
-    y = y.copy().astype(np.float32)
-    y[1:] -= 0.97 * y[:-1]
-    y[0] = 0.0
+    # --- Pre-emphasis ---
+    y = np.append(y[0], y[1:] - 0.97 * y[:-1])
 
-    frame_features = []
-    i = 0
-    while i + FFT_SIZE <= len(y):
-        frame = y[i:i + FFT_SIZE].copy()
+    # --- Zero-Crossing Rate (1 value) ---
+    zcr_frames = librosa.feature.zero_crossing_rate(
+        y, frame_length=FFT_SIZE, hop_length=HOP_LENGTH, center=False
+    )  # shape: (1, n_frames)
+    zcr_mean = np.mean(zcr_frames)
 
-        # Hamming window
-        frame *= np.hamming(FFT_SIZE)
+    # --- Short-Time Energy (1 value) ---
+    # Compute per-frame energy: mean of squared samples
+    frames = librosa.util.frame(y, frame_length=FFT_SIZE, hop_length=HOP_LENGTH)
+    # frames shape: (FFT_SIZE, n_frames)
+    ste_frames = np.mean(frames ** 2, axis=0)   # shape: (n_frames,)
+    ste_mean   = np.mean(ste_frames)
 
-        # FFT — use numpy rfft, take only first N_BINS bins
-        F = np.fft.rfft(frame, FFT_SIZE)          # shape: FFT_SIZE//2 + 1 = 65
-        F = F[:N_BINS]                             # bins 0..63
+    # --- Mel Filter Bank Log-Energies (N_MEL_BANDS values) ---
+    mel_spec = librosa.feature.melspectrogram(
+        y=y,
+        sr=sr,
+        n_fft=FFT_SIZE,
+        hop_length=HOP_LENGTH,
+        n_mels=N_MEL_BANDS,
+        window='hamming',
+        center=False,
+        power=2.0
+    )  # shape: (N_MEL_BANDS, n_frames)
 
-        # L1 magnitude — matches C: abs(re) + abs(im)
-        mag = np.abs(F.real) + np.abs(F.imag)     # shape: 64
+    # Log-compress (mirrors what the ear does, stabilises dynamic range)
+    log_mel = np.log(mel_spec + 1e-9)           # +eps avoids log(0)
+    mel_mean = np.mean(log_mel, axis=1)          # shape: (N_MEL_BANDS,)
 
-        feats = []
+    # --- Normalise STE to same ballpark as other features ---
+    # log-scale STE so it doesn't dwarf the Mel energies
+    ste_log = np.log(ste_mean + 1e-9)
 
-        # Features 0–7: band energies (mean magnitude per band)
-        for ks, ke in zip(BAND_STARTS, BAND_ENDS):
-            feats.append(mag[ks:ke].mean())
-
-        # Feature 8: total energy (skip DC bin 0), scaled like C (>> 6 = / 64)
-        total_energy = mag[1:].sum() / 64.0
-        feats.append(total_energy)
-
-        # Feature 9: spectral centroid in bins
-        denom = mag[1:].sum()
-        centroid = (np.arange(1, N_BINS) * mag[1:]).sum() / denom if denom > 0 else 0.0
-        feats.append(centroid)
-
-        frame_features.append(feats)
-        i += HOP_LENGTH
-
-    if not frame_features:
-        return np.zeros(N_FEATURES, dtype=np.float32)
-
-    # Average across frames (same as C: accum[k] / n_frames)
-    avg = np.mean(frame_features, axis=0).astype(np.float32)
-
-    # Scale to uint16 range to match what the C nearest_neighbor expects
-    # Use the same fixed scale factor your C code uses (adjust if needed)
-    avg_scaled = np.clip(avg * 256.0, 0, 65535).astype(np.uint16)
-
-    return avg_scaled
+    # --- Concatenate into one vector ---
+    feature_vec = np.concatenate([[zcr_mean, ste_log], mel_mean])
+    return feature_vec                           # shape: (8,)
 
 
 # ====================== MAIN PROCESSING ======================
 
 print("Starting feature extraction...\n")
 
-save_hamming_window()
+audio_data    = sorted(os.listdir(AUDIO_DIR))
+word_features = {folder.lower(): [] for folder in audio_data}
 
-word_features = {cls: [] for cls in CLASSES}
-
-for folder in sorted(os.listdir(AUDIO_DIR)):
-    folder_lower = folder.lower()
-    if folder_lower not in word_features:
-        print(f"⚠️  Skipping unknown folder: {folder}")
-        continue
-
+for folder in audio_data:
     folder_path = os.path.join(AUDIO_DIR, folder)
+    if not os.path.isdir(folder_path):
+        continue
     print(f"Processing folder: {folder}")
 
-    for file in os.listdir(folder_path):
+    for file in sorted(os.listdir(folder_path)):
         if not file.lower().endswith(('.wav', '.mp3', '.m4a')):
             continue
 
         file_path = os.path.join(folder_path, file)
         y, sr = librosa.load(file_path, sr=SAMPLE_RATE, mono=True)
 
+        # Trim leading/trailing silence
         y_trimmed, _ = librosa.effects.trim(y, top_db=20)
 
         if len(y_trimmed) < FFT_SIZE:
@@ -120,42 +88,62 @@ for folder in sorted(os.listdir(AUDIO_DIR)):
             continue
 
         feat_vec = extract_features(y_trimmed, sr)
-        word_features[folder_lower].append(feat_vec)
-        print(f"  ✓ {file} → features: {feat_vec}")
+        word_features[folder.lower()].append(feat_vec)
 
-# ====================== AVERAGE PER CLASS & WRITE HEADER ======================
+        preview = " ".join(f"{v:.4f}" for v in feat_vec)
+        print(f"  ✓ {file} → [{preview}]")
 
-print("\nGenerating speech_data.h ...")
+# ====================== AVERAGE PER CLASS ======================
 
-with open("speech_data.h", "w") as f:
-    f.write("#ifndef SPEECH_DATA_H\n#define SPEECH_DATA_H\n\n")
+print("\nGenerating final reference features...")
+
+final_features = {}
+
+with open("word_features.h", "w") as f:
+    f.write("#ifndef WORD_FEATURES_H\n")
+    f.write("#define WORD_FEATURES_H\n\n")
     f.write("#include <avr/pgmspace.h>\n\n")
-    f.write(f"#define N_FEATURES {N_FEATURES}\n")
-    f.write(f"#define PRE_EMPHASIS 0.97f\n\n")
+    f.write(f"#define N_FEATURES {N_FEATURES}\n\n")
 
-    final_features = {}
+    for word, vectors in sorted(word_features.items()):
+        if len(vectors) == 0:
+            print(f"  ⚠️  No valid recordings for '{word}', skipping.")
+            continue
 
-    for word in CLASSES:
-        vectors = word_features[word]
-        if not vectors:
-            print(f"⚠️  No samples for '{word}', writing zeros.")
-            avg = np.zeros(N_FEATURES, dtype=np.uint16)
-        else:
-            # Average the already-uint16-scaled vectors
-            avg = np.mean(vectors, axis=0).astype(np.uint16)
+        avg_vec = np.mean(vectors, axis=0)       # shape: (N_FEATURES,)
+        final_features[word] = avg_vec
 
-        final_features[word] = avg
+        values = ", ".join(f"{x:.6f}f" for x in avg_vec)
+        f.write(f"// ZCR, log-STE, Mel[0..{N_MEL_BANDS-1}]\n")
+        f.write(f"static const float feat_{word}[N_FEATURES] PROGMEM = {{{values}}};\n\n")
+        print(f"  ✓ {word:12} → {np.round(avg_vec, 4)}")
 
-        values = ", ".join(str(v) for v in avg)
-        f.write(f"static const uint16_t feat_{word}[{N_FEATURES}] PROGMEM = {{{values}}};\n")
-        print(f"✓ {word:10} → {avg}")
+    # Lookup table (pointer array in Flash)
+    words_sorted = sorted(final_features.keys())
 
-    f.write("\n// Pointer table — order must match labels[] in main.c\n")
-    f.write("static const uint16_t* const feat_table[] PROGMEM = {\n")
-    for word in CLASSES:
+    f.write("// Pointer table — index matches LABELS[] below\n")
+    f.write("static const float* const feat_table[] PROGMEM = {\n")
+    for word in words_sorted:
         f.write(f"    feat_{word},\n")
-    f.write("};\n\n#endif\n")
+    f.write("};\n\n")
 
-print("\n✅ Done! Generated:")
-print("   • hamming_window.h")
-print("   • speech_data.h")
+    # Label strings in Flash
+    f.write("// Word labels\n")
+    label_list = ", ".join(f'"{w}"' for w in words_sorted)
+    f.write(f"static const char* const LABELS[] PROGMEM = {{{label_list}}};\n\n")
+
+    f.write(f"#define N_WORDS {len(words_sorted)}\n\n")
+    f.write("#endif // WORD_FEATURES_H\n")
+
+print("\n✅ Done! Generated: word_features.h")
+
+# ---- Debug dump ----
+print("\n--- Final averaged feature vectors ---")
+np.set_printoptions(precision=4, suppress=True)
+header = f"{'Word':12}  {'ZCR':>8}  {'logSTE':>8}  " + \
+         "  ".join(f"Mel{i}" for i in range(N_MEL_BANDS))
+print(header)
+print("-" * len(header))
+for word, vec in sorted(final_features.items()):
+    vals = "  ".join(f"{v:8.4f}" for v in vec)
+    print(f"{word:12}  {vals}")
