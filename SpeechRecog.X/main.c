@@ -15,6 +15,8 @@
 #define TIMER_TICK_HZ 8000
 #define BUTTON_DEBOUNCE_MS 20
 #define FFT_INPUT_SHIFT 7
+#define SILENCE_THRESHOLD 0
+#define PRE_EMPHASIS_NUM 95
 
 #include "fix_fft.h"
 #include <stdio.h>
@@ -39,9 +41,10 @@ volatile uint16_t address = 0;
 uint16_t features[N_FEATURES];
 short fft_real[FFT_SIZE];
 short fft_imag[FFT_SIZE];
+static int16_t prev_sample = 0;
 
 /* ?? Mel band bin boundaries (linear spacing on 0..N_BINS-1, 6 bands) ?? */
-static const uint8_t band_start[N_BANDS] PROGMEM = {0, 2, 4, 8, 16, 24};
+static const uint8_t band_start[N_BANDS] PROGMEM = {1, 2, 4, 8, 16, 24};
 static const uint8_t band_end [N_BANDS] PROGMEM = {2, 4, 8, 16, 24, 32};
 
 /* ------------------------------------------------------------------ */
@@ -61,6 +64,12 @@ static uint16_t ilog2_scaled(uint32_t x) {
     // fractional part: (x >> (shift-3)) & 0x07  gives 3 extra bits
     uint16_t frac = (shift >= 3) ? ((x >> (shift - 3)) & 0x07) : 0;
     return (uint16_t) ((uint16_t) shift * 8 + frac); // 8 * log2(x), approx
+}
+
+static int8_t clamp_int8(int16_t v) {
+    if (v > 127) return 127;
+    if (v < -128) return -128;
+    return (int8_t) v;
 }
 
 static void get_label(uint8_t idx, char *out, size_t out_size) {
@@ -110,7 +119,11 @@ ISR(INT0_vect) {
 
 ISR(TIMER1_COMPA_vect) {
     if (!recording) return;
-    audio_sample = (int8_t) (ADC_read() - ADC_CENTER);
+    int16_t raw_val = ADC_read();
+    int16_t centered = raw_val - ADC_CENTER;
+    int16_t pre_emph = centered - (int16_t) ((PRE_EMPHASIS_NUM * prev_sample) / 100);
+    prev_sample = centered;
+    audio_sample = clamp_int8(pre_emph);
     sample_ready = 1;
 }
 
@@ -188,6 +201,20 @@ int nearest_neighbor(uint16_t *input) {
     return best;
 }
 
+static void dump_distances(uint16_t *input) {
+    char label_buf[12];
+    for (uint8_t i = 0; i < N_WORDS; i++) {
+        const uint16_t *ref = (const uint16_t *) pgm_read_ptr(&feat_table[i]);
+        uint32_t dist = 0;
+        for (uint8_t k = 0; k < N_FEATURES; k++) {
+            int32_t diff = (int32_t) input[k] - pgm_read_word(&ref[k]);
+            dist += (uint32_t) (diff * diff);
+        }
+        get_label(i, label_buf, sizeof(label_buf));
+        printf("dist %s: %lu\n", label_buf, dist);
+    }
+}
+
 void init_INT0() {
     DDRD &= ~(1 << PD2);
     DDRD |= (1 << PD7);
@@ -231,12 +258,6 @@ void compute_features(uint16_t total_samples, uint16_t *feat_out) {
     uint32_t accum_mel[N_BANDS];
     for (uint8_t b = 0; b < N_BANDS; b++) accum_mel[b] = 0;
 
-    int32_t mean_sum = 0;
-    for (uint16_t i = 0; i < total_samples; i++) {
-        mean_sum += SRAM_read_byte(i);
-    }
-    int16_t mean = (total_samples > 0) ? (int16_t) (mean_sum / (int32_t) total_samples) : 0;
-
     // ?? single reusable frame buffer (int16, 128 bytes on stack) ??
     int16_t frame_buf[FFT_SIZE];
 
@@ -246,14 +267,24 @@ void compute_features(uint16_t total_samples, uint16_t *feat_out) {
 
         /* ?? 1. Read frame ONCE from SRAM ?? */
         for (uint8_t i = 0; i < FFT_SIZE; i++) {
-            int16_t sample = (int16_t) SRAM_read_byte(addr + i) - mean;
-            frame_buf[i] = sample;
+            frame_buf[i] = (int16_t) SRAM_read_byte(addr + i);
             //            printf("Address: %d | data: %d\n", addr + i, frame_buf[i]);
         }
 
         // printf("after reading data \n");
 
-        /* ?? 2. ZCR on raw int8 samples ?? */
+        /* ?? 2. Short-Time Energy + VAD on raw samples ?? */
+        uint32_t frame_energy = 0;
+        for (uint8_t i = 0; i < FFT_SIZE; i++) {
+            int16_t s = frame_buf[i];
+            frame_energy += (uint32_t) (s * s);
+        }
+        if (frame_energy < SILENCE_THRESHOLD) {
+            addr += HOP_SIZE;
+            continue;
+        }
+
+        /* ?? 3. ZCR on raw int16 samples ?? */
         uint8_t zcr_count = 0;
         for (uint8_t i = 1; i < FFT_SIZE; i++) {
             if ((frame_buf[i] >= 0) != (frame_buf[i - 1] >= 0))
@@ -261,15 +292,6 @@ void compute_features(uint16_t total_samples, uint16_t *feat_out) {
         }
         accum_zcr += (uint16_t) zcr_count * 4u; // scale: (count/64)*256 = count*4
 
-        //        printf("after zcr_count \n");
-
-
-        /* ?? 3. Short-Time Energy on raw int8 samples ?? */
-        uint32_t frame_energy = 0;
-        for (uint8_t i = 0; i < FFT_SIZE; i++) {
-            int16_t s = frame_buf[i];
-            frame_energy += (uint32_t) (s * s);
-        }
         accum_ste += ilog2_scaled(frame_energy);
 
 
@@ -280,7 +302,6 @@ void compute_features(uint16_t total_samples, uint16_t *feat_out) {
         }
 
 
-        pre_emphasis(fft_real, FFT_SIZE);
         fix_fft(fft_real, fft_imag, FFT_LOG2, 0);
         
         // printf("after fix_fft\n ");
@@ -353,6 +374,8 @@ int main(int argc, char **argv) {
             printf("Processing...\n");
 
             compute_features(number_of_samples, features);
+
+            dump_distances(features);
 
             int label = nearest_neighbor(features);
 

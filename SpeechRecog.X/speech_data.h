@@ -6,28 +6,28 @@
 #define N_FEATURES 8
 
 // ZCR, log-STE, Mel[0..5]
-static const uint16_t feat_down[N_FEATURES] PROGMEM = {21, 101, 92, 102, 103, 108, 101, 95};
+static const uint16_t feat_down[N_FEATURES] PROGMEM = {20, 79, 58, 77, 77, 93, 90, 89};
 
 // ZCR, log-STE, Mel[0..5]
-static const uint16_t feat_left[N_FEATURES] PROGMEM = {31, 91, 77, 87, 93, 104, 103, 101};
+static const uint16_t feat_left[N_FEATURES] PROGMEM = {21, 78, 41, 67, 71, 87, 88, 87};
 
 // ZCR, log-STE, Mel[0..5]
-static const uint16_t feat_off[N_FEATURES] PROGMEM = {33, 86, 73, 77, 90, 103, 102, 98};
+static const uint16_t feat_off[N_FEATURES] PROGMEM = {12, 77, 31, 56, 69, 86, 88, 88};
 
 // ZCR, log-STE, Mel[0..5]
-static const uint16_t feat_on[N_FEATURES] PROGMEM = {19, 97, 88, 100, 95, 102, 96, 92};
+static const uint16_t feat_on[N_FEATURES] PROGMEM = {20, 78, 55, 75, 74, 91, 90, 90};
 
 // ZCR, log-STE, Mel[0..5]
-static const uint16_t feat_right[N_FEATURES] PROGMEM = {26, 91, 78, 94, 103, 108, 100, 94};
+static const uint16_t feat_right[N_FEATURES] PROGMEM = {23, 79, 48, 73, 79, 93, 96, 90};
 
 // ZCR, log-STE, Mel[0..5]
-static const uint16_t feat_start[N_FEATURES] PROGMEM = {33, 88, 75, 89, 97, 106, 100, 98};
+static const uint16_t feat_start[N_FEATURES] PROGMEM = {34, 80, 50, 76, 82, 96, 97, 96};
 
 // ZCR, log-STE, Mel[0..5]
-static const uint16_t feat_stop[N_FEATURES] PROGMEM = {29, 85, 71, 82, 90, 95, 92, 93};
+static const uint16_t feat_stop[N_FEATURES] PROGMEM = {26, 78, 40, 63, 72, 86, 90, 93};
 
 // ZCR, log-STE, Mel[0..5]
-static const uint16_t feat_up[N_FEATURES] PROGMEM = {20, 84, 71, 78, 90, 92, 86, 86};
+static const uint16_t feat_up[N_FEATURES] PROGMEM = {10, 76, 41, 58, 66, 79, 84, 87};
 
 // Pointer table - index matches LABELS[] below
 static const uint16_t* const feat_table[] PROGMEM = {

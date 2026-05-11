@@ -9,8 +9,10 @@ HOP_LENGTH  = 32
 N_MEL_BANDS = 6
 N_FEATURES  = N_MEL_BANDS + 2  # ZCR, log-STE, mel0..mel5
 FFT_INPUT_SHIFT = 7
+SILENCE_THRESHOLD = 0
+PRE_EMPHASIS_NUM = 95
 
-BAND_START = [0, 2, 4, 8, 16, 24]
+BAND_START = [1, 2, 4, 8, 16, 24]
 BAND_END   = [2, 4, 8, 16, 24, 32]
 ADC_CENTER = 128
 
@@ -34,25 +36,28 @@ def ilog2_scaled(x):
     return (shift * 8) + frac
 
 
-def pre_emphasis(x):
+def pre_emphasis_samples(x):
     if len(x) < 2:
-        return x.astype(np.int32)
-    y = x.astype(np.float32).copy()
-    for i in range(len(y) - 1, 0, -1):
-        y[i] = y[i] - (0.97 * y[i - 1])
+        return x.astype(np.int16)
+    y = x.astype(np.int32).copy()
+    prev = int(y[0])
     y[0] = 0
-    return np.round(y).astype(np.int32)
+    for i in range(1, len(y)):
+        cur = int(y[i])
+        y[i] = cur - ((PRE_EMPHASIS_NUM * prev) // 100)
+        prev = cur
+    return np.clip(y, -128, 127).astype(np.int16)
 
 
 def extract_features(y, sr=SAMPLE_RATE):
     """
     Returns a 1-D feature vector of length N_FEATURES:
       [zcr_mean, log_ste_mean, mel_band_0, ..., mel_band_5]
-    Matches current C pipeline (FFT, ilog2 scaling, DC mean removed).
+    Matches current C pipeline (FFT, ilog2 scaling, DC block + pre-emphasis).
     """
     adc = np.clip(np.round(y * 127) + ADC_CENTER, 0, 255).astype(np.int16)
-    y = (adc - ADC_CENTER).astype(np.int8)
-    y = (y.astype(np.int16) - int(np.round(np.mean(y)))).astype(np.int16)
+    y = (adc - ADC_CENTER).astype(np.int16)
+    y = pre_emphasis_samples(y)
 
     accum_zcr = 0
     accum_ste = 0
@@ -63,18 +68,22 @@ def extract_features(y, sr=SAMPLE_RATE):
     while addr + FFT_SIZE <= len(y):
         frame = y[addr:addr + FFT_SIZE]
 
+        # STE + VAD (skip silence frames)
+        s = frame.astype(np.int16)
+        frame_energy = int(np.sum(s * s))
+        if frame_energy < SILENCE_THRESHOLD:
+            addr += HOP_LENGTH
+            continue
+
         # ZCR scaled by 4
         zcr = np.sum((frame[1:] >= 0) != (frame[:-1] >= 0))
         accum_zcr += int(zcr) * 4
 
         # STE log2 scaled
-        s = frame.astype(np.int16)
-        frame_energy = int(np.sum(s * s))
         accum_ste += ilog2_scaled(frame_energy)
 
         # Match MCU: scale, pre-emphasis, FFT
         fft_real = (frame.astype(np.int16) << FFT_INPUT_SHIFT).astype(np.int32)
-        fft_real = pre_emphasis(fft_real)
         fft_bins = np.fft.rfft(fft_real, n=FFT_SIZE) / FFT_SIZE
         mag = (fft_bins.real ** 2 + fft_bins.imag ** 2)
 
