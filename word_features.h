@@ -6,31 +6,31 @@
 #define N_FEATURES 8
 
 // ZCR, log-STE, Mel[0..5]
-static const float feat_down[N_FEATURES] PROGMEM = {0.300377f, -4.359515f, -6.064520f, -6.188857f, -6.566078f, -6.568796f, -6.896235f, -7.148645f};
+static const uint16_t feat_down[N_FEATURES] PROGMEM = {4, 139, 81, 95, 108, 119, 119, 119};
 
 // ZCR, log-STE, Mel[0..5]
-static const float feat_left[N_FEATURES] PROGMEM = {0.363822f, -4.537633f, -6.674198f, -6.992841f, -7.331271f, -6.911180f, -6.745756f, -6.852909f};
+static const uint16_t feat_left[N_FEATURES] PROGMEM = {6, 139, 83, 97, 108, 119, 119, 119};
 
 // ZCR, log-STE, Mel[0..5]
-static const float feat_off[N_FEATURES] PROGMEM = {0.369501f, -4.734900f, -6.737294f, -6.770664f, -6.777926f, -6.810320f, -7.119432f, -7.441887f};
+static const uint16_t feat_off[N_FEATURES] PROGMEM = {4, 139, 81, 95, 107, 118, 118, 118};
 
 // ZCR, log-STE, Mel[0..5]
-static const float feat_on[N_FEATURES] PROGMEM = {0.302526f, -3.925523f, -5.832629f, -6.071343f, -6.204804f, -6.296070f, -6.602297f, -6.643975f};
+static const uint16_t feat_on[N_FEATURES] PROGMEM = {9, 139, 81, 96, 110, 122, 122, 122};
 
 // ZCR, log-STE, Mel[0..5]
-static const float feat_right[N_FEATURES] PROGMEM = {0.321640f, -3.972558f, -6.367244f, -6.486142f, -6.976037f, -6.647659f, -6.658583f, -6.957759f};
+static const uint16_t feat_right[N_FEATURES] PROGMEM = {9, 139, 81, 96, 109, 121, 121, 121};
 
 // ZCR, log-STE, Mel[0..5]
-static const float feat_start[N_FEATURES] PROGMEM = {0.376833f, -4.188819f, -6.270663f, -5.959852f, -6.431057f, -6.237648f, -6.361084f, -6.468153f};
+static const uint16_t feat_start[N_FEATURES] PROGMEM = {5, 139, 82, 96, 110, 121, 121, 121};
 
 // ZCR, log-STE, Mel[0..5]
-static const float feat_stop[N_FEATURES] PROGMEM = {0.328468f, -4.478813f, -7.116247f, -7.158666f, -7.364592f, -7.420154f, -7.444934f, -7.357604f};
+static const uint16_t feat_stop[N_FEATURES] PROGMEM = {5, 139, 80, 94, 106, 116, 116, 116};
 
 // ZCR, log-STE, Mel[0..5]
-static const float feat_up[N_FEATURES] PROGMEM = {0.292927f, -4.614080f, -7.058267f, -6.947430f, -7.381168f, -7.570995f, -7.761914f, -7.732168f};
+static const uint16_t feat_up[N_FEATURES] PROGMEM = {4, 138, 78, 92, 103, 114, 114, 114};
 
 // Pointer table — index matches LABELS[] below
-static const float* const feat_table[] PROGMEM = {
+static const uint16_t* const feat_table[] PROGMEM = {
     feat_down,
     feat_left,
     feat_off,

@@ -95,7 +95,7 @@ ISR(INT0_vect) {
 
 ISR(TIMER1_COMPA_vect) {
     if (!recording) return;
-    audio_sample = (int8_t) (ADC_read() - 128);
+    audio_sample = (int8_t) (ADC_read() - 63);
     sample_ready = 1;
 }
 
@@ -259,7 +259,7 @@ void compute_features(uint16_t total_samples, uint16_t *feat_out) {
 
 
         pre_emphasis(fft_real, FFT_SIZE);
-        fix_fft(fft_real, fft_imag, FFT_LOG2, 0);
+        // fix_fft(fft_real, fft_imag, FFT_LOG2, 0);
         
         // printf("after fix_fft\n ");
 
@@ -274,7 +274,7 @@ void compute_features(uint16_t total_samples, uint16_t *feat_out) {
             for (uint8_t k = k0; k < k1; k++) {
                 int16_t re = fft_real[k];
                 int16_t im = fft_imag[k];
-                band_energy += (uint32_t) ((int32_t) re * re + (int32_t) im * im) >> 8;
+                band_energy += (uint32_t) ((int32_t) re * re + (int32_t) im * im) >> 4;
             }
             accum_mel[b] += ilog2_scaled(band_energy);
         }
@@ -297,9 +297,9 @@ void compute_features(uint16_t total_samples, uint16_t *feat_out) {
             feat_out[k] = 0;
     }
 
-    // printf("feat: %u %u %u %u %u %u %u %u\n",
-    //         feat_out[0], feat_out[1], feat_out[2], feat_out[3],
-    //         feat_out[4], feat_out[5], feat_out[6], feat_out[7]);
+        printf("feat: %u %u %u %u %u %u %u %u\n",
+            feat_out[0], feat_out[1], feat_out[2], feat_out[3],
+            feat_out[4], feat_out[5], feat_out[6], feat_out[7]);
 }
 
 /* ================================================================== */

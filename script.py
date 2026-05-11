@@ -4,60 +4,93 @@ import librosa
 
 # ========================= CONFIG =========================
 SAMPLE_RATE = 8000
-FFT_SIZE    = 128
-HOP_LENGTH  = 64
-N_MEL_BANDS = 6       # Number of Mel filter bank channels
-N_FEATURES  = N_MEL_BANDS + 2  # +1 ZCR, +1 STE  →  8 total
+FFT_SIZE    = 64
+HOP_LENGTH  = 32
+N_MEL_BANDS = 6
+N_FEATURES  = N_MEL_BANDS + 2  # ZCR, log-STE, mel0..mel5
+
+BAND_START = [0, 2, 4, 8, 16, 24]
+BAND_END   = [2, 4, 8, 16, 24, 32]
+ADC_CENTER = 63
 
 AUDIO_DIR = 'Audio Files'
 # =========================================================
 
 
+def ilog2_scaled(x):
+    if x == 0:
+        return 0
+    shift = 0
+    v = int(x)
+    while v > 1:
+        v >>= 1
+        shift += 1
+    frac = ((int(x) >> (shift - 3)) & 0x07) if shift >= 3 else 0
+    return (shift * 8) + frac
+
+
+def pre_emphasis(x):
+    if len(x) < 2:
+        return x
+    y = x.astype(np.float32).copy()
+    for i in range(len(y) - 1, 0, -1):
+        y[i] = y[i] - (0.97 * y[i - 1])
+    y[0] = 0
+    return y
+
+
 def extract_features(y, sr=SAMPLE_RATE):
     """
     Returns a 1-D feature vector of length N_FEATURES:
-      [zcr_mean, ste_mean, mel_band_0, ..., mel_band_5]
-    All computed per-frame then averaged across time.
+      [zcr_mean, log_ste_mean, mel_band_0, ..., mel_band_5]
+    Matches current C pipeline (no FFT, ilog2 scaling).
     """
-    # --- Pre-emphasis ---
-    y = np.append(y[0], y[1:] - 0.97 * y[:-1])
+    adc = np.clip(np.round(y * 127) + ADC_CENTER, 0, 255).astype(np.int16)
+    y = (adc - ADC_CENTER).astype(np.int8)
 
-    # --- Zero-Crossing Rate (1 value) ---
-    zcr_frames = librosa.feature.zero_crossing_rate(
-        y, frame_length=FFT_SIZE, hop_length=HOP_LENGTH, center=False
-    )  # shape: (1, n_frames)
-    zcr_mean = np.mean(zcr_frames)
+    accum_zcr = 0
+    accum_ste = 0
+    accum_mel = np.zeros(N_MEL_BANDS, dtype=np.int64)
+    n_frames = 0
 
-    # --- Short-Time Energy (1 value) ---
-    # Compute per-frame energy: mean of squared samples
-    frames = librosa.util.frame(y, frame_length=FFT_SIZE, hop_length=HOP_LENGTH)
-    # frames shape: (FFT_SIZE, n_frames)
-    ste_frames = np.mean(frames ** 2, axis=0)   # shape: (n_frames,)
-    ste_mean   = np.mean(ste_frames)
+    addr = 0
+    while addr + FFT_SIZE <= len(y):
+        frame = y[addr:addr + FFT_SIZE]
 
-    # --- Mel Filter Bank Log-Energies (N_MEL_BANDS values) ---
-    mel_spec = librosa.feature.melspectrogram(
-        y=y,
-        sr=sr,
-        n_fft=FFT_SIZE,
-        hop_length=HOP_LENGTH,
-        n_mels=N_MEL_BANDS,
-        window='hamming',
-        center=False,
-        power=2.0
-    )  # shape: (N_MEL_BANDS, n_frames)
+        # ZCR scaled by 4
+        zcr = np.sum((frame[1:] >= 0) != (frame[:-1] >= 0))
+        accum_zcr += int(zcr) * 4
 
-    # Log-compress (mirrors what the ear does, stabilises dynamic range)
-    log_mel = np.log(mel_spec + 1e-9)           # +eps avoids log(0)
-    mel_mean = np.mean(log_mel, axis=1)          # shape: (N_MEL_BANDS,)
+        # STE log2 scaled
+        s = frame.astype(np.int16)
+        frame_energy = int(np.sum(s * s))
+        accum_ste += ilog2_scaled(frame_energy)
 
-    # --- Normalise STE to same ballpark as other features ---
-    # log-scale STE so it doesn't dwarf the Mel energies
-    ste_log = np.log(ste_mean + 1e-9)
+        # Match MCU: scale, pre-emphasis, no FFT
+        fft_real = (frame.astype(np.int16) << 6).astype(np.int32)
+        fft_real = pre_emphasis(fft_real)
 
-    # --- Concatenate into one vector ---
-    feature_vec = np.concatenate([[zcr_mean, ste_log], mel_mean])
-    return feature_vec                           # shape: (8,)
+        for b in range(N_MEL_BANDS):
+            k0 = BAND_START[b]
+            k1 = BAND_END[b]
+            band_energy = 0
+            for k in range(k0, k1):
+                re = int(fft_real[k])
+                band_energy += ((re * re) >> 4)
+            accum_mel[b] += ilog2_scaled(band_energy)
+
+        n_frames += 1
+        addr += HOP_LENGTH
+
+    if n_frames == 0:
+        return np.zeros(N_FEATURES, dtype=np.uint16)
+
+    feat = np.zeros(N_FEATURES, dtype=np.uint16)
+    feat[0] = accum_zcr // n_frames
+    feat[1] = accum_ste // n_frames
+    for b in range(N_MEL_BANDS):
+        feat[b + 2] = accum_mel[b] // n_frames
+    return feat
 
 
 # ====================== MAIN PROCESSING ======================
@@ -80,17 +113,14 @@ for folder in audio_data:
         file_path = os.path.join(folder_path, file)
         y, sr = librosa.load(file_path, sr=SAMPLE_RATE, mono=True)
 
-        # Trim leading/trailing silence
-        y_trimmed, _ = librosa.effects.trim(y, top_db=20)
-
-        if len(y_trimmed) < FFT_SIZE:
+        if len(y) < FFT_SIZE:
             print(f"  ⚠️  {file} too short, skipping.")
             continue
 
-        feat_vec = extract_features(y_trimmed, sr)
+        feat_vec = extract_features(y, sr)
         word_features[folder.lower()].append(feat_vec)
 
-        preview = " ".join(f"{v:.4f}" for v in feat_vec)
+        preview = " ".join(str(int(v)) for v in feat_vec)
         print(f"  ✓ {file} → [{preview}]")
 
 # ====================== AVERAGE PER CLASS ======================
@@ -110,19 +140,19 @@ with open("word_features.h", "w") as f:
             print(f"  ⚠️  No valid recordings for '{word}', skipping.")
             continue
 
-        avg_vec = np.mean(vectors, axis=0)       # shape: (N_FEATURES,)
+        avg_vec = np.mean(vectors, axis=0).round().astype(np.uint16)
         final_features[word] = avg_vec
 
-        values = ", ".join(f"{x:.6f}f" for x in avg_vec)
+        values = ", ".join(str(int(x)) for x in avg_vec)
         f.write(f"// ZCR, log-STE, Mel[0..{N_MEL_BANDS-1}]\n")
-        f.write(f"static const float feat_{word}[N_FEATURES] PROGMEM = {{{values}}};\n\n")
-        print(f"  ✓ {word:12} → {np.round(avg_vec, 4)}")
+        f.write(f"static const uint16_t feat_{word}[N_FEATURES] PROGMEM = {{{values}}};\n\n")
+        print(f"  ✓ {word:12} → {avg_vec}")
 
     # Lookup table (pointer array in Flash)
     words_sorted = sorted(final_features.keys())
 
     f.write("// Pointer table — index matches LABELS[] below\n")
-    f.write("static const float* const feat_table[] PROGMEM = {\n")
+    f.write("static const uint16_t* const feat_table[] PROGMEM = {\n")
     for word in words_sorted:
         f.write(f"    feat_{word},\n")
     f.write("};\n\n")
@@ -145,5 +175,5 @@ header = f"{'Word':12}  {'ZCR':>8}  {'logSTE':>8}  " + \
 print(header)
 print("-" * len(header))
 for word, vec in sorted(final_features.items()):
-    vals = "  ".join(f"{v:8.4f}" for v in vec)
+    vals = "  ".join(f"{int(v):8d}" for v in vec)
     print(f"{word:12}  {vals}")

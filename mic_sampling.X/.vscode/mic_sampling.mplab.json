@@ -1,6 +1,6 @@
 {
   "version": "1.9",
-  "importedFrom": "mic_sampling.X",
+  "importedFrom": "./",
   "configurations": [
     {
       "name": "default",
@@ -32,7 +32,7 @@
         "compiler.call-prologues": false,
         "compiler.default-bitfield-type": true,
         "compiler.default-char-type": true,
-        "compiler.extra-include-directories": "mic_sampling.X",
+        "compiler.extra-include-directories": ".",
         "compiler.extra-warnings": false,
         "compiler.garbage-collect-data": true,
         "compiler.garbage-collect-functions": true,
@@ -55,7 +55,7 @@
         "compiler++.call-prologues": false,
         "compiler++.default-bitfield-type": true,
         "compiler++.default-char-type": true,
-        "compiler++.extra-include-directories": "mic_sampling.X",
+        "compiler++.extra-include-directories": ".",
         "compiler++.garbage-collect-data": true,
         "compiler++.garbage-collect-functions": true,
         "compiler++.inhibit-all": false,
@@ -78,7 +78,7 @@
         "assembler.suppress-warnings": false,
         "archiver.archiver-flags": "-r",
         "linker.exclude-standard-libraries": false,
-        "linker.extra-lib-directories": "mic_sampling.X",
+        "linker.extra-lib-directories": ".",
         "linker.generate-map-file": true,
         "linker.input-libraries": "m",
         "linker.no-default-libs": false,
@@ -375,7 +375,7 @@
     {
       "name": "Project files",
       "files": [
-        "mic_sampling.X/*"
+        "*"
       ],
       "encoding": "ISO-8859-1"
     }
