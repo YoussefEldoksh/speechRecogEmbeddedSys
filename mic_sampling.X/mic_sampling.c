@@ -1,4 +1,6 @@
 #define F_CPU 11059200UL
+#define TIMER_TICK_HZ 8000
+#define BUTTON_DEBOUNCE_MS 20
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -54,7 +56,7 @@ void Timer1_init() {
     TCCR1B |= (1 << WGM12); // CTC mode
     TCCR1B |= (1 << CS11); // prescaler 8
 
-    OCR1A = (F_CPU / (8UL * 8000UL)) - 1; // 8kHz
+    OCR1A = (F_CPU / (8UL * TIMER_TICK_HZ)) - 1; // 8kHz
 
     TIMSK |= (1 << OCIE1A);
 }
@@ -72,8 +74,11 @@ void INT0_init() {
 // ================= ISR =================
 
 ISR(INT0_vect) {
-    recording = !recording;
-    PORTB ^= (1 << PB0);
+    _delay_ms(BUTTON_DEBOUNCE_MS);
+    if (!(PIND & (1 << PD2))) {
+        recording = !recording;
+        PORTB ^= (1 << PB0);
+    }
 }
 
 // Timer interrupt: sample audio

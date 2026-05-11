@@ -6,18 +6,21 @@
  */
 #define F_CPU 11059200UL
 #define BAUD_PRESCALE ((F_CPU / (16UL * USAR_BAUDRATE)) - 1)
-#define N_CLASSES 8
 #define FFT_SIZE 64
 #define FFT_LOG2 6
 #define N_BINS 32
 #define HOP_SIZE 32
 #define N_BANDS 6
-#define N_FEATURES 8   // [ZCR, log_STE, mel0..mel5]
+#define ADC_CENTER 128
+#define TIMER_TICK_HZ 8000
+#define BUTTON_DEBOUNCE_MS 20
+#define FFT_INPUT_SHIFT 7
 
 #include "fix_fft.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <avr/pgmspace.h>
+#include <string.h>
 #include "speech_data.h"
 #include "lcd.h"
 #include <avr/io.h>
@@ -36,8 +39,6 @@ volatile uint16_t address = 0;
 uint16_t features[N_FEATURES];
 short fft_real[FFT_SIZE];
 short fft_imag[FFT_SIZE];
-
-const char *labels[N_CLASSES] = {"down", "left", "off", "on", "right", "start", "stop", "up"};
 
 /* ?? Mel band bin boundaries (linear spacing on 0..N_BINS-1, 6 bands) ?? */
 static const uint8_t band_start[N_BANDS] PROGMEM = {0, 2, 4, 8, 16, 24};
@@ -60,6 +61,17 @@ static uint16_t ilog2_scaled(uint32_t x) {
     // fractional part: (x >> (shift-3)) & 0x07  gives 3 extra bits
     uint16_t frac = (shift >= 3) ? ((x >> (shift - 3)) & 0x07) : 0;
     return (uint16_t) ((uint16_t) shift * 8 + frac); // 8 * log2(x), approx
+}
+
+static void get_label(uint8_t idx, char *out, size_t out_size) {
+    if (out_size == 0) return;
+    if (idx >= N_WORDS) {
+        out[0] = '\0';
+        return;
+    }
+    PGM_P ptr = (PGM_P) pgm_read_ptr(&LABELS[idx]);
+    strncpy_P(out, ptr, out_size - 1);
+    out[out_size - 1] = '\0';
 }
 
 /* ================================================================== */
@@ -89,20 +101,23 @@ int UART_putChar(char c, FILE *stream) {
 static FILE uart_str = FDEV_SETUP_STREAM(UART_putChar, UART_getChar, _FDEV_SETUP_RW);
 
 ISR(INT0_vect) {
-    recording = !recording;
-    PORTD ^= (1 << PD7);
+    _delay_ms(BUTTON_DEBOUNCE_MS);
+    if (!(PIND & (1 << PD2))) {
+        recording = !recording;
+        PORTD ^= (1 << PD7);
+    }
 }
 
 ISR(TIMER1_COMPA_vect) {
     if (!recording) return;
-    audio_sample = (int8_t) (ADC_read() - 63);
+    audio_sample = (int8_t) (ADC_read() - ADC_CENTER);
     sample_ready = 1;
 }
 
 void Timer1_init() {
     TCCR1B |= (1 << WGM12);
     TCCR1B |= (1 << CS11);
-    OCR1A = (F_CPU / (8UL * 8000UL)) - 1;
+    OCR1A = (F_CPU / (8UL * TIMER_TICK_HZ)) - 1;
     TIMSK |= (1 << OCIE1A);
 }
 
@@ -158,12 +173,12 @@ int nearest_neighbor(uint16_t *input) {
     uint32_t min_dist = 0xFFFFFFFF;
     int best = 0;
 
-    for (uint8_t i = 0; i < N_CLASSES; i++) {
-        const uint16_t *ref = (const uint16_t *) pgm_read_word(&feat_table[i]);
+    for (uint8_t i = 0; i < N_WORDS; i++) {
+        const uint16_t *ref = (const uint16_t *) pgm_read_ptr(&feat_table[i]);
         uint32_t dist = 0;
         for (uint8_t k = 0; k < N_FEATURES; k++) {
             int32_t diff = (int32_t) input[k] - pgm_read_word(&ref[k]);
-            dist += (uint32_t) (diff * diff >> 8);
+            dist += (uint32_t) (diff * diff);
         }
         if (dist < min_dist) {
             min_dist = dist;
@@ -201,7 +216,7 @@ void pre_emphasis(short *x, uint8_t len) {
 /*  compute_features                                                   */
 /*                                                                     */
 /*  Feature vector layout (matches Python pipeline):                   */
-/*    feat_out[0]   = ZCR mean        (counts per frame, scaled �256) */
+/*    feat_out[0]   = ZCR mean        (counts per frame, scaled *4)  */
 /*    feat_out[1]   = log-STE mean    (ilog2_scaled of frame energy)  */
 /*    feat_out[2..7]= log Mel band energies [band 0 .. band 5]        */
 
@@ -216,8 +231,14 @@ void compute_features(uint16_t total_samples, uint16_t *feat_out) {
     uint32_t accum_mel[N_BANDS];
     for (uint8_t b = 0; b < N_BANDS; b++) accum_mel[b] = 0;
 
-    // ?? single reusable frame buffer (int8, 64 bytes on stack) ??
-    int8_t frame_buf[FFT_SIZE];
+    int32_t mean_sum = 0;
+    for (uint16_t i = 0; i < total_samples; i++) {
+        mean_sum += SRAM_read_byte(i);
+    }
+    int16_t mean = (total_samples > 0) ? (int16_t) (mean_sum / (int32_t) total_samples) : 0;
+
+    // ?? single reusable frame buffer (int16, 128 bytes on stack) ??
+    int16_t frame_buf[FFT_SIZE];
 
     // printf("Total Samples: %u\n", total_samples);
 
@@ -225,7 +246,8 @@ void compute_features(uint16_t total_samples, uint16_t *feat_out) {
 
         /* ?? 1. Read frame ONCE from SRAM ?? */
         for (uint8_t i = 0; i < FFT_SIZE; i++) {
-            frame_buf[i] = SRAM_read_byte(addr + i);
+            int16_t sample = (int16_t) SRAM_read_byte(addr + i) - mean;
+            frame_buf[i] = sample;
             //            printf("Address: %d | data: %d\n", addr + i, frame_buf[i]);
         }
 
@@ -253,13 +275,13 @@ void compute_features(uint16_t total_samples, uint16_t *feat_out) {
 
         /* ?? 4. Load into FFT buffer, pre-emphasis, FFT ?? */
         for (uint8_t i = 0; i < FFT_SIZE; i++) {
-            fft_real[i] = (short) frame_buf[i] << 6;
+            fft_real[i] = (short) frame_buf[i] << FFT_INPUT_SHIFT;
             fft_imag[i] = 0;
         }
 
 
         pre_emphasis(fft_real, FFT_SIZE);
-        // fix_fft(fft_real, fft_imag, FFT_LOG2, 0);
+        fix_fft(fft_real, fft_imag, FFT_LOG2, 0);
         
         // printf("after fix_fft\n ");
 
@@ -274,7 +296,7 @@ void compute_features(uint16_t total_samples, uint16_t *feat_out) {
             for (uint8_t k = k0; k < k1; k++) {
                 int16_t re = fft_real[k];
                 int16_t im = fft_imag[k];
-                band_energy += (uint32_t) ((int32_t) re * re + (int32_t) im * im) >> 4;
+                band_energy += (uint32_t) ((int32_t) re * re + (int32_t) im * im);
             }
             accum_mel[b] += ilog2_scaled(band_energy);
         }
@@ -336,7 +358,9 @@ int main(int argc, char **argv) {
 
             // LCD_Clear();
             // LCD_String_xy(0, 0, (char *) labels[label]);
-            printf("%s\n", labels[label]);
+            char label_buf[12];
+            get_label((uint8_t) label, label_buf, sizeof(label_buf));
+            printf("%s\n", label_buf);
             _delay_ms(100);
         }
 

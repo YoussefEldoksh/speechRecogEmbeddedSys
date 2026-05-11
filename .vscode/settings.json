@@ -1,3 +1,6 @@
 {
-    "cmake.sourceDirectory": "D:/Mohamed/EmbedProj/speechRecogEmbeddedSys/SpeechRecog.X/fftw-3.3.10"
+    "cmake.sourceDirectory": "D:/Mohamed/EmbedProj/speechRecogEmbeddedSys/SpeechRecog.X/fftw-3.3.10",
+    "mplab.clangd.compileCommandsDir": "${workspaceFolder}\\_build\\mic_sampling\\default",
+    "python-envs.defaultEnvManager": "ms-python.python:system",
+    "python.defaultInterpreterPath": "C:\\Users\\YNM\\AppData\\Local\\Programs\\Python\\Python314\\python.exe"
 }

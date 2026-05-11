@@ -8,12 +8,17 @@ FFT_SIZE    = 64
 HOP_LENGTH  = 32
 N_MEL_BANDS = 6
 N_FEATURES  = N_MEL_BANDS + 2  # ZCR, log-STE, mel0..mel5
+FFT_INPUT_SHIFT = 7
 
 BAND_START = [0, 2, 4, 8, 16, 24]
 BAND_END   = [2, 4, 8, 16, 24, 32]
-ADC_CENTER = 63
+ADC_CENTER = 128
 
-AUDIO_DIR = 'Audio Files'
+# AUDIO_DIR = 'Audio Files'
+AUDIO_DIR = 'new_samples'
+OUTPUT_HEADERS = [
+    'word_features.h',
+]
 # =========================================================
 
 
@@ -31,22 +36,23 @@ def ilog2_scaled(x):
 
 def pre_emphasis(x):
     if len(x) < 2:
-        return x
+        return x.astype(np.int32)
     y = x.astype(np.float32).copy()
     for i in range(len(y) - 1, 0, -1):
         y[i] = y[i] - (0.97 * y[i - 1])
     y[0] = 0
-    return y
+    return np.round(y).astype(np.int32)
 
 
 def extract_features(y, sr=SAMPLE_RATE):
     """
     Returns a 1-D feature vector of length N_FEATURES:
       [zcr_mean, log_ste_mean, mel_band_0, ..., mel_band_5]
-    Matches current C pipeline (no FFT, ilog2 scaling).
+    Matches current C pipeline (FFT, ilog2 scaling, DC mean removed).
     """
     adc = np.clip(np.round(y * 127) + ADC_CENTER, 0, 255).astype(np.int16)
     y = (adc - ADC_CENTER).astype(np.int8)
+    y = (y.astype(np.int16) - int(np.round(np.mean(y)))).astype(np.int16)
 
     accum_zcr = 0
     accum_ste = 0
@@ -66,17 +72,18 @@ def extract_features(y, sr=SAMPLE_RATE):
         frame_energy = int(np.sum(s * s))
         accum_ste += ilog2_scaled(frame_energy)
 
-        # Match MCU: scale, pre-emphasis, no FFT
-        fft_real = (frame.astype(np.int16) << 6).astype(np.int32)
+        # Match MCU: scale, pre-emphasis, FFT
+        fft_real = (frame.astype(np.int16) << FFT_INPUT_SHIFT).astype(np.int32)
         fft_real = pre_emphasis(fft_real)
+        fft_bins = np.fft.rfft(fft_real, n=FFT_SIZE) / FFT_SIZE
+        mag = (fft_bins.real ** 2 + fft_bins.imag ** 2)
 
         for b in range(N_MEL_BANDS):
             k0 = BAND_START[b]
             k1 = BAND_END[b]
             band_energy = 0
             for k in range(k0, k1):
-                re = int(fft_real[k])
-                band_energy += ((re * re) >> 4)
+                band_energy += int(mag[k])
             accum_mel[b] += ilog2_scaled(band_energy)
 
         n_frames += 1
@@ -114,58 +121,74 @@ for folder in audio_data:
         y, sr = librosa.load(file_path, sr=SAMPLE_RATE, mono=True)
 
         if len(y) < FFT_SIZE:
-            print(f"  ⚠️  {file} too short, skipping.")
+            print(f"  WARN {file} too short, skipping.")
             continue
 
         feat_vec = extract_features(y, sr)
         word_features[folder.lower()].append(feat_vec)
 
         preview = " ".join(str(int(v)) for v in feat_vec)
-        print(f"  ✓ {file} → [{preview}]")
+        print(f"  OK {file} -> [{preview}]")
 
 # ====================== AVERAGE PER CLASS ======================
 
 print("\nGenerating final reference features...")
 
 final_features = {}
+header_lines = []
 
-with open("word_features.h", "w") as f:
-    f.write("#ifndef WORD_FEATURES_H\n")
-    f.write("#define WORD_FEATURES_H\n\n")
-    f.write("#include <avr/pgmspace.h>\n\n")
-    f.write(f"#define N_FEATURES {N_FEATURES}\n\n")
+header_lines.append("#ifndef WORD_FEATURES_H\n")
+header_lines.append("#define WORD_FEATURES_H\n\n")
+header_lines.append("#include <avr/pgmspace.h>\n\n")
+header_lines.append(f"#define N_FEATURES {N_FEATURES}\n\n")
 
-    for word, vectors in sorted(word_features.items()):
-        if len(vectors) == 0:
-            print(f"  ⚠️  No valid recordings for '{word}', skipping.")
-            continue
+for word, vectors in sorted(word_features.items()):
+    if len(vectors) == 0:
+        print(f"  WARN No valid recordings for '{word}', skipping.")
+        continue
 
-        avg_vec = np.mean(vectors, axis=0).round().astype(np.uint16)
-        final_features[word] = avg_vec
+    avg_vec = np.mean(vectors, axis=0).round().astype(np.uint16)
+    final_features[word] = avg_vec
 
-        values = ", ".join(str(int(x)) for x in avg_vec)
-        f.write(f"// ZCR, log-STE, Mel[0..{N_MEL_BANDS-1}]\n")
-        f.write(f"static const uint16_t feat_{word}[N_FEATURES] PROGMEM = {{{values}}};\n\n")
-        print(f"  ✓ {word:12} → {avg_vec}")
+    values = ", ".join(str(int(x)) for x in avg_vec)
+    header_lines.append(f"// ZCR, log-STE, Mel[0..{N_MEL_BANDS-1}]\n")
+    header_lines.append(f"static const uint16_t feat_{word}[N_FEATURES] PROGMEM = {{{values}}};\n\n")
+    print(f"  OK {word:12} -> {avg_vec}")
 
-    # Lookup table (pointer array in Flash)
-    words_sorted = sorted(final_features.keys())
+# Lookup table (pointer array in Flash)
+words_sorted = sorted(final_features.keys())
 
-    f.write("// Pointer table — index matches LABELS[] below\n")
-    f.write("static const uint16_t* const feat_table[] PROGMEM = {\n")
-    for word in words_sorted:
-        f.write(f"    feat_{word},\n")
-    f.write("};\n\n")
+header_lines.append("// Pointer table - index matches LABELS[] below\n")
+header_lines.append("static const uint16_t* const feat_table[] PROGMEM = {\n")
+for word in words_sorted:
+    header_lines.append(f"    feat_{word},\n")
+header_lines.append("};\n\n")
 
-    # Label strings in Flash
-    f.write("// Word labels\n")
-    label_list = ", ".join(f'"{w}"' for w in words_sorted)
-    f.write(f"static const char* const LABELS[] PROGMEM = {{{label_list}}};\n\n")
+# Label strings in Flash
+header_lines.append("// Word labels\n")
+for word in words_sorted:
+    header_lines.append(f"static const char label_{word}[] PROGMEM = \"{word}\";\n")
+header_lines.append("\n")
+header_lines.append("static const char* const LABELS[] PROGMEM = {\n")
+for word in words_sorted:
+    header_lines.append(f"    label_{word},\n")
+header_lines.append("};\n\n")
 
-    f.write(f"#define N_WORDS {len(words_sorted)}\n\n")
-    f.write("#endif // WORD_FEATURES_H\n")
+header_lines.append(f"#define N_WORDS {len(words_sorted)}\n\n")
+header_lines.append("#endif // WORD_FEATURES_H\n")
 
-print("\n✅ Done! Generated: word_features.h")
+header_content = "".join(header_lines)
+
+for out_path in OUTPUT_HEADERS:
+    out_dir = os.path.dirname(out_path)
+    if out_dir:
+        os.makedirs(out_dir, exist_ok=True)
+    with open(out_path, "w") as f:
+        f.write(header_content)
+
+print("\nOK Done! Generated:")
+for out_path in OUTPUT_HEADERS:
+    print(f"  - {out_path}")
 
 # ---- Debug dump ----
 print("\n--- Final averaged feature vectors ---")
