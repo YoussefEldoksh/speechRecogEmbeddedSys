@@ -158,6 +158,32 @@
         "documentation": {}
     },
     {
+        "label": "matplotlib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "matplotlib",
+        "description": "matplotlib",
+        "detail": "matplotlib",
+        "documentation": {}
+    },
+    {
+        "label": "matplotlib.pyplot",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "matplotlib.pyplot",
+        "description": "matplotlib.pyplot",
+        "detail": "matplotlib.pyplot",
+        "documentation": {}
+    },
+    {
+        "label": "wavfile",
+        "importPath": "scipy.io",
+        "description": "scipy.io",
+        "isExtraImport": true,
+        "detail": "scipy.io",
+        "documentation": {}
+    },
+    {
         "label": "extract_13_features",
         "kind": 2,
         "importPath": "features.template_generator",
@@ -581,29 +607,20 @@
         "documentation": {}
     },
     {
-        "label": "extract_features",
-        "kind": 2,
-        "importPath": "script",
-        "description": "script",
-        "peekOfCode": "def extract_features(y, sr=SAMPLE_RATE):\n    \"\"\"\n    Returns a 1-D feature vector of length N_FEATURES:\n      [zcr_mean, ste_mean, mel_band_0, ..., mel_band_5]\n    All computed per-frame then averaged across time.\n    \"\"\"\n    # --- Pre-emphasis ---\n    y = np.append(y[0], y[1:] - 0.97 * y[:-1])\n    # --- Zero-Crossing Rate (1 value) ---\n    zcr_frames = librosa.feature.zero_crossing_rate(",
-        "detail": "script",
-        "documentation": {}
-    },
-    {
         "label": "SAMPLE_RATE",
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "SAMPLE_RATE = 8000\nFFT_SIZE    = 128\nHOP_LENGTH  = 64\nN_MEL_BANDS = 6       # Number of Mel filter bank channels\nN_FEATURES  = N_MEL_BANDS + 2  # +1 ZCR, +1 STE  →  8 total\nAUDIO_DIR = 'Audio Files'\n# =========================================================\ndef extract_features(y, sr=SAMPLE_RATE):\n    \"\"\"\n    Returns a 1-D feature vector of length N_FEATURES:",
+        "peekOfCode": "SAMPLE_RATE = 8000\nADC_CENTER = 63\nAUDIO_DIR = 'Audio Files'\nzcr = 0\nste = 0\nnp.set_printoptions(threshold=np.inf)\naudio_folders = os.listdir(\"Audio Files\")\nfeatures_of_folder = []\nword_features = []\nfor folder in audio_folders:",
         "detail": "script",
         "documentation": {}
     },
     {
-        "label": "N_MEL_BANDS",
+        "label": "ADC_CENTER",
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "N_MEL_BANDS = 6       # Number of Mel filter bank channels\nN_FEATURES  = N_MEL_BANDS + 2  # +1 ZCR, +1 STE  →  8 total\nAUDIO_DIR = 'Audio Files'\n# =========================================================\ndef extract_features(y, sr=SAMPLE_RATE):\n    \"\"\"\n    Returns a 1-D feature vector of length N_FEATURES:\n      [zcr_mean, ste_mean, mel_band_0, ..., mel_band_5]\n    All computed per-frame then averaged across time.\n    \"\"\"",
+        "peekOfCode": "ADC_CENTER = 63\nAUDIO_DIR = 'Audio Files'\nzcr = 0\nste = 0\nnp.set_printoptions(threshold=np.inf)\naudio_folders = os.listdir(\"Audio Files\")\nfeatures_of_folder = []\nword_features = []\nfor folder in audio_folders:\n    features_of_folder = []  # reset per folder",
         "detail": "script",
         "documentation": {}
     },
@@ -612,7 +629,43 @@
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "AUDIO_DIR = 'Audio Files'\n# =========================================================\ndef extract_features(y, sr=SAMPLE_RATE):\n    \"\"\"\n    Returns a 1-D feature vector of length N_FEATURES:\n      [zcr_mean, ste_mean, mel_band_0, ..., mel_band_5]\n    All computed per-frame then averaged across time.\n    \"\"\"\n    # --- Pre-emphasis ---\n    y = np.append(y[0], y[1:] - 0.97 * y[:-1])",
+        "peekOfCode": "AUDIO_DIR = 'Audio Files'\nzcr = 0\nste = 0\nnp.set_printoptions(threshold=np.inf)\naudio_folders = os.listdir(\"Audio Files\")\nfeatures_of_folder = []\nword_features = []\nfor folder in audio_folders:\n    features_of_folder = []  # reset per folder\n    for file in os.listdir(f'Audio Files/{folder}'):  # fix #1",
+        "detail": "script",
+        "documentation": {}
+    },
+    {
+        "label": "zcr",
+        "kind": 5,
+        "importPath": "script",
+        "description": "script",
+        "peekOfCode": "zcr = 0\nste = 0\nnp.set_printoptions(threshold=np.inf)\naudio_folders = os.listdir(\"Audio Files\")\nfeatures_of_folder = []\nword_features = []\nfor folder in audio_folders:\n    features_of_folder = []  # reset per folder\n    for file in os.listdir(f'Audio Files/{folder}'):  # fix #1\n        y, sr = librosa.load(f'Audio Files/{folder}/{file}', sr=SAMPLE_RATE)",
+        "detail": "script",
+        "documentation": {}
+    },
+    {
+        "label": "ste",
+        "kind": 5,
+        "importPath": "script",
+        "description": "script",
+        "peekOfCode": "ste = 0\nnp.set_printoptions(threshold=np.inf)\naudio_folders = os.listdir(\"Audio Files\")\nfeatures_of_folder = []\nword_features = []\nfor folder in audio_folders:\n    features_of_folder = []  # reset per folder\n    for file in os.listdir(f'Audio Files/{folder}'):  # fix #1\n        y, sr = librosa.load(f'Audio Files/{folder}/{file}', sr=SAMPLE_RATE)\n        mean = np.mean(y)",
+        "detail": "script",
+        "documentation": {}
+    },
+    {
+        "label": "audio_folders",
+        "kind": 5,
+        "importPath": "script",
+        "description": "script",
+        "peekOfCode": "audio_folders = os.listdir(\"Audio Files\")\nfeatures_of_folder = []\nword_features = []\nfor folder in audio_folders:\n    features_of_folder = []  # reset per folder\n    for file in os.listdir(f'Audio Files/{folder}'):  # fix #1\n        y, sr = librosa.load(f'Audio Files/{folder}/{file}', sr=SAMPLE_RATE)\n        mean = np.mean(y)\n        y = y - mean\n        adc = np.clip(np.round(y * 127) + ADC_CENTER, 0, 255).astype(np.int16)",
+        "detail": "script",
+        "documentation": {}
+    },
+    {
+        "label": "features_of_folder",
+        "kind": 5,
+        "importPath": "script",
+        "description": "script",
+        "peekOfCode": "features_of_folder = []\nword_features = []\nfor folder in audio_folders:\n    features_of_folder = []  # reset per folder\n    for file in os.listdir(f'Audio Files/{folder}'):  # fix #1\n        y, sr = librosa.load(f'Audio Files/{folder}/{file}', sr=SAMPLE_RATE)\n        mean = np.mean(y)\n        y = y - mean\n        adc = np.clip(np.round(y * 127) + ADC_CENTER, 0, 255).astype(np.int16)\n        y = (adc - ADC_CENTER).astype(np.int8)",
         "detail": "script",
         "documentation": {}
     },
@@ -621,25 +674,7 @@
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "word_features = {folder.lower(): [] for folder in audio_data}\nfor folder in audio_data:\n    folder_path = os.path.join(AUDIO_DIR, folder)\n    if not os.path.isdir(folder_path):\n        continue\n    print(f\"Processing folder: {folder}\")\n    for file in sorted(os.listdir(folder_path)):\n        if not file.lower().endswith(('.wav', '.mp3', '.m4a')):\n            continue\n        file_path = os.path.join(folder_path, file)",
-        "detail": "script",
-        "documentation": {}
-    },
-    {
-        "label": "final_features",
-        "kind": 5,
-        "importPath": "script",
-        "description": "script",
-        "peekOfCode": "final_features = {}\nwith open(\"word_features.h\", \"w\") as f:\n    f.write(\"#ifndef WORD_FEATURES_H\\n\")\n    f.write(\"#define WORD_FEATURES_H\\n\\n\")\n    f.write(\"#include <avr/pgmspace.h>\\n\\n\")\n    f.write(f\"#define N_FEATURES {N_FEATURES}\\n\\n\")\n    for word, vectors in sorted(word_features.items()):\n        if len(vectors) == 0:\n            print(f\"  ⚠️  No valid recordings for '{word}', skipping.\")\n            continue",
-        "detail": "script",
-        "documentation": {}
-    },
-    {
-        "label": "header",
-        "kind": 5,
-        "importPath": "script",
-        "description": "script",
-        "peekOfCode": "header = f\"{'Word':12}  {'ZCR':>8}  {'logSTE':>8}  \" + \\\n         \"  \".join(f\"Mel{i}\" for i in range(N_MEL_BANDS))\nprint(header)\nprint(\"-\" * len(header))\nfor word, vec in sorted(final_features.items()):\n    vals = \"  \".join(f\"{v:8.4f}\" for v in vec)\n    print(f\"{word:12}  {vals}\")",
+        "peekOfCode": "word_features = []\nfor folder in audio_folders:\n    features_of_folder = []  # reset per folder\n    for file in os.listdir(f'Audio Files/{folder}'):  # fix #1\n        y, sr = librosa.load(f'Audio Files/{folder}/{file}', sr=SAMPLE_RATE)\n        mean = np.mean(y)\n        y = y - mean\n        adc = np.clip(np.round(y * 127) + ADC_CENTER, 0, 255).astype(np.int16)\n        y = (adc - ADC_CENTER).astype(np.int8)\n        number_of_samples = len(y)",
         "detail": "script",
         "documentation": {}
     }

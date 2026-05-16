@@ -12,18 +12,20 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Lenovo/OneDrive%20-%20Alexandria%20University/Documents/Embedded%20Final%20Project/SpeechRecog.X/speech_processing.h</file>
+            <file>file:/C:/Users/Lenovo/OneDrive%20-%20Alexandria%20University/Documents/Embedded%20Final%20Project/SpeechRecog.X/speech_data.h</file>
+            <file>file:/C:/Users/Lenovo/OneDrive%20-%20Alexandria%20University/Documents/Embedded%20Final%20Project/SpeechRecog.X/kiss_fft130/tools/kiss_fftr.h</file>
+            <file>file:/C:/Users/Lenovo/OneDrive%20-%20Alexandria%20University/Documents/Embedded%20Final%20Project/SpeechRecog.X/speech_processing.c</file>
             <file>file:/C:/Users/Lenovo/OneDrive%20-%20Alexandria%20University/Documents/Embedded%20Final%20Project/SpeechRecog.X/kiss_fft130/tools/kiss_fftr.c</file>
             <file>file:/C:/Users/Lenovo/OneDrive%20-%20Alexandria%20University/Documents/Embedded%20Final%20Project/SpeechRecog.X/adc.c</file>
             <file>file:/C:/Users/Lenovo/OneDrive%20-%20Alexandria%20University/Documents/Embedded%20Final%20Project/SpeechRecog.X/lcd.h</file>
-            <file>file:/C:/Users/Lenovo/OneDrive%20-%20Alexandria%20University/Documents/Embedded%20Final%20Project/SpeechRecog.X/speech_processing.h</file>
-            <file>file:/C:/Users/Lenovo/OneDrive%20-%20Alexandria%20University/Documents/Embedded%20Final%20Project/SpeechRecog.X/speech_data.h</file>
             <file>file:/C:/Users/Lenovo/OneDrive%20-%20Alexandria%20University/Documents/Embedded%20Final%20Project/SpeechRecog.X/lcd.c</file>
+            <file>file:/C:/Users/Lenovo/OneDrive%20-%20Alexandria%20University/Documents/Embedded%20Final%20Project/SpeechRecog.X/fix_fft.c</file>
             <file>file:/C:/Users/Lenovo/OneDrive%20-%20Alexandria%20University/Documents/Embedded%20Final%20Project/SpeechRecog.X/main.c</file>
             <file>file:/C:/Users/Lenovo/OneDrive%20-%20Alexandria%20University/Documents/Embedded%20Final%20Project/SpeechRecog.X/ADC_interface.h</file>
             <file>file:/C:/Users/Lenovo/OneDrive%20-%20Alexandria%20University/Documents/Embedded%20Final%20Project/SpeechRecog.X/kiss_fft130/kiss_fft.c</file>
-            <file>file:/C:/Users/Lenovo/OneDrive%20-%20Alexandria%20University/Documents/Embedded%20Final%20Project/SpeechRecog.X/kiss_fft130/tools/kiss_fftr.h</file>
-            <file>file:/C:/Users/Lenovo/OneDrive%20-%20Alexandria%20University/Documents/Embedded%20Final%20Project/SpeechRecog.X/speech_processing.c</file>
             <file>file:/C:/Users/Lenovo/OneDrive%20-%20Alexandria%20University/Documents/Embedded%20Final%20Project/SpeechRecog.X/kiss_fft130/kiss_fft.h</file>
+            <file>file:/C:/Users/Lenovo/OneDrive%20-%20Alexandria%20University/Documents/Embedded%20Final%20Project/SpeechRecog.X/fix_fft.h</file>
         </group>
     </open-files>
 </project-private>

@@ -3,47 +3,27 @@
 
 #include <avr/pgmspace.h>
 
-#define N_FEATURES 8
+#define N_CLASSES 4
+#define N_FRAMES  8
 
-// ZCR, log-STE, Mel[0..5]
-static const float feat_down[N_FEATURES] PROGMEM = {0.300377f, -4.359515f, -6.064520f, -6.188857f, -6.566078f, -6.568796f, -6.896235f, -7.148645f};
 
-// ZCR, log-STE, Mel[0..5]
-static const float feat_left[N_FEATURES] PROGMEM = {0.363822f, -4.537633f, -6.674198f, -6.992841f, -7.331271f, -6.911180f, -6.745756f, -6.852909f};
+// ---- ZCR reference arrays (one per word) ----
+static const float down_zcr [N_FRAMES] PROGMEM = {120.85, 144.05, 124.45, 159.75, 158.85, 116.25,  88.00,  98.85};
+static const float left_zcr [N_FRAMES] PROGMEM = {113.50, 151.15, 188.65, 247.75, 204.20, 148.35, 154.25, 152.85};
+static const float right_zcr[N_FRAMES] PROGMEM = {120.90, 145.95, 167.80, 230.35, 202.35, 147.65, 175.10, 125.80};
+static const float up_zcr   [N_FRAMES] PROGMEM = { 90.90, 103.05, 122.90, 120.15,  94.90,  73.35,  57.15,  62.60};
 
-// ZCR, log-STE, Mel[0..5]
-static const float feat_off[N_FEATURES] PROGMEM = {0.369501f, -4.734900f, -6.737294f, -6.770664f, -6.777926f, -6.810320f, -7.119432f, -7.441887f};
+// ---- STE reference arrays (one per word) ----
+static const float down_ste [N_FRAMES] PROGMEM = {124665.15, 264618.45,  393496.15, 1324715.60, 1495920.65, 884985.65, 212844.85,  85533.85};
+static const float left_ste [N_FRAMES] PROGMEM = {257887.05, 286715.65,  707708.00, 1112791.10,  792734.75, 185814.20, 139681.80, 108527.30};
+static const float right_ste[N_FRAMES] PROGMEM = {187159.25, 300386.60,  682900.45, 1591138.50, 1406012.90, 515662.45, 217630.95,  94189.80};
+static const float up_ste   [N_FRAMES] PROGMEM = {187139.65, 328982.05,  615536.85,  959417.75,  559720.60, 488151.50, 497501.75, 219518.95};
 
-// ZCR, log-STE, Mel[0..5]
-static const float feat_on[N_FEATURES] PROGMEM = {0.302526f, -3.925523f, -5.832629f, -6.071343f, -6.204804f, -6.296070f, -6.602297f, -6.643975f};
+// ---- Pointer tables indexed by class ----
+static const float * const zcr_table[N_CLASSES] PROGMEM = {down_zcr, left_zcr, right_zcr, up_zcr};
+static const float * const ste_table[N_CLASSES] PROGMEM = {down_ste, left_ste, right_ste, up_ste};
 
-// ZCR, log-STE, Mel[0..5]
-static const float feat_right[N_FEATURES] PROGMEM = {0.321640f, -3.972558f, -6.367244f, -6.486142f, -6.976037f, -6.647659f, -6.658583f, -6.957759f};
-
-// ZCR, log-STE, Mel[0..5]
-static const float feat_start[N_FEATURES] PROGMEM = {0.376833f, -4.188819f, -6.270663f, -5.959852f, -6.431057f, -6.237648f, -6.361084f, -6.468153f};
-
-// ZCR, log-STE, Mel[0..5]
-static const float feat_stop[N_FEATURES] PROGMEM = {0.328468f, -4.478813f, -7.116247f, -7.158666f, -7.364592f, -7.420154f, -7.444934f, -7.357604f};
-
-// ZCR, log-STE, Mel[0..5]
-static const float feat_up[N_FEATURES] PROGMEM = {0.292927f, -4.614080f, -7.058267f, -6.947430f, -7.381168f, -7.570995f, -7.761914f, -7.732168f};
-
-// Pointer table � index matches LABELS[] below
-static const float* const feat_table[] PROGMEM = {
-    feat_down,
-    feat_left,
-    feat_off,
-    feat_on,
-    feat_right,
-    feat_start,
-    feat_stop,
-    feat_up,
-};
-
-// Word labels
-static const char* const LABELS[] PROGMEM = {"down", "left", "off", "on", "right", "start", "stop", "up"};
-
-#define N_WORDS 8
+// ---- Labels ----
+static const char * const LABELS[N_CLASSES] PROGMEM = {"down", "left", "right", "up"};
 
 #endif // WORD_FEATURES_H
