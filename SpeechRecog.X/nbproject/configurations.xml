@@ -26,6 +26,7 @@
       <itemPath>lcd.c</itemPath>
       <itemPath>adc.c</itemPath>
       <itemPath>fix_fft.c</itemPath>
+      <itemPath>speech_processing.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>

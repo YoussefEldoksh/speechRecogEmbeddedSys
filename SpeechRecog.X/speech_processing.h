@@ -21,7 +21,7 @@ extern "C" {
 void SP_Init(void);
 void SP_Compute_features(float* out);
 uint8_t  SP_Is_Speaking(void);
-void UART_init(long USAR_BAUDRATE);
+void    UART_init(long USAR_BAUDRATE);
 uint8_t UART_dataAvailable(void);
 int UART_getChar(FILE * stream);
 int UART_putChar(char c, FILE * stream);

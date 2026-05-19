@@ -62,6 +62,15 @@
         "documentation": {}
     },
     {
+        "label": "matplotlib.pyplot",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "matplotlib.pyplot",
+        "description": "matplotlib.pyplot",
+        "detail": "matplotlib.pyplot",
+        "documentation": {}
+    },
+    {
         "label": "FFT",
         "kind": 6,
         "isExtraImport": true,
@@ -167,23 +176,6 @@
         "documentation": {}
     },
     {
-        "label": "matplotlib.pyplot",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "matplotlib.pyplot",
-        "description": "matplotlib.pyplot",
-        "detail": "matplotlib.pyplot",
-        "documentation": {}
-    },
-    {
-        "label": "wavfile",
-        "importPath": "scipy.io",
-        "description": "scipy.io",
-        "isExtraImport": true,
-        "detail": "scipy.io",
-        "documentation": {}
-    },
-    {
         "label": "extract_13_features",
         "kind": 2,
         "importPath": "features.template_generator",
@@ -224,7 +216,7 @@
         "kind": 5,
         "importPath": "mic testing.uart_rec (1)",
         "description": "mic testing.uart_rec (1)",
-        "peekOfCode": "start = 0\nend = 0\nser = serial.Serial('COM5', 115200, timeout=1)\nsamples = []\nrecording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) Down",
+        "peekOfCode": "start = 0\nend = 0\ncounter = 0\nser = serial.Serial('COM6', 115200, timeout=1)\nsamples = []\nrecording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:",
         "detail": "mic testing.uart_rec (1)",
         "documentation": {}
     },
@@ -233,7 +225,16 @@
         "kind": 5,
         "importPath": "mic testing.uart_rec (1)",
         "description": "mic testing.uart_rec (1)",
-        "peekOfCode": "end = 0\nser = serial.Serial('COM5', 115200, timeout=1)\nsamples = []\nrecording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) Down\n      1) Left",
+        "peekOfCode": "end = 0\ncounter = 0\nser = serial.Serial('COM6', 115200, timeout=1)\nsamples = []\nrecording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) BACK",
+        "detail": "mic testing.uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "counter",
+        "kind": 5,
+        "importPath": "mic testing.uart_rec (1)",
+        "description": "mic testing.uart_rec (1)",
+        "peekOfCode": "counter = 0\nser = serial.Serial('COM6', 115200, timeout=1)\nsamples = []\nrecording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) BACK\n      1) GO",
         "detail": "mic testing.uart_rec (1)",
         "documentation": {}
     },
@@ -242,7 +243,7 @@
         "kind": 5,
         "importPath": "mic testing.uart_rec (1)",
         "description": "mic testing.uart_rec (1)",
-        "peekOfCode": "ser = serial.Serial('COM5', 115200, timeout=1)\nsamples = []\nrecording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) Down\n      1) Left\n      2) Off",
+        "peekOfCode": "ser = serial.Serial('COM6', 115200, timeout=1)\nsamples = []\nrecording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) BACK\n      1) GO\n      2) ONE",
         "detail": "mic testing.uart_rec (1)",
         "documentation": {}
     },
@@ -251,7 +252,7 @@
         "kind": 5,
         "importPath": "mic testing.uart_rec (1)",
         "description": "mic testing.uart_rec (1)",
-        "peekOfCode": "samples = []\nrecording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) Down\n      1) Left\n      2) Off\n      3) On",
+        "peekOfCode": "samples = []\nrecording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) BACK\n      1) GO\n      2) ONE\n      3) SHIP",
         "detail": "mic testing.uart_rec (1)",
         "documentation": {}
     },
@@ -260,7 +261,7 @@
         "kind": 5,
         "importPath": "mic testing.uart_rec (1)",
         "description": "mic testing.uart_rec (1)",
-        "peekOfCode": "recording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) Down\n      1) Left\n      2) Off\n      3) On\n      4) Right",
+        "peekOfCode": "recording = False\naudio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) BACK\n      1) GO\n      2) ONE\n      3) SHIP\n      8) Quit",
         "detail": "mic testing.uart_rec (1)",
         "documentation": {}
     },
@@ -269,7 +270,7 @@
         "kind": 5,
         "importPath": "mic testing.uart_rec (1)",
         "description": "mic testing.uart_rec (1)",
-        "peekOfCode": "audio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) Down\n      1) Left\n      2) Off\n      3) On\n      4) Right\n      5) Start",
+        "peekOfCode": "audio_folders = os.listdir(\"./Audio Files\");\nprint(audio_folders)\nprint('''\nChoose Word You'r going to Record or (8) to quit:\n      0) BACK\n      1) GO\n      2) ONE\n      3) SHIP\n      8) Quit\n''')",
         "detail": "mic testing.uart_rec (1)",
         "documentation": {}
     },
@@ -278,7 +279,7 @@
         "kind": 5,
         "importPath": "mic testing.uart_rec (1)",
         "description": "mic testing.uart_rec (1)",
-        "peekOfCode": "choice = int(input(\"Your Choice: \"))\nif(choice == 8):\n    print(\"Ending Program\")\n    sys.exit(0)  \nword = audio_folders[choice]\nfor folder in audio_folders:\n    if folder == word:\n        for i in range(15,16):\n            print(f\"file {i} in {folder} Waiting for START...\")\n            while True:",
+        "peekOfCode": "choice = int(input(\"Your Choice: \"))\nif(choice == 8):\n    print(\"Ending Program\")\n    sys.exit(0)  \nword = audio_folders[choice]\nzcr_arr = []\nste_arr = []\nfolder_zcr_arr = []\nfolder_ste_arr = []\nfor folder in audio_folders:",
         "detail": "mic testing.uart_rec (1)",
         "documentation": {}
     },
@@ -287,7 +288,133 @@
         "kind": 5,
         "importPath": "mic testing.uart_rec (1)",
         "description": "mic testing.uart_rec (1)",
-        "peekOfCode": "word = audio_folders[choice]\nfor folder in audio_folders:\n    if folder == word:\n        for i in range(15,16):\n            print(f\"file {i} in {folder} Waiting for START...\")\n            while True:\n                if not recording:\n                    # Read line until START\n                    line = ser.readline()\n                    if b\"START\" in line:",
+        "peekOfCode": "word = audio_folders[choice]\nzcr_arr = []\nste_arr = []\nfolder_zcr_arr = []\nfolder_ste_arr = []\nfor folder in audio_folders:\n    if folder == word:\n        for i in range(0,10):\n            zcr_arr = []  # reset here\n            ste_arr = []  # reset here",
+        "detail": "mic testing.uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "zcr_arr",
+        "kind": 5,
+        "importPath": "mic testing.uart_rec (1)",
+        "description": "mic testing.uart_rec (1)",
+        "peekOfCode": "zcr_arr = []\nste_arr = []\nfolder_zcr_arr = []\nfolder_ste_arr = []\nfor folder in audio_folders:\n    if folder == word:\n        for i in range(0,10):\n            zcr_arr = []  # reset here\n            ste_arr = []  # reset here\n            print(f\"file {i} in {folder} Waiting for START...\")",
+        "detail": "mic testing.uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "ste_arr",
+        "kind": 5,
+        "importPath": "mic testing.uart_rec (1)",
+        "description": "mic testing.uart_rec (1)",
+        "peekOfCode": "ste_arr = []\nfolder_zcr_arr = []\nfolder_ste_arr = []\nfor folder in audio_folders:\n    if folder == word:\n        for i in range(0,10):\n            zcr_arr = []  # reset here\n            ste_arr = []  # reset here\n            print(f\"file {i} in {folder} Waiting for START...\")\n            while True:",
+        "detail": "mic testing.uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "folder_zcr_arr",
+        "kind": 5,
+        "importPath": "mic testing.uart_rec (1)",
+        "description": "mic testing.uart_rec (1)",
+        "peekOfCode": "folder_zcr_arr = []\nfolder_ste_arr = []\nfor folder in audio_folders:\n    if folder == word:\n        for i in range(0,10):\n            zcr_arr = []  # reset here\n            ste_arr = []  # reset here\n            print(f\"file {i} in {folder} Waiting for START...\")\n            while True:\n                if not recording:",
+        "detail": "mic testing.uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "folder_ste_arr",
+        "kind": 5,
+        "importPath": "mic testing.uart_rec (1)",
+        "description": "mic testing.uart_rec (1)",
+        "peekOfCode": "folder_ste_arr = []\nfor folder in audio_folders:\n    if folder == word:\n        for i in range(0,10):\n            zcr_arr = []  # reset here\n            ste_arr = []  # reset here\n            print(f\"file {i} in {folder} Waiting for START...\")\n            while True:\n                if not recording:\n                    # Read line until START",
+        "detail": "mic testing.uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "zcr_avg_arr",
+        "kind": 5,
+        "importPath": "mic testing.uart_rec (1)",
+        "description": "mic testing.uart_rec (1)",
+        "peekOfCode": "zcr_avg_arr = []\nzcr_acc = 0\nfor i in range(len(folder_zcr_arr[0])):\n    zcr_acc = 0  \n    for j in range(len(folder_zcr_arr)):\n        zcr_acc += folder_zcr_arr[j][i]\n    zcr_acc /= (len(folder_zcr_arr)-1)\n    zcr_avg_arr.append(zcr_acc)\nzcr_min = min(zcr_avg_arr)\nzcr_max = max(zcr_avg_arr)",
+        "detail": "mic testing.uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "zcr_acc",
+        "kind": 5,
+        "importPath": "mic testing.uart_rec (1)",
+        "description": "mic testing.uart_rec (1)",
+        "peekOfCode": "zcr_acc = 0\nfor i in range(len(folder_zcr_arr[0])):\n    zcr_acc = 0  \n    for j in range(len(folder_zcr_arr)):\n        zcr_acc += folder_zcr_arr[j][i]\n    zcr_acc /= (len(folder_zcr_arr)-1)\n    zcr_avg_arr.append(zcr_acc)\nzcr_min = min(zcr_avg_arr)\nzcr_max = max(zcr_avg_arr)\nzcr_avg_arr = [(z - zcr_min) / (zcr_max - zcr_min) for z in zcr_avg_arr]",
+        "detail": "mic testing.uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "zcr_min",
+        "kind": 5,
+        "importPath": "mic testing.uart_rec (1)",
+        "description": "mic testing.uart_rec (1)",
+        "peekOfCode": "zcr_min = min(zcr_avg_arr)\nzcr_max = max(zcr_avg_arr)\nzcr_avg_arr = [(z - zcr_min) / (zcr_max - zcr_min) for z in zcr_avg_arr]\nste_avg_arr = []\nste_acc = 0\nfor i in range(len(folder_ste_arr[0])):\n    ste_acc = 0  \n    for j in range(len(folder_ste_arr)):\n        ste_acc += folder_ste_arr[j][i]\n    ste_acc /= (len(folder_ste_arr)-1)",
+        "detail": "mic testing.uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "zcr_max",
+        "kind": 5,
+        "importPath": "mic testing.uart_rec (1)",
+        "description": "mic testing.uart_rec (1)",
+        "peekOfCode": "zcr_max = max(zcr_avg_arr)\nzcr_avg_arr = [(z - zcr_min) / (zcr_max - zcr_min) for z in zcr_avg_arr]\nste_avg_arr = []\nste_acc = 0\nfor i in range(len(folder_ste_arr[0])):\n    ste_acc = 0  \n    for j in range(len(folder_ste_arr)):\n        ste_acc += folder_ste_arr[j][i]\n    ste_acc /= (len(folder_ste_arr)-1)\n    ste_avg_arr.append(ste_acc)",
+        "detail": "mic testing.uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "zcr_avg_arr",
+        "kind": 5,
+        "importPath": "mic testing.uart_rec (1)",
+        "description": "mic testing.uart_rec (1)",
+        "peekOfCode": "zcr_avg_arr = [(z - zcr_min) / (zcr_max - zcr_min) for z in zcr_avg_arr]\nste_avg_arr = []\nste_acc = 0\nfor i in range(len(folder_ste_arr[0])):\n    ste_acc = 0  \n    for j in range(len(folder_ste_arr)):\n        ste_acc += folder_ste_arr[j][i]\n    ste_acc /= (len(folder_ste_arr)-1)\n    ste_avg_arr.append(ste_acc)\nste_min = min(ste_avg_arr)",
+        "detail": "mic testing.uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "ste_avg_arr",
+        "kind": 5,
+        "importPath": "mic testing.uart_rec (1)",
+        "description": "mic testing.uart_rec (1)",
+        "peekOfCode": "ste_avg_arr = []\nste_acc = 0\nfor i in range(len(folder_ste_arr[0])):\n    ste_acc = 0  \n    for j in range(len(folder_ste_arr)):\n        ste_acc += folder_ste_arr[j][i]\n    ste_acc /= (len(folder_ste_arr)-1)\n    ste_avg_arr.append(ste_acc)\nste_min = min(ste_avg_arr)\nste_max = max(ste_avg_arr)",
+        "detail": "mic testing.uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "ste_acc",
+        "kind": 5,
+        "importPath": "mic testing.uart_rec (1)",
+        "description": "mic testing.uart_rec (1)",
+        "peekOfCode": "ste_acc = 0\nfor i in range(len(folder_ste_arr[0])):\n    ste_acc = 0  \n    for j in range(len(folder_ste_arr)):\n        ste_acc += folder_ste_arr[j][i]\n    ste_acc /= (len(folder_ste_arr)-1)\n    ste_avg_arr.append(ste_acc)\nste_min = min(ste_avg_arr)\nste_max = max(ste_avg_arr)\nste_avg_arr = [(s - ste_min) / (ste_max - ste_min) for s in ste_avg_arr]",
+        "detail": "mic testing.uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "ste_min",
+        "kind": 5,
+        "importPath": "mic testing.uart_rec (1)",
+        "description": "mic testing.uart_rec (1)",
+        "peekOfCode": "ste_min = min(ste_avg_arr)\nste_max = max(ste_avg_arr)\nste_avg_arr = [(s - ste_min) / (ste_max - ste_min) for s in ste_avg_arr]\n# Write to features.txt\nwith open('features.txt', 'a') as f:\n    f.write(\"// ---- ZCR reference arrays (one per word) ----\\n\")\n    zcr_str = ', '.join(f'{z:.3f}' for z in zcr_avg_arr)\n    f.write(f\"static const float {word.lower()}_zcr[N_FRAMES] PROGMEM = {{{zcr_str}}};\\n\")\n    f.write(\"\\n\\n\")\n    f.write(\"// ---- STE reference arrays (one per word) ----\\n\")",
+        "detail": "mic testing.uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "ste_max",
+        "kind": 5,
+        "importPath": "mic testing.uart_rec (1)",
+        "description": "mic testing.uart_rec (1)",
+        "peekOfCode": "ste_max = max(ste_avg_arr)\nste_avg_arr = [(s - ste_min) / (ste_max - ste_min) for s in ste_avg_arr]\n# Write to features.txt\nwith open('features.txt', 'a') as f:\n    f.write(\"// ---- ZCR reference arrays (one per word) ----\\n\")\n    zcr_str = ', '.join(f'{z:.3f}' for z in zcr_avg_arr)\n    f.write(f\"static const float {word.lower()}_zcr[N_FRAMES] PROGMEM = {{{zcr_str}}};\\n\")\n    f.write(\"\\n\\n\")\n    f.write(\"// ---- STE reference arrays (one per word) ----\\n\")\n    ste_str = ', '.join(f'{s:.3f}' for s in ste_avg_arr)",
+        "detail": "mic testing.uart_rec (1)",
+        "documentation": {}
+    },
+    {
+        "label": "ste_avg_arr",
+        "kind": 5,
+        "importPath": "mic testing.uart_rec (1)",
+        "description": "mic testing.uart_rec (1)",
+        "peekOfCode": "ste_avg_arr = [(s - ste_min) / (ste_max - ste_min) for s in ste_avg_arr]\n# Write to features.txt\nwith open('features.txt', 'a') as f:\n    f.write(\"// ---- ZCR reference arrays (one per word) ----\\n\")\n    zcr_str = ', '.join(f'{z:.3f}' for z in zcr_avg_arr)\n    f.write(f\"static const float {word.lower()}_zcr[N_FRAMES] PROGMEM = {{{zcr_str}}};\\n\")\n    f.write(\"\\n\\n\")\n    f.write(\"// ---- STE reference arrays (one per word) ----\\n\")\n    ste_str = ', '.join(f'{s:.3f}' for s in ste_avg_arr)\n    f.write(f\"static const float {word.lower()}_ste[N_FRAMES] PROGMEM = {{{ste_str}}};\\n\")",
         "detail": "mic testing.uart_rec (1)",
         "documentation": {}
     },
@@ -611,16 +738,7 @@
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "SAMPLE_RATE = 8000\nADC_CENTER = 63\nAUDIO_DIR = 'Audio Files'\nzcr = 0\nste = 0\nnp.set_printoptions(threshold=np.inf)\naudio_folders = os.listdir(\"Audio Files\")\nfeatures_of_folder = []\nword_features = []\nfor folder in audio_folders:",
-        "detail": "script",
-        "documentation": {}
-    },
-    {
-        "label": "ADC_CENTER",
-        "kind": 5,
-        "importPath": "script",
-        "description": "script",
-        "peekOfCode": "ADC_CENTER = 63\nAUDIO_DIR = 'Audio Files'\nzcr = 0\nste = 0\nnp.set_printoptions(threshold=np.inf)\naudio_folders = os.listdir(\"Audio Files\")\nfeatures_of_folder = []\nword_features = []\nfor folder in audio_folders:\n    features_of_folder = []  # reset per folder",
+        "peekOfCode": "SAMPLE_RATE = 8000\nAUDIO_DIR = 'Audio Files'\nnp.set_printoptions(threshold=np.inf)\ncounter = 0\naudio_folders = os.listdir(AUDIO_DIR)\nword_features = []\nfor folder in audio_folders:\n    features_of_folder = []\n    for file in os.listdir(f'{AUDIO_DIR}/{folder}'):\n        # librosa loads as float32 in [-1.0, 1.0]",
         "detail": "script",
         "documentation": {}
     },
@@ -629,25 +747,16 @@
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "AUDIO_DIR = 'Audio Files'\nzcr = 0\nste = 0\nnp.set_printoptions(threshold=np.inf)\naudio_folders = os.listdir(\"Audio Files\")\nfeatures_of_folder = []\nword_features = []\nfor folder in audio_folders:\n    features_of_folder = []  # reset per folder\n    for file in os.listdir(f'Audio Files/{folder}'):  # fix #1",
+        "peekOfCode": "AUDIO_DIR = 'Audio Files'\nnp.set_printoptions(threshold=np.inf)\ncounter = 0\naudio_folders = os.listdir(AUDIO_DIR)\nword_features = []\nfor folder in audio_folders:\n    features_of_folder = []\n    for file in os.listdir(f'{AUDIO_DIR}/{folder}'):\n        # librosa loads as float32 in [-1.0, 1.0]\n        y, sr = librosa.load(f'{AUDIO_DIR}/{folder}/{file}', sr=SAMPLE_RATE)",
         "detail": "script",
         "documentation": {}
     },
     {
-        "label": "zcr",
+        "label": "counter",
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "zcr = 0\nste = 0\nnp.set_printoptions(threshold=np.inf)\naudio_folders = os.listdir(\"Audio Files\")\nfeatures_of_folder = []\nword_features = []\nfor folder in audio_folders:\n    features_of_folder = []  # reset per folder\n    for file in os.listdir(f'Audio Files/{folder}'):  # fix #1\n        y, sr = librosa.load(f'Audio Files/{folder}/{file}', sr=SAMPLE_RATE)",
-        "detail": "script",
-        "documentation": {}
-    },
-    {
-        "label": "ste",
-        "kind": 5,
-        "importPath": "script",
-        "description": "script",
-        "peekOfCode": "ste = 0\nnp.set_printoptions(threshold=np.inf)\naudio_folders = os.listdir(\"Audio Files\")\nfeatures_of_folder = []\nword_features = []\nfor folder in audio_folders:\n    features_of_folder = []  # reset per folder\n    for file in os.listdir(f'Audio Files/{folder}'):  # fix #1\n        y, sr = librosa.load(f'Audio Files/{folder}/{file}', sr=SAMPLE_RATE)\n        mean = np.mean(y)",
+        "peekOfCode": "counter = 0\naudio_folders = os.listdir(AUDIO_DIR)\nword_features = []\nfor folder in audio_folders:\n    features_of_folder = []\n    for file in os.listdir(f'{AUDIO_DIR}/{folder}'):\n        # librosa loads as float32 in [-1.0, 1.0]\n        y, sr = librosa.load(f'{AUDIO_DIR}/{folder}/{file}', sr=SAMPLE_RATE)\n        # Match AVR pipeline: 10-bit ADC >> 2 → [0,255] → subtract 128 → [-128,127]\n        # librosa gives [-1,1], so just scale to [-128,127] — no DC offset",
         "detail": "script",
         "documentation": {}
     },
@@ -656,16 +765,7 @@
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "audio_folders = os.listdir(\"Audio Files\")\nfeatures_of_folder = []\nword_features = []\nfor folder in audio_folders:\n    features_of_folder = []  # reset per folder\n    for file in os.listdir(f'Audio Files/{folder}'):  # fix #1\n        y, sr = librosa.load(f'Audio Files/{folder}/{file}', sr=SAMPLE_RATE)\n        mean = np.mean(y)\n        y = y - mean\n        adc = np.clip(np.round(y * 127) + ADC_CENTER, 0, 255).astype(np.int16)",
-        "detail": "script",
-        "documentation": {}
-    },
-    {
-        "label": "features_of_folder",
-        "kind": 5,
-        "importPath": "script",
-        "description": "script",
-        "peekOfCode": "features_of_folder = []\nword_features = []\nfor folder in audio_folders:\n    features_of_folder = []  # reset per folder\n    for file in os.listdir(f'Audio Files/{folder}'):  # fix #1\n        y, sr = librosa.load(f'Audio Files/{folder}/{file}', sr=SAMPLE_RATE)\n        mean = np.mean(y)\n        y = y - mean\n        adc = np.clip(np.round(y * 127) + ADC_CENTER, 0, 255).astype(np.int16)\n        y = (adc - ADC_CENTER).astype(np.int8)",
+        "peekOfCode": "audio_folders = os.listdir(AUDIO_DIR)\nword_features = []\nfor folder in audio_folders:\n    features_of_folder = []\n    for file in os.listdir(f'{AUDIO_DIR}/{folder}'):\n        # librosa loads as float32 in [-1.0, 1.0]\n        y, sr = librosa.load(f'{AUDIO_DIR}/{folder}/{file}', sr=SAMPLE_RATE)\n        # Match AVR pipeline: 10-bit ADC >> 2 → [0,255] → subtract 128 → [-128,127]\n        # librosa gives [-1,1], so just scale to [-128,127] — no DC offset\n        y = y * 127.0  # now in [-127, 127], matching int8_t range",
         "detail": "script",
         "documentation": {}
     },
@@ -674,7 +774,7 @@
         "kind": 5,
         "importPath": "script",
         "description": "script",
-        "peekOfCode": "word_features = []\nfor folder in audio_folders:\n    features_of_folder = []  # reset per folder\n    for file in os.listdir(f'Audio Files/{folder}'):  # fix #1\n        y, sr = librosa.load(f'Audio Files/{folder}/{file}', sr=SAMPLE_RATE)\n        mean = np.mean(y)\n        y = y - mean\n        adc = np.clip(np.round(y * 127) + ADC_CENTER, 0, 255).astype(np.int16)\n        y = (adc - ADC_CENTER).astype(np.int8)\n        number_of_samples = len(y)",
+        "peekOfCode": "word_features = []\nfor folder in audio_folders:\n    features_of_folder = []\n    for file in os.listdir(f'{AUDIO_DIR}/{folder}'):\n        # librosa loads as float32 in [-1.0, 1.0]\n        y, sr = librosa.load(f'{AUDIO_DIR}/{folder}/{file}', sr=SAMPLE_RATE)\n        # Match AVR pipeline: 10-bit ADC >> 2 → [0,255] → subtract 128 → [-128,127]\n        # librosa gives [-1,1], so just scale to [-128,127] — no DC offset\n        y = y * 127.0  # now in [-127, 127], matching int8_t range\n        if counter == 0:",
         "detail": "script",
         "documentation": {}
     }

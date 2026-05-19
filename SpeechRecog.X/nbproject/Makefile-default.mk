@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c lcd.c adc.c fix_fft.c
+SOURCEFILES_QUOTED_IF_SPACED=main.c lcd.c adc.c fix_fft.c speech_processing.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/lcd.o ${OBJECTDIR}/adc.o ${OBJECTDIR}/fix_fft.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/lcd.o.d ${OBJECTDIR}/adc.o.d ${OBJECTDIR}/fix_fft.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/lcd.o ${OBJECTDIR}/adc.o ${OBJECTDIR}/fix_fft.o ${OBJECTDIR}/speech_processing.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/lcd.o.d ${OBJECTDIR}/adc.o.d ${OBJECTDIR}/fix_fft.o.d ${OBJECTDIR}/speech_processing.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/lcd.o ${OBJECTDIR}/adc.o ${OBJECTDIR}/fix_fft.o
+OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/lcd.o ${OBJECTDIR}/adc.o ${OBJECTDIR}/fix_fft.o ${OBJECTDIR}/speech_processing.o
 
 # Source Files
-SOURCEFILES=main.c lcd.c adc.c fix_fft.c
+SOURCEFILES=main.c lcd.c adc.c fix_fft.c speech_processing.c
 
 # Pack Options 
 PACK_COMPILER_OPTIONS=-I "${DFP_DIR}/include"
@@ -128,6 +128,12 @@ ${OBJECTDIR}/fix_fft.o: fix_fft.c  .generated_files/flags/default/76f0d04d277616
 	@${RM} ${OBJECTDIR}/fix_fft.o 
 	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega32 ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -I"kiss_fft130" -mcall-prologues -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/fix_fft.o.d" -MT "${OBJECTDIR}/fix_fft.o.d" -MT ${OBJECTDIR}/fix_fft.o  -o ${OBJECTDIR}/fix_fft.o fix_fft.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
+${OBJECTDIR}/speech_processing.o: speech_processing.c  .generated_files/flags/default/1e3ccabdff33a1fb508f0fba87273e2364e80af3 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/speech_processing.o.d 
+	@${RM} ${OBJECTDIR}/speech_processing.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega32 ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -I"kiss_fft130" -mcall-prologues -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/speech_processing.o.d" -MT "${OBJECTDIR}/speech_processing.o.d" -MT ${OBJECTDIR}/speech_processing.o  -o ${OBJECTDIR}/speech_processing.o speech_processing.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+	
 else
 ${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/cf981e5aa345f4727d5c820b001a988f866b8ada .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
@@ -152,6 +158,12 @@ ${OBJECTDIR}/fix_fft.o: fix_fft.c  .generated_files/flags/default/81875cc0442e70
 	@${RM} ${OBJECTDIR}/fix_fft.o.d 
 	@${RM} ${OBJECTDIR}/fix_fft.o 
 	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega32 ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -I"kiss_fft130" -mcall-prologues -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/fix_fft.o.d" -MT "${OBJECTDIR}/fix_fft.o.d" -MT ${OBJECTDIR}/fix_fft.o  -o ${OBJECTDIR}/fix_fft.o fix_fft.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+	
+${OBJECTDIR}/speech_processing.o: speech_processing.c  .generated_files/flags/default/ec13bca2d0a5c8b43d49bfe2ccce021df929142c .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/speech_processing.o.d 
+	@${RM} ${OBJECTDIR}/speech_processing.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega32 ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -I"kiss_fft130" -mcall-prologues -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/speech_processing.o.d" -MT "${OBJECTDIR}/speech_processing.o.d" -MT ${OBJECTDIR}/speech_processing.o  -o ${OBJECTDIR}/speech_processing.o speech_processing.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
 endif
 
